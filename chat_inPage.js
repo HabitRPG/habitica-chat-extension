@@ -159,7 +159,7 @@ function digestChatData(chatBoxId,chatData) {
 			} else {
 				var contributorLabel = 'label-contributor-'+chatData[key]['contributor']['level'];
 			}
-			var userLabel = '<span class="label label-default '+contributorLabel+'">&nbsp;'+chatData[key]['user']+'&nbsp;</span>&nbsp;&nbsp;';
+			var userLabel = '<span class="label label-default '+contributorLabel+'" onClick="mention(\''+chatBoxId+'\',\''+chatData[key]['user']+'\')">&nbsp;'+chatData[key]['user']+'&nbsp;</span>&nbsp;&nbsp;';
 			
 			// Create HTML
 			var chatMessage = "<div class='chatMessage "+posterClass+"'><div class='msg_user'>" + userLabel + "</div><div class='bubble'>" + chatText + "</div><div class='msg_time'>"+formattedTime+extraActionIcon+"</div></div>";
@@ -295,6 +295,11 @@ function createGroupsBox() {
 			
 		}
 	});
+}
+
+function mention(chatBoxId, name) {
+	var currentText = $("#"+chatBoxId+" .chatBox_input textarea").val();
+	$("#"+chatBoxId+" .chatBox_input textarea").val(currentText+" @"+name+" ");
 }
 
 //////////////////////////////////////////////////////////////////////////

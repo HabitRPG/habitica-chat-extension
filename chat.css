@@ -189,10 +189,12 @@ vertical-align: top;
 margin-left: 30px;
 font-weight: bold;
 margin-bottom: 5px;
+cursor: pointer;
 }
 .chatMessage.userPoster .msg_user {
 margin-left: 10px;
 }
+
 .chatBox .chatBox_content .chatMessage .msg_user .label {
  font-size: 0.8em;
 }
