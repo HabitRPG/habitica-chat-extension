@@ -154,7 +154,8 @@ function digestChatData(chatBoxId,chatData) {
 			
 			
 			// The user label
-			var userLevel = chatData[key]['contributor']['level'];
+			// check if user has a contributor level, if not (ie: system), set it to undefined
+			var userLevel = chatData[key]['contributor'] ? chatData[key]['contributor']['level'] : undefined;
 			if(chatData[key]['uuid'] == "system" || typeof userLevel  == 'undefined') {
 				var contributorLabel = '';
 			} else {
@@ -164,7 +165,7 @@ function digestChatData(chatBoxId,chatData) {
 			if(userLevel == 8) userSymbol = '<span class="glyphicon glyphicon-star"></span>';
 			if(userLevel == 9) userSymbol = '<span class="glyphicon icon-crown"></span>';
 			var userLabel = '<span class="label label-default '+contributorLabel+'">&nbsp;'+chatData[key]['user']+'&nbsp;' + userSymbol+'</span>&nbsp;&nbsp;';
-			
+						
 			// Create HTML
 			var chatMessage = "<div class='chatMessage "+posterClass+"'><div class='msg_user'>" + userLabel + "</div><div class='bubble'>" + chatText + "</div><div class='msg_time'>"+formattedTime+extraActionIcon+"</div></div>";
 			$(html).prepend(chatMessage);
