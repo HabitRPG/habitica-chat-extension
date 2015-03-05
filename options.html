@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>HabitRPG Chat Chrome Extension</title>
+	<link rel="stylesheet" href="options.css" />
+</head>
+	<body>
+		<h1>HabitRPG Chat Chrome Extension</h1>
+		<div id="userForm">
+			<div class="legend">User ID </div><div class="field"><input type="text" id="uuid" /></div>
+			<div class="legend">API Key    </div><div class="field"><input type="text" id="api" /> </div>
+			<div class="legend"></div><div class="field"><a href="#" id="hint">(Find your User ID and API key here)</a></div>
+			<label>
+				<div class="legend">Use Sound?</div><div class="field"><input type="checkbox" id="enableSound"> </div>
+			</label>
+		</div>
+		<div id="saveSection">
+			<button id="save">Save</button>
+			<div id="status"></div>
+		</div>
+		<script src="options.js"></script>
+	</body>
+</html>

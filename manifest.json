@@ -1,0 +1,35 @@
+{
+  "manifest_version": 2,
+
+  "name": "HabitRPG Chat Client",
+  "short_name": "Habit Chat",
+  "description": "This extension adds a HabitRPG chat client to habitRPG.com",
+  "version": "0.4.3",
+  "options_page": "options.html",
+  "icons": { "16": "icon16.png",
+           "48": "icon48.png",
+          "128": "icon128.png" },
+  "browser_action": {
+    "default_icon": "icon128.png",
+    "default_popup": "options.html",
+	"name": "HabitRPG Chat Extension"
+  },
+  "content_scripts": [ {
+    "js":      [ "jquery.js", "chat.js" ],
+    "css":     [ "chat.css" ],
+	"matches": [ "http://*.habitrpg.com/*", "https://*.habitrpg.com/*"] 
+	
+  }],
+  "externally_connectable": {
+	"matches": ["http://*.habitrpg.com/*", "https://*.habitrpg.com/*"]
+  },
+  "web_accessible_resources": [
+        "chat.css",
+        "chat_inPage.js"
+    ],
+  "permissions": [
+	"storage",
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ]
+}
