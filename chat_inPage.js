@@ -317,8 +317,8 @@ var headers = {
 }
 var baseAPIUrl = "https://habitrpg.com/api/v2/";
 var refreshRateFast = 5000;
-var refreshRateMedium = 45000;
-var refreshRateSlow = 60000;
+var refreshRateMedium = 10000;
+var refreshRateSlow = 10000;
 
 window.addEventListener('focus', function() {
 	for (var key in intervals) {
