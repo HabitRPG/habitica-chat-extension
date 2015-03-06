@@ -197,7 +197,11 @@ vertical-align: top;
 	cursor: default;
 	color: #2EB82E;
 }
-.msg_footer .likeMessage.liked:hover {
+.msg_footer .flagMessage.flagged {
+	cursor: default;
+	color: #E60000;
+}
+.msg_footer .likeMessage.liked:hover,.msg_footer .flagMessage.flagged:hover {
 	padding-top: 0px;
 }
 

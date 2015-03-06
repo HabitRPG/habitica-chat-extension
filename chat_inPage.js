@@ -147,7 +147,11 @@ function digestChatData(chatBoxId,chatData) {
 				var chatText = (chatData[key]['text']);
 			} else {
 				var posterClass = "otherPoster";
-				var extraActionIcon = '<span class="flagMessage glyphicon glyphicon-flag" onClick='+"'"+'flagMessage("'+chatBoxId+'","'+groupID+'","'+chatData[key]['id']+'");'+"'"+'></span>';
+				var flagColorClass = '';
+				for(var flaggedKey in chatData[key]['flags']) {
+					if(flaggedKey == config['uuid']) flagColorClass = ' flagged ';
+				}
+				var extraActionIcon = '<span class="'+flagColorClass+' flagMessage glyphicon glyphicon-flag" onClick='+"'"+'flagMessage("'+chatBoxId+'","'+groupID+'","'+chatData[key]['id']+'");'+"'"+'></span>';
 				// like
 				var likeColorClass = '';
 				for(var likesKey in chatData[key]['likes']) {
@@ -190,7 +194,7 @@ function digestChatData(chatBoxId,chatData) {
 
 function flagMessage(chatBoxId, gid, mid) {
 	
-	if(confirm('Reporting a message indicates that you believe it to be in violation of the community guidelines. Are you sure you wish to report this message?')) {
+	if($('#mid_'+mid+' .msg_footer .flagMessage').hasClass('flagged') || confirm('Reporting a message indicates that you believe it to be in violation of the community guidelines. Are you sure you wish to report this message?')) {
 		
 		var action = "groups/"+gid+"/chat/"+mid+"/flag";
 
@@ -200,8 +204,8 @@ function flagMessage(chatBoxId, gid, mid) {
 			type: "POST",
 			headers: headers,
 			success: function(data) {
-				alert('This message was reported.');
 				updateChat(chatBoxId);
+				$('#mid_'+mid+' .msg_footer .flagMessage').toggleClass('flagged');
 			}
 		});
 	}
