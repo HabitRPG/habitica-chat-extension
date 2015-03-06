@@ -5,11 +5,13 @@ config.setAttribute("style", "display: none;");
 chrome.storage.sync.get({
 	uuid: '',
 	api: '',
-	enableSound: true
+	enableSound: true,
+	largeText: true
 }, function(items) {
 	config.setAttribute("uuid" , items.uuid);
 	config.setAttribute("apiK" , items.api);
 	config.setAttribute("sound", items.enableSound);
+	config.setAttribute("largeText", items.largeText);
 });
 (document.head||document.documentElement).appendChild(config);
 

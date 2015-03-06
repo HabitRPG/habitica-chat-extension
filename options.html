@@ -7,17 +7,31 @@
 	<body>
 		<h1>HabitRPG Chat Chrome Extension</h1>
 		<div id="userForm">
-			<div class="legend">User ID </div><div class="field"><input type="text" id="uuid" /></div>
-			<div class="legend">API Key    </div><div class="field"><input type="text" id="api" /> </div>
-			<div class="legend"></div><div class="field"><a href="#" id="hint">(Find your User ID and API key here)</a></div>
-			<label>
-				<div class="legend">Use Sound?</div><div class="field"><input type="checkbox" id="enableSound"> </div>
-			</label>
+			<div class="row">
+				<div class="legend">User ID </div><div class="field"><input type="text" id="uuid" /></div>
+			</div>
+			<div class="row">
+				<div class="legend">API Key    </div><div class="field"><input type="text" id="api" /> </div>
+			</div>
+			<div class="row">
+				<div class="legend"></div><div class="field"><a href="#" id="hint">(Find your User ID and API key here)</a></div>
+			</div>
+			<div class="row">
+				<label>
+					<div class="legend">Use sound?</div><div class="field"><input type="checkbox" id="enableSound"> </div>
+				</label>
+			</div>
+			<div class="row">
+				<label>
+					<div class="legend">Use large text?</div><div class="field"><input type="checkbox" id="largeText"> </div>
+				</label>
+			</div>
 		</div>
 		<div id="saveSection">
 			<button id="save">Save</button>
 			<div id="status"></div>
 		</div>
+		<br><br>
 		<script src="options.js"></script>
 	</body>
 </html>
