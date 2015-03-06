@@ -306,7 +306,7 @@ function createGroupsBox() {
 
 function mention(chatBoxId, name) {
 	var currentText = $("#"+chatBoxId+" .chatBox_input textarea").val();
-	$("#"+chatBoxId+" .chatBox_input textarea").val(currentText+" @"+name+" ");
+	$("#"+chatBoxId+" .chatBox_input textarea").val(currentText+" @"+name+" ").focus();
 }
 
 //////////////////////////////////////////////////////////////////////////
