@@ -3,10 +3,12 @@ function save_options() {
   var uuid = document.getElementById('uuid').value;
   var api = document.getElementById('api').value;
   var enableSound = document.getElementById('enableSound').checked;
+  var largeText = document.getElementById('largeText').checked;
   chrome.storage.sync.set({
     uuid: uuid,
     api: api,
-    enableSound: enableSound
+    enableSound: enableSound,
+    largeText: largeText
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -24,11 +26,13 @@ function restore_options() {
   chrome.storage.sync.get({
     uuid: '',
     api: '',
-    enableSound: true
+    enableSound: true,
+    largeText: true
   }, function(items) {
     document.getElementById('uuid').value = items.uuid;
     document.getElementById('api').value = items.api;
     document.getElementById('enableSound').checked = items.enableSound;
+    document.getElementById('largeText').checked = items.largeText;
   });
 }
 

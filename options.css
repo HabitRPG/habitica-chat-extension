@@ -5,16 +5,17 @@ body {
 	background-color: #c0d4f7;
 }
 
-#userForm {
-
+#userForm .row {
+	float: left;
+	width: 100%;
 }
 	#userForm .legend {
-		float: left;
+		display: inline-block;
 		width: 15%;
 		padding-top: 18px;
 	}
 	#userForm .field {
-		float: left;
+		display: inline-block;
 		width: 79%;
 	}
 	#userForm .field input {
@@ -38,6 +39,7 @@ body {
 	margin-top: 60px;
 	float: left;
 	width: 100%;
+	padding-bottom: 20px;
 }
 #saveSection button {
 	border: 1px solid rgb(15, 53, 119);
@@ -46,4 +48,5 @@ body {
 	border-radius: 5px;
 	padding: 10px;
 	color: black;
+	
 }

@@ -1,6 +1,7 @@
 #chatWrapper {
     z-index: 10000;
     pointer-events: none;
+	font-size: 1em;
 }
 
 #groupsBox , .chatBox, .chatBox * {
