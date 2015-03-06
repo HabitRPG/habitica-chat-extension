@@ -162,7 +162,7 @@
  margin-top: 30px;
 }
 
-.chatMessage .msg_time {
+.chatMessage .msg_footer {
 font-size: 0.7em;
 width: 100%;
 text-align: right;
@@ -171,19 +171,34 @@ margin-top:3px;
 margin-right: 5px;
 vertical-align: top;
 }
-.chatMessage.userPoster .msg_time {
+.chatMessage.userPoster .msg_footer {
     margin-right: 25px;
 }
 
-.msg_time .flagMessage,.msg_time .deleteMessage {
-    margin-left: 5px;
+.msg_footer .msg_time {
+	margin-right: 5px;
+	display: inline-block;
+vertical-align: top;
+}
+
+.msg_footer .flagMessage,.msg_footer .deleteMessage,.msg_footer .flagMessage,.msg_footer .likeMessage {
+    margin-right: 5px;
     cursor: pointer;
     color: #aaa;
     font-size: 1.2em;
+	display: inline-block;
+	vertical-align: top;
 }
-.msg_time .flagMessage:hover,.msg_time .deleteMessage:hover {
+.msg_footer .flagMessage:hover,.msg_footer .deleteMessage:hover,.msg_footer .likeMessage:hover {
     padding-top: 1px;
     color: black;
+}
+.msg_footer .likeMessage.liked {
+	cursor: default;
+	color: #2EB82E;
+}
+.msg_footer .likeMessage.liked:hover {
+	padding-top: 0px;
 }
 
 .chatMessage .msg_user {
@@ -247,7 +262,7 @@ margin-right: 0px;
 }
 
 
-.chatMessage.systemPoster .msg_time {
+.chatMessage.systemPoster .msg_footer {
 display: none;
 }
 

@@ -128,11 +128,10 @@ function digestChatData(chatBoxId,chatData) {
 			var date = new Date(chatData[key]['timestamp']);
 			var hours = date.getHours();
 			var minutes = "0" + date.getMinutes();
-			var seconds = "0" + date.getSeconds();
 			var day = date.getDate();
 			var month = date.getMonth()+1;
 			var year = date.getFullYear();
-			var formattedTime = day +"/"+month+"/"+year+" "+hours + ':' + minutes.substr(minutes.length-2) + ':' + seconds.substr(seconds.length-2);
+			var formattedTime = "<span class='msg_time'>"+day +"/"+month+"/"+year+" "+hours + ':' + minutes.substr(minutes.length-2) + "</span>";
 			
 			
 			// The type of poster
@@ -149,6 +148,12 @@ function digestChatData(chatBoxId,chatData) {
 			} else {
 				var posterClass = "otherPoster";
 				var extraActionIcon = '<span class="flagMessage glyphicon glyphicon-flag" onClick='+"'"+'flagMessage("'+chatBoxId+'","'+groupID+'","'+chatData[key]['id']+'");'+"'"+'></span>';
+				// like
+				var likeColorClass = '';
+				for(var likesKey in chatData[key]['likes']) {
+					if(likesKey == config['uuid']) likeColorClass = ' liked ';
+				}
+				extraActionIcon += ' <span class="'+likeColorClass+' likeMessage glyphicon glyphicon-thumbs-up" onClick='+"'"+'likeMessage("'+chatBoxId+'","'+groupID+'","'+chatData[key]['id']+'");'+"'"+'></span>';
 				// The message
 				var chatText = mmd(chatData[key]['text']);
 			}
@@ -169,7 +174,7 @@ function digestChatData(chatBoxId,chatData) {
 			var userLabel = '<span class="label label-default '+contributorLabel+'" onClick="mention(\''+chatBoxId+'\',\''+chatData[key]['user']+'\')">&nbsp;'+chatData[key]['user']+'&nbsp;' + userSymbol+'</span>&nbsp;&nbsp;';
 
 			// Create HTML
-			var chatMessage = "<div class='chatMessage "+posterClass+"'><div class='msg_user'>" + userLabel + "</div><div class='bubble'>" + chatText + "</div><div class='msg_time'>"+formattedTime+extraActionIcon+"</div></div>";
+			var chatMessage = "<div id='mid_"+chatData[key]['id']+"' class='chatMessage "+posterClass+"'><div class='msg_user'>" + userLabel + "</div><div class='bubble'>" + chatText + "</div><div class='msg_footer'>"+formattedTime+extraActionIcon+"</div></div>";
 			$(html).prepend(chatMessage);
 		}
 	  }
@@ -213,6 +218,22 @@ function deleteMessage(chatBoxId, gid, mid) {
 			headers: headers,
 			success: function() {
 				updateChat(chatBoxId);
+			}
+		});
+}
+
+function likeMessage(chatBoxId, gid, mid) {
+	
+		var action = "groups/"+gid+"/chat/"+mid+"/like";
+
+		$.ajax({
+			dataType: "json",
+			url: baseAPIUrl + action,
+			type: "POST",
+			headers: headers,
+			success: function() {
+				updateChat(chatBoxId);
+				$('#mid_'+mid+' .msg_footer .likeMessage').toggleClass('liked');
 			}
 		});
 }
