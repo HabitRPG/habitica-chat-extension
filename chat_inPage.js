@@ -154,10 +154,15 @@ function digestChatData(chatBoxId,chatData) {
 				var extraActionIcon = '<span class="'+flagColorClass+' flagMessage glyphicon glyphicon-flag" onClick='+"'"+'flagMessage("'+chatBoxId+'","'+groupID+'","'+chatData[key]['id']+'");'+"'"+'></span>';
 				// like
 				var likeColorClass = '';
-				for(var likesKey in chatData[key]['likes']) {
-					if(likesKey == config['uuid']) likeColorClass = ' liked ';
-				}
-				extraActionIcon += ' <span class="'+likeColorClass+' likeMessage glyphicon glyphicon-thumbs-up" onClick='+"'"+'likeMessage("'+chatBoxId+'","'+groupID+'","'+chatData[key]['id']+'");'+"'"+'></span>';
+				var numLikes = Object.keys(chatData[key].likes).length;
+				if(chatData[key].likes[config['uuid']]) likeColorClass = ' liked';
+				if(numLikes <= 0) {
+					numLikes = '<span class="likeNumberCont"></span>';
+				} else {
+					numLikes = '<span class="likeNumberCont' + likeColorClass + '">+<span class="likeNumber">' + numLikes + '</span> </span>';
+				} 
+
+				extraActionIcon += numLikes + ' <span class="'+likeColorClass+' likeMessage glyphicon glyphicon-thumbs-up" onClick='+"'"+'likeMessage("'+chatBoxId+'","'+groupID+'","'+chatData[key]['id']+'");'+"'"+'></span>';
 				// The message
 				var chatText = mmd(chatData[key]['text']);
 			}
@@ -237,7 +242,27 @@ function likeMessage(chatBoxId, gid, mid) {
 			headers: headers,
 			success: function() {
 				updateChat(chatBoxId);
-				$('#mid_'+mid+' .msg_footer .likeMessage').toggleClass('liked');
+				var $numLikes = '#mid_'+mid+' .msg_footer .likeNumberCont'; // shortcut target
+				$('#mid_'+mid+' .msg_footer .likeMessage, ' + $numLikes).toggleClass('liked');
+				var numOfLikes = $($numLikes + ' .likeNumber').text(); // Get number of likes displayed
+				if(!numOfLikes) numOfLikes = 0; // If empty string, make it zero
+				numOfLikes = parseInt(numOfLikes); // Cast as an int instead of string so math will work
+				if($($numLikes).hasClass('liked')) { 
+					// If post is being liked by user, increase the number by one
+					// Using html on the container is necessary for posts that had no
+					// likes previously, so it can be given a '+'
+					$($numLikes).html(' +<span class="likeNumber">' + (numOfLikes + 1) + '</span>');
+				} else if(numOfLikes - 1 > 0) { 
+					// If user is removing their like, make sure that result will be
+					// greater than zero, if so display the new number
+					$($numLikes + ' .likeNumber').text(numOfLikes - 1);
+				} else {
+					// If user is removing thier like and the resulting number
+					// would be zero, just remove it
+					$($numLikes).text('');
+				}
+				
+				
 			}
 		});
 }

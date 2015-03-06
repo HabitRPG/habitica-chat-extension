@@ -186,14 +186,22 @@ vertical-align: top;
     cursor: pointer;
     color: #aaa;
     font-size: 1.2em;
-	display: inline-block;
-	vertical-align: top;
+    display: inline-block;
+    vertical-align: top;
 }
+
+.msg_footer .likeNumberCont {
+    color: #aaa;
+    position: relative;
+    top: 1px;
+    padding-right: 1px;
+}
+
 .msg_footer .flagMessage:hover,.msg_footer .deleteMessage:hover,.msg_footer .likeMessage:hover {
     padding-top: 1px;
     color: black;
 }
-.msg_footer .likeMessage.liked {
+.msg_footer .likeMessage.liked, .msg_footer .likeNumberCont.liked {
 	cursor: default;
 	color: #2EB82E;
 }
