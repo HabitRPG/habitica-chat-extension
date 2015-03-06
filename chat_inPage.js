@@ -222,8 +222,8 @@ function sendChatMessage(chatBoxId) {
 	var targetTA = $('#TA_'+chatBoxId); 
 	var message = targetTA.val(); 
 	
-	if(message.match(/[a-z]/i)) {
-		console.log(message);
+	
+	if(message.match(/[a-z:]/i)) {
 	
 		// URI Encoding of the message
 		message = encodeURIComponent(message);
