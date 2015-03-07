@@ -1,4 +1,4 @@
-
+// Create "Config" elements to pass down config (until I figure out message passing)
 var config = document.createElement('config');
 config.setAttribute("id", "habitRPGChatConfig");
 config.setAttribute("style", "display: none;");
@@ -15,13 +15,20 @@ chrome.storage.sync.get({
 });
 (document.head||document.documentElement).appendChild(config);
 
+// Call markdown to html script
 var s = document.createElement('script');
-s.src = chrome.extension.getURL('chat_inPage.js');
+s.src = chrome.extension.getURL('resources/mmd.js');
 s.onload = function() {
     this.parentNode.removeChild(this);
 };
 (document.head||document.documentElement).appendChild(s);
 
-console.log('ID: '+chrome.runtime.id);
+// Call main chat script
+var s = document.createElement('script');
+s.src = chrome.extension.getURL('mainChat/chat_inPage.js');
+s.onload = function() {
+    this.parentNode.removeChild(this);
+};
+(document.head||document.documentElement).appendChild(s);
 
 
