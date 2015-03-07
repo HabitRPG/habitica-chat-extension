@@ -125,9 +125,7 @@ function createChatBox(chatBoxId) {
 function updateChat(chatBoxId) {
 	var action = chatBoxId.replace('groups_','groups/') + "/chat";
 	var data = "";
-	console.log('updateing?');
 	if(chatIsActive) {
-	console.log('UPDATING');
 		$.ajax({
 			dataType: "json",
 			url: baseAPIUrl + action,
@@ -162,6 +160,12 @@ function digestChatData(chatBoxId,chatData) {
 	var preUpdateLastMessageId = $("#"+chatBoxId+" .chatBox_content div").attr("lastMsgId");
 	var groupID = chatBoxId.replace('groups_','');
 	
+	var today = new Date();
+	var todayDay = today.getDate();
+	var todayMonth = today.getMonth()+1;
+	var todayYear = today.getFullYear();
+	var formattedToday = todayDay + "/" + todayMonth + "/" + todayYear;
+	
 	for (var key in chatData) {
 	  if (chatData.hasOwnProperty(key)) {
 		if (typeof chatData[key]['user'] !== 'undefined' || chatData[key]['uuid'] == "system") {
@@ -170,12 +174,19 @@ function digestChatData(chatBoxId,chatData) {
 				lastMessageIdIsSet = true;
 			}
 			var date = new Date(chatData[key]['timestamp']);
+			
 			var hours = date.getHours();
 			var minutes = "0" + date.getMinutes();
 			var day = date.getDate();
 			var month = date.getMonth()+1;
 			var year = date.getFullYear();
-			var formattedTime = "<span class='msg_time'>"+day +"/"+month+"/"+year+" "+hours + ':' + minutes.substr(minutes.length-2) + "</span>";
+			var formattedDate = day +"/"+month+"/"+year;
+			
+			if (formattedDate == formattedToday) var displayedDate = "Today, ";
+			else if (day == todayDay - 1) var displayedDate = "Yesterday, "
+			else var displayedDate = date.toLocaleDateString();
+			
+			var formattedTime = "<span class='msg_time'>"+displayedDate+" " + hours + ':' + minutes.substr(minutes.length-2) + "</span>";
 			
 			
 			// The type of poster
