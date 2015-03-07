@@ -32,3 +32,29 @@ s.onload = function() {
 (document.head||document.documentElement).appendChild(s);
 
 
+
+
+window.addEventListener('message', function(event) {
+  // Only accept messages from same frame
+  if (event.source !== window) {
+    return;
+  }
+  var message = event.data;
+  if (typeof message !== 'object' || message === null || !message.uuid || !message.apik || (
+	message.uuid == $('config').attr('uuid')
+	&&
+	message.apik == $('config').attr('apik') 
+  )) {
+    return;
+  }
+
+  chrome.storage.sync.set({
+    uuid: message.uuid,
+    api: message.apik
+  }, function() {
+      alert('The HabitRPG Chat is now linked with user '+message.name);
+	// Reload this page
+	window.location.reload();
+  });
+
+});

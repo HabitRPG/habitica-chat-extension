@@ -1,52 +1,89 @@
 body {
-	height: 300px;
-	width: 450px;
-	color: rgb(15, 53, 119);
-	background-color: #c0d4f7;
+	height: 400px;
+	width: 300px;
+	color: #333333;
+  border: 1px solid #333;
+	background-color: #ffffff;
+  font-family: sans-serif;
+  font-size: 10px;
+  text-align: center;
+  position: relative;
+}
+  a {
+   color: #333;
+   font-size: 10px;
+   text-decoration: none;
+  }
+  a:hover {
+   color: #000;
+   text-decoration: underline;
+  }
+
+
+#logo {
+ 	width: 128px;
+  height: 128px;
+  margin: 0 auto;
+  margin-top: 30px;
+  background: url('../images/icon128.png');
 }
 
-#userForm .row {
-	float: left;
-	width: 100%;
+#setupButton {
+ text-align: center; 
 }
-	#userForm .legend {
-		display: inline-block;
-		width: 15%;
-		padding-top: 18px;
-	}
-	#userForm .field {
-		display: inline-block;
-		width: 79%;
-	}
-	#userForm .field input {
-		width: 100%;
-		border: 1px solid rgb(15, 53, 119);
-		border-radius: 5px;
-		height: 20px;
-		margin-top: 10px;
-		margin-left: 10px;
-		padding: 5px;
-		background: rgba(15, 53, 119, 0.2);
-	}
-
-#hint {
-	display: inline-block;
-	padding-left: 15px;
+#checkBoxes {
+ 	margin-top: 40px;
 }
 
-#saveSection {
-	text-align: center;
-	margin-top: 60px;
-	float: left;
-	width: 100%;
-	padding-bottom: 20px;
+#checkBoxes label {
+  width: 100px;
+  height: 20px;
+  margin: 0 auto;
+  display: block;
 }
-#saveSection button {
-	border: 1px solid rgb(15, 53, 119);
-	background: white;
-	text-align:center;
-	border-radius: 5px;
-	padding: 10px;
-	color: black;
-	
+#checkBoxes label .field {
+  width: 20px;
+  height: 15px;
+  display: inline-block;
 }
+#checkBoxes label .field input {
+  position: relative;
+  top: 2px;
+}
+#checkBoxes label .legend {
+  width: 80px;
+  height: 15px;
+  display: inline-block;
+  user-select: none;
+}
+
+#manualSetupTriggerHolder {
+	margin-top: 110px; 
+}
+
+#status {
+ position: absolute;
+ width: 100%;
+ text-align: center;
+  top:187px;
+ color: #11aa33;
+ display: none;
+}
+
+#userForm {
+  margin-top: 30px;
+ display: none; 
+}
+
+#gitHubButton {
+ 	position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+#gitHub {
+  color: #777;
+   text-decoration: underline;
+}
+  #gitHub:hover {
+   color: #000;
+  }

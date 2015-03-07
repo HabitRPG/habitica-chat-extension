@@ -1,3 +1,13 @@
+// Automatic setup via API page
+if(document.URL == "https://habitrpg.com/#/options/settings/api") {
+	var updatedConfig = {
+		"uuid": $('pre').first().text(),
+		"apik": $('pre').last().text(),
+		"name": $('.main-herobox figure .avatar-name').text()
+	};
+	window.postMessage(updatedConfig, '*');
+}
+
 
 function createChatWrapper() {
 	$("body").append("<div id='chatWrapper'><div id='chatWrapper_boxes'></div></div>");

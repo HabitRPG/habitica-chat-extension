@@ -200,6 +200,10 @@
 		-moz-border-radius: 5px;
 		border-radius: 5px;
 	}
+	
+		.chatMessage .bubble p {
+			margin-top: 8px;
+		}
 		.chatMessage.userPoster .bubble {
 			background: #D9EAD3;
 			margin-left: 10px;
