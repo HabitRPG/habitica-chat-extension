@@ -26,7 +26,7 @@ function restore_options() {
     uuid: '',
     api: '',
     enableSound: true,
-    largeText: true
+    largeText: false
   }, function(items) {
     document.getElementById('uuid').value = items.uuid;
     document.getElementById('api').value = items.api;
