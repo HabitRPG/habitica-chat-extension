@@ -433,7 +433,7 @@ createChatWrapper();
 var idleTime = 0;
 $(document).ready(function () {
     //Increment the idle time counter every minute.
-    var idleInterval = setInterval(timerIncrement, 60s000); // 1 minute
+    var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
 
     //Zero the idle timer on mouse movement.
     $(this).mousemove(function (e) {
