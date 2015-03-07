@@ -171,7 +171,7 @@ function digestChatData(chatBoxId,chatData) {
 				var posterClass = "userPoster";
 				var extraActionIcon = '<span  onClick='+"'"+'deleteMessage("'+chatBoxId+'","'+groupID+'","'+chatData[key]['id']+'");'+"'"+' class="deleteMessage glyphicon glyphicon-trash"></span>';
 				// The message
-				var chatText = (mmd(chatData[key]['text']));
+				var chatText = emoji.replace_colons(mmd(chatData[key]['text']));
 			} else if (chatData[key]['uuid'] == "system") {
 				var posterClass = "systemPoster";
 				var extraActionIcon = '';
@@ -198,7 +198,7 @@ function digestChatData(chatBoxId,chatData) {
 
 				extraActionIcon += numLikes + ' <span class="'+likeColorClass+' likeMessage glyphicon glyphicon-thumbs-up" onClick='+"'"+'likeMessage("'+chatBoxId+'","'+groupID+'","'+chatData[key]['id']+'");'+"'"+'></span>';
 				// The message
-				var chatText = (mmd(chatData[key]['text']));
+				var chatText = emoji.replace_colons(mmd(chatData[key]['text']));
 			}
 			
 			
