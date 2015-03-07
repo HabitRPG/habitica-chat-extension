@@ -16,8 +16,6 @@
     pointer-events: none;
 	font-size: 1em;
 }
-	
-#chatWrapper_boxes.largeText{ font-size: 1.2em; }
 
 #groupsBox , .chatBox, .chatBox * { pointer-events: auto; z-index: 10000; }
 
@@ -201,7 +199,7 @@
 		border-radius: 5px;
 	}
 	
-		.chatMessage .bubble p {
+		.chatMessage .bubble p:not(:first-child) {
 			margin-top: 8px;
 		}
 		.chatMessage.userPoster .bubble {
@@ -313,4 +311,10 @@
 		width: 100%;
 		font-style: italic;
 	}
+
+/* Large Text */
+
+#chatWrapper_boxes.largeText { font-size: 1.2em; }
+#chatWrapper_boxes.largeText .chatBox_input textarea {	font-size: 0.9em; }	
+#chatWrapper_boxes.largeText .chatBox_input button { font-size: 0.9em; }
 
