@@ -445,7 +445,6 @@ var idleTime = 0;
 $(document).ready(function () {
     //Increment the idle time counter every minute.
     var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
-
     //Zero the idle timer on mouse movement.
     $(this).mousemove(function (e) {
         idleTime = 0;
@@ -457,10 +456,13 @@ $(document).ready(function () {
 
 function timerIncrement() {
     idleTime = idleTime + 1;
-    if (idleTime > 30) { // 30 minutes
+    if (chatIsActive == true && idleTime > 60) { // 60 minutes
 		chatIsActive = false;
-        alert('Welcome back! The HabitRPG chat has been paused while you were away for over 30 minutes.')
-		chatIsActive = true;
-		updateChat();
+		$('head title').text('(Chat Paused) | HabitRPG | Your Life The Role Playing Game');
+		bootbox.alert("Welcome back! The HabitRPG chat has been paused while you were away for over 60 minutes.", function() {
+			idleTime = 0;
+			chatIsActive = true;
+			$('head title').text('HabitRPG | Your Life The Role Playing Game');
+		});
     }
 }

@@ -23,6 +23,14 @@ s.onload = function() {
 };
 (document.head||document.documentElement).appendChild(s);
 
+// Call bootbox
+var s = document.createElement('script');
+s.src = chrome.extension.getURL('resources/bootbox.min.js');
+s.onload = function() {
+    this.parentNode.removeChild(this);
+};
+(document.head||document.documentElement).appendChild(s);
+
 // Call main chat script
 var s = document.createElement('script');
 s.src = chrome.extension.getURL('mainChat/chat_inPage.js');
