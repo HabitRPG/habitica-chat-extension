@@ -135,7 +135,8 @@ function updateChat(chatBoxId) {
 				var htmlChat = digestChatData(chatBoxId, data);
 				if(htmlChat) {
 					grabAttentionForNewMessage(chatBoxId);
-					$("#"+chatBoxId+" .chatBox_content").html(htmlChat).scrollTop($("#"+chatBoxId+" .chatBox_content")[0].scrollHeight);
+					$("#"+chatBoxId+" .chatBox_content").html(htmlChat);
+					setTimeout("$('#"+chatBoxId+" .chatBox_content').scrollTop($('#"+chatBoxId+" .chatBox_content')[0].scrollHeight)",200);
 				}
 			}
 		});
