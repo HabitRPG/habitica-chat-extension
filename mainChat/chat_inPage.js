@@ -62,7 +62,7 @@ function createChatBox(chatBoxId) {
 	
 	if($("#"+chatBoxId).is(':visible')) {
 		removeChatBox(chatBoxId);
-	} else if ($('.chatBox').length > 5) {
+	} else if ($('.chatBox').length >= 5) {
 		alert('Only 5 groups can be opened at once. Please close one of your groups before opening another one.');
 	} else {
 		$("#chatWrapper_boxes").append("<div class='chatBox' id='"+chatBoxId+"'></div>");
