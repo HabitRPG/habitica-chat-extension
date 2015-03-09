@@ -4,7 +4,7 @@
   "name": "HabitRPG Chat Client",
   "short_name": "Habit Chat",
   "description": "This extension adds a HabitRPG chat client to habitRPG.com",
-  "version": "0.5.3",
+  "version": "0.5.5",
   "options_page": "optionsPage/options.html",
   "icons": { "16": "images/icon16.png",
              "48": "images/icon48.png",
@@ -30,6 +30,7 @@
   "web_accessible_resources": [
         "mainChat/chat.css",
         "mainChat/chat_inPage.js",
+        "resources/bootbox.min.js",
         "resources/mmd.js"
     ],
   "permissions": [
