@@ -7,6 +7,7 @@ Hi, and thanks for contributing to this humble project!
 
 ## 0.5 (Like!)
 ### 0.5.5
+* Changed audio
 * Integrated Bootbox
 * Changed inactivity timer from alert to bootbox modal
 * Fixed scroll bug
