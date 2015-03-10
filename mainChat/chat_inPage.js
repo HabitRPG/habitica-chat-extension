@@ -57,7 +57,6 @@ function removeChatBox(chatBoxId) {
 }
 
 function createChatBox(chatBoxId) {
-	
 	var chatBoxTitle = "";
 	
 	if($("#"+chatBoxId).is(':visible')) {
@@ -168,7 +167,7 @@ function digestChatData(chatBoxId,chatData) {
 	var formattedToday = todayDay + "/" + todayMonth + "/" + todayYear;
 	
 	for (var key in chatData) {
-	  if (chatData.hasOwnProperty(key)) {
+	  if (chatData.hasOwnProperty(key) && chatData[key]['text'] !== null ) {
 		if (typeof chatData[key]['user'] !== 'undefined' || chatData[key]['uuid'] == "system") {
 			if(!lastMessageIdIsSet) {
 				lastMessageId = chatData[key]['id'];
