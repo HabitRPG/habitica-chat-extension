@@ -6,6 +6,9 @@ Hi, and thanks for contributing to this humble project!
 # Version history
 
 ## 0.5 (Like!)
+### 0.5.6
+* Fixed a bug that made a chatBox unable to load if there was an empty message in the log.
+
 ### 0.5.5
 * Changed audio
 * Integrated Bootbox
