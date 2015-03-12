@@ -82,6 +82,7 @@
 		height: 100%;
 		border: none;
 		padding: 10px;
+		padding-left: 27px;
 	}
 
 	.chatBox_input button {
@@ -317,4 +318,45 @@
 #chatWrapper_boxes.largeText { font-size: 1.2em; }
 #chatWrapper_boxes.largeText .chatBox_input textarea {	font-size: 0.9em; }	
 #chatWrapper_boxes.largeText .chatBox_input button { font-size: 0.9em; }
+
+/* Mentions */
+
+	.mentionedInChat .bubble {
+		box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+	}
+	
+	.chatMention {
+		font-weight: bold;
+		text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+		padding: 2px;
+	}
+
+	.mentionedInChat:hover .chatMention {
+		background: rgba(0,0,0,0.3);
+		border-radius: 5px;
+		color: white;
+	}
+
+    .chatBoxMentionNav {
+		position: absolute;
+		width: 20px;
+		height: 100px;
+		bottom: -44px;
+        left: 5px;
+		-webkit-user-select: none;
+	}
+
+    	.mentionNav_up, .mentionNav_down {
+			width: 19px;
+			height: 19px;
+			float: left;
+            padding: 2px;
+            margin-bottom: 5px;
+			display: block;
+            color: #ccc;
+            cursor: pointer;
+		}
+    	.mentionNav_up:hover, .mentionNav_down:hover {
+			padding-top: 3px;
+		}
 
