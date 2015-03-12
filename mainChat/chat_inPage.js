@@ -1,4 +1,4 @@
-// Add scrolling function to jQuery
+﻿// Add scrolling function to jQuery
 jQuery.fn.scrollTo = function(elem) { 
     $(this).animate({
         scrollTop:  $(this).scrollTop() - $(this).offset().top + $(elem).offset().top 
@@ -248,8 +248,8 @@ function digestChatData(chatBoxId,chatData) {
 				var extraActionIcon = '<span class="'+flagColorClass+' flagMessage glyphicon glyphicon-flag" onClick='+"'"+'flagMessage("'+chatBoxId+'","'+groupID+'","'+chatData[key]['id']+'");'+"'"+'></span>';
 				// like
 				var likeColorClass = '';
-				var numLikes = Object.keys(chatData[key].likes).length;
-				if(chatData[key].likes[config['uuid']]) likeColorClass = ' liked';
+				var numLikes = chatData[key].likes ? Object.keys(chatData[key].likes).length : 0;
+				if(chatData[key].likes && chatData[key].likes[config['uuid']]) likeColorClass = ' liked';
 				var likeGlowClass = "";
 				if(numLikes <= 0) {
 					numLikes = '<span class="likeNumberCont"></span>';
@@ -277,6 +277,7 @@ function digestChatData(chatBoxId,chatData) {
 			if(userLevel == 8) userSymbol = '<span class="glyphicon glyphicon-star"></span>';
 			if(userLevel == 9) userSymbol = '<span class="glyphicon icon-crown"></span>';
 			var userLabel = '<span class="label label-default '+contributorLabel+'" onClick="mention(\''+chatBoxId+'\',\''+chatData[key]['user']+'\')">&nbsp;'+chatData[key]['user']+'&nbsp;' + userSymbol+'</span>&nbsp;&nbsp;';
+
 
 			// Check for @ Mentions
 			var mentionAttribute = "";
