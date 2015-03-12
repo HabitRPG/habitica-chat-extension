@@ -5,6 +5,10 @@ Hi, and thanks for contributing to this humble project!
 
 # Version history
 
+## 0.6 (Mentions)
+* Added mentions recognition
+* Added arrows to navigate mentions
+
 ## 0.5 (Like!)
 ### 0.5.6
 * Fixed a bug that made a chatBox unable to load if there was an empty message in the log.
