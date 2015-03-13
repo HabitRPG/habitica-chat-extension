@@ -31,7 +31,8 @@
         "mainChat/chat.css",
         "mainChat/chat_inPage.js",
         "resources/bootbox.min.js",
-        "resources/mmd.js"
+        "resources/mmd.js",
+        "resources/miscFunctions.js"
     ],
   "permissions": [
 	"storage",
