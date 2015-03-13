@@ -6,7 +6,7 @@ chrome.storage.sync.get({
 	uuid: '',
 	api: '',
 	enableSound: true,
-	largeText: true
+	largeText: false
 }, function(items) {
 	config.setAttribute("uuid" , items.uuid);
 	config.setAttribute("apiK" , items.api);
