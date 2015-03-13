@@ -244,6 +244,10 @@
 			border-width: 9px 0px 9px 12px;
 		}
 		
+		.bubble ul,.bubble ol {
+			margin-left: 2em;
+		}
+		
 	.chatMessage .msg_footer {
 	font-size: 0.7em;
 	width: 100%;
