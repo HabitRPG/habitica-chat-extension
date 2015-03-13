@@ -4,6 +4,8 @@ A HabitRPG.com Chat Client for Chrome
 Hi, and thanks for contributing to this humble project!
 
 # Version history
+## 1.0 (Official Release)
+* Fixed minor bugs and adjusted some CSS
 
 ## 0.6 (Mentions)
 * Added mentions recognition
