@@ -106,6 +106,9 @@
     background: none;
     float: left;
     cursor: pointer;
+    text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;	
 }
 
 /* Groups Box */
