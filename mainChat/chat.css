@@ -106,6 +106,9 @@
     background: none;
     float: left;
     cursor: pointer;
+    text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;	
 }
 
 /* Groups Box */
@@ -242,6 +245,10 @@
 			width: 0;
 			z-index: 1;
 			border-width: 9px 0px 9px 12px;
+		}
+		
+		.bubble ul,.bubble ol {
+			margin-left: 2em;
 		}
 		
 	.chatMessage .msg_footer {

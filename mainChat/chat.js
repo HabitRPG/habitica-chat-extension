@@ -6,7 +6,7 @@ chrome.storage.sync.get({
 	uuid: '',
 	api: '',
 	enableSound: true,
-	largeText: true
+	largeText: false
 }, function(items) {
 	config.setAttribute("uuid" , items.uuid);
 	config.setAttribute("apiK" , items.api);
@@ -18,6 +18,14 @@ chrome.storage.sync.get({
 // Call markdown to html script
 var s = document.createElement('script');
 s.src = chrome.extension.getURL('resources/mmd.js');
+s.onload = function() {
+    this.parentNode.removeChild(this);
+};
+(document.head||document.documentElement).appendChild(s);
+
+// Call other functions
+var s = document.createElement('script');
+s.src = chrome.extension.getURL('resources/miscFunctions.js');
 s.onload = function() {
     this.parentNode.removeChild(this);
 };

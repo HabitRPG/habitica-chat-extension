@@ -172,7 +172,7 @@ function updateChat(chatBoxId) {
 				if(htmlChat) {
 					grabAttentionForNewMessage(chatBoxId);
 					$("#"+chatBoxId+" .chatBox_content").html(htmlChat);
-					setTimeout("$('#"+chatBoxId+" .chatBox_content').scrollTop($('#"+chatBoxId+" .chatBox_content')[0].scrollHeight)",200);
+					setTimeout("$('#"+chatBoxId+" .chatBox_content').scrollTop($('#"+chatBoxId+" .chatBox_content')[0].scrollHeight)",300);
 				}
 			}
 		});
@@ -432,8 +432,7 @@ function unblink(chatBoxId) {
 }
 
 function mention(chatBoxId, name) {
-	var currentText = $("#"+chatBoxId+" .chatBox_input textarea").val();
-	$("#"+chatBoxId+" .chatBox_input textarea").val(currentText+" @"+name+" ").focus();
+	insertAtCaret("TA_"+chatBoxId, "@"+name+" ");
 }
 
 
