@@ -7,6 +7,9 @@ Hi, and thanks for contributing to this humble project!
 ## 1.0 (Official Release)
 * Fixed minor bugs and adjusted some CSS
 
+### 1.0.1
+* Fixed navigation arrows that appeared in some minimized boxes
+
 ## 0.6 (Mentions)
 * Added mentions recognition
 * Added arrows to navigate mentions

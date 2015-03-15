@@ -299,7 +299,7 @@ function digestChatData(chatBoxId,chatData) {
 	
 	$(html).attr("lastMsgId", lastMessageId);
 	$(html).attr("totalMentions", totalMentions);
-	if(parseInt(totalMentions) <= 0) $("#"+chatBoxId+" .chatBoxMentionNav").hide();
+	if(parseInt(totalMentions) <= 0) $("#"+chatBoxId+" .chatBoxMentionNav").remove();
 
 	if(typeof preUpdateLastMessageId == 'undefined' || preUpdateLastMessageId != lastMessageId) {
 		return html;
