@@ -1,6 +1,5 @@
 {
   "manifest_version": 2,
-
   "name": "HabitRPG Chat Client",
   "short_name": "Habit Chat",
   "description": "This extension adds a HabitRPG chat client to habitRPG.com",
