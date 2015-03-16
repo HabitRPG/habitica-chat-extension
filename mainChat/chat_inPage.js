@@ -212,16 +212,14 @@ function digestChatData(chatBoxId,chatData) {
 				lastMessageId = chatData[key]['id'];
 				lastMessageIdIsSet = true;
 			}
-			
 			var date = new Date(chatData[key]['timestamp']);
+			
 			var hours = date.getHours();
 			var minutes = "0" + date.getMinutes();
 			var day = date.getDate();
 			var month = date.getMonth()+1;
 			var year = date.getFullYear();
 			var formattedDate = day +"/"+month+"/"+year;
-			
-			var avatar = "";
 			
 			if (formattedDate == formattedToday) var displayedDate = "Today, ";
 			else if (day == todayDay - 1) var displayedDate = "Yesterday, "
@@ -236,7 +234,6 @@ function digestChatData(chatBoxId,chatData) {
 				var extraActionIcon = '<span  onClick='+"'"+'deleteMessage("'+chatBoxId+'","'+groupID+'","'+chatData[key]['id']+'");'+"'"+' class="deleteMessage glyphicon glyphicon-trash"></span>';
 				// The message
 				var chatText = emoji.replace_colons(mmd(chatData[key]['text']));
-				avatar = "<img src='https://habitrpg.com/export/avatar-"+config['uuid']+".png' />";
 			} else if (chatData[key]['uuid'] == "system") {
 				var posterClass = "systemPoster";
 				var extraActionIcon = '';
@@ -245,7 +242,6 @@ function digestChatData(chatBoxId,chatData) {
 			} else {
 				var posterClass = "otherPoster";
 				var flagColorClass = '';
-				avatar = "<img src='https://habitrpg.com/export/avatar-"+chatData[key]['uuid']+".png' />";
 				for(var flaggedKey in chatData[key]['flags']) {
 					if(flaggedKey == config['uuid']) flagColorClass = ' flagged ';
 				}
@@ -295,7 +291,7 @@ function digestChatData(chatBoxId,chatData) {
 			}
 			
 			// Create HTML
-			var chatMessage = "<div "+mentionAttribute+" id='mid_"+chatData[key]['id']+"' class='chatMessage "+posterClass+" "+mentionClass+"'><div class='msg_avatar'><div class='msg_avatar_cropper'>"+avatar+"</div></div><div class='msg_user'>" + userLabel + "</div><div class='bubble "+likeGlowClass+"'>" + chatText + "</div><div class='msg_footer'>"+formattedTime+extraActionIcon+"</div></div>";
+			var chatMessage = "<div "+mentionAttribute+" id='mid_"+chatData[key]['id']+"' class='chatMessage "+posterClass+" "+mentionClass+"'><div class='msg_user'>" + userLabel + "</div><div class='bubble "+likeGlowClass+"'>" + chatText + "</div><div class='msg_footer'>"+formattedTime+extraActionIcon+"</div></div>";
 			$(html).prepend(chatMessage);
 		}
 	  }

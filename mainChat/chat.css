@@ -171,13 +171,12 @@
 .chatMessage {
  font-size: 0.8em;
  margin-top: 30px;
- position: relative;
 }
 
-    .chatMessage .msg_user {
-    margin-left: 70px;
-    font-weight: bold;
-    margin-bottom: 5px;
+	.chatMessage .msg_user {
+	margin-left: 30px;
+	font-weight: bold;
+	margin-bottom: 5px;
 	cursor: pointer;
 	}
 		.chatMessage.userPoster .msg_user {
@@ -189,14 +188,14 @@
 			}
 
 		.chatMessage.userPoster .msg_user {
-		margin-left: 10px;
+		margin-left: 0px;
 		margin-right: 0px;
 		}
 
 	.chatMessage .bubble {
 		position: relative;
-		margin-left: 70px;
-		width: 220px;
+		margin-left: 25px;
+		width: 270px;
 		padding: 5px;
 		background: rgba(15, 53, 119,0.1);
 		-webkit-border-radius: 5px;
@@ -263,7 +262,7 @@
 	}
 	
 		.chatMessage.userPoster .msg_footer {
-			margin-right: 70px;
+			margin-right: 25px;
 		}
 
 		.msg_footer .msg_time {
@@ -320,43 +319,8 @@
 		width: 100%;
 		font-style: italic;
 	}
-    
-    /* Avatars */
-	
-    .msg_avatar {
-     overflow: hidden;
-     width: 50px;
-     height: 50px;
-     border-radius: 100px;
-    position: absolute;
-    top: 10px;
-	border: 2px solid #333;
-    background-image: url("https://habitrpg.com/page-loader.gif");
-    background-size: 20px;
-    background-repeat: no-repeat;
-    background-position: 13px 13px;
-    }
 
-.msg_avatar_cropper {
- width: 280px;
- height: 194px;
-}
 
-    	.msg_avatar .msg_avatar_cropper img {
-			height: 38%;
-            margin-left: -15px;
-            margin-top: -11px;
-		}
-
-		.chatMessage.systemPoster .msg_avatar {
-			display: none;
-		}
-
-		.chatMessage.userPoster .msg_avatar {
-			right: 0px;
-		}
-
-		
 /* Large Text */
 
 #chatWrapper_boxes.largeText { font-size: 1.2em; }
