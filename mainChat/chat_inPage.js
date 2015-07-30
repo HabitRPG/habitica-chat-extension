@@ -1,9 +1,9 @@
 ﻿// Add scrolling function to jQuery
-jQuery.fn.scrollTo = function(elem) { 
+jQuery.fn.scrollTo = function(elem) {
     $(this).animate({
-        scrollTop:  $(this).scrollTop() - $(this).offset().top + $(elem).offset().top 
-    }, speed = 300); 
-    return this; 
+        scrollTop:  $(this).scrollTop() - $(this).offset().top + $(elem).offset().top
+    }, speed = 300);
+    return this;
 };
 
 // Automatic setup via API page
@@ -31,18 +31,18 @@ function createGroupsBox() {
 		url: baseAPIUrl + action,
 		headers: apiHeaders,
 		success: function(groups) {
-			
+
 			$("#chatWrapper_boxes").append("<div id='groupsBox'></div>");
 			$("#groupsBox").append("<div class='hidders groupsBox_title'><div class='groupsBoxTitle_title'>Groups</div><button class='chatBox_minimizer'><i class='glyphicon glyphicon-chevron-down'></i></button></div></div>");
 			$("#groupsBox").append("<div class='hidders groupsBox_content'></div>");
 			$("#groupsBox").append("<div class='showers groupsBox_shower'><div class='shower_title'>Groups</div></div>");
-			
+
 			$("#groupsBox .showers").css('display',"none");
 			$("#groupsBox .groupsBox_title, #groupsBox .groupsBox_shower").click(function() {
 				$('#groupsBox .hidders').toggle();
 				$('#groupsBox .showers').toggle();
 			});
-			
+
 			$("#groupsBox .groupsBox_content").append("<div class='groupHR'>Regular Chatrooms</div>");
 			$("#groupsBox .groupsBox_content").append("<div linkedId='habitrpg' onClick='createChatBox(\"groups_habitrpg\")' class='group'>Tavern</div>");
 			$("#groupsBox .groupsBox_content").append("<div linkedId='party' onClick='createChatBox(\"groups_party\")' class='group'>My Party</div>");
@@ -52,7 +52,7 @@ function createGroupsBox() {
 				$("#groupsBox .groupsBox_content").append("<div linkedId='"+groups[key]['_id']+"' onClick='createChatBox(\"groups_"+groups[key]['_id']+"\")' class='group'>"+groups[key]['name'] + "</div>");
 			  }
 			}
-			
+
 		}
 	});
 }
@@ -66,7 +66,7 @@ function removeChatBox(chatBoxId) {
 
 function createChatBox(chatBoxId) {
 	var chatBoxTitle = "";
-	
+
 	if($("#"+chatBoxId).is(':visible')) {
 		removeChatBox(chatBoxId);
 	} else if ($('.chatBox').length >= 5) {
@@ -79,7 +79,7 @@ function createChatBox(chatBoxId) {
 		$("#"+chatBoxId).append("<div class='showers chatBox_shower'></div>");
 		$("#"+chatBoxId).append("<div class='hidders chatBoxMentionNav' currentMentionPosition='0'><i class='mentionNav_up glyphicon glyphicon-circle-arrow-up'></i><i class='mentionNav_down glyphicon glyphicon-circle-arrow-down'></i></div>");
 		recalculateChatBoxPositions();
-				
+
 		// Populate, position and add triggers
 		var action = chatBoxId.replace('groups_','groups/');
 		$.ajax({
@@ -92,18 +92,18 @@ function createChatBox(chatBoxId) {
 				// Prevent link from minimizing window
 				$("#"+chatBoxId+" .chatBox_title .chatBoxTitle_title a").click(function(e){
 				    e.stopPropagation();
-				});	
+				});
 				$("#"+chatBoxId+" .chatBox_input").html('<textarea id="TA_'+chatBoxId+'" "Type here..."></textarea><button onClick="sendChatMessage(\''+chatBoxId+'\')">Send</button>');
 				$("#"+chatBoxId+" .chatBox_shower").html("<div class='shower_title'>"+data['name']+"</div><button class='chatBox_closer'><i class='glyphicon glyphicon-remove'></i></button>");
 				$("#"+chatBoxId+" div .chatBox_closer").click(function() {
 					removeChatBox(chatBoxId);
-				});	
+				});
 				$("#"+chatBoxId+" .chatBox_input textarea").keyup(function(e){
 					if (!e) e = window.event;
 					var keyCode = e.keyCode || e.which;
 					if (keyCode == '13' && !e.shiftKey){ sendChatMessage($(this).parent().parent().attr('id')) }
 				});
-				
+
 				// Mention navigation
 				$("#"+chatBoxId+" .chatBoxMentionNav .mentionNav_up ").click(function() {
 					var totalMentions = parseInt($("#"+chatBoxId+" .chatBox_content div").attr('totalMentions'));
@@ -132,7 +132,7 @@ function createChatBox(chatBoxId) {
 					$(this).parent().attr('currentMentionPosition',nextMentionPosition);
 				});
 			}
-		});	
+		});
 		$("#"+chatBoxId+" .chatBox_shower").css('display',"none");
 		$("#"+chatBoxId+" .chatBox_title").click(function() {
 			$('#'+chatBoxId+' .hidders').toggle();
@@ -152,7 +152,7 @@ function createChatBox(chatBoxId) {
 			delete intervals.chatBoxId;
 			intervals[chatBoxId] = window.setInterval("updateChat('"+chatBoxId+"')", refreshRateFast);
 		});
-		
+
 		updateChat(chatBoxId);
 		intervals[chatBoxId] = window.setInterval("updateChat('"+chatBoxId+"')", refreshRateFast);
 	}
@@ -198,13 +198,13 @@ function digestChatData(chatBoxId,chatData) {
 	var groupID = chatBoxId.replace('groups_','');
 
 	var totalMentions = 0;
-	
+
 	var today = new Date();
 	var todayDay = today.getDate();
 	var todayMonth = today.getMonth()+1;
 	var todayYear = today.getFullYear();
 	var formattedToday = todayDay + "/" + todayMonth + "/" + todayYear;
-	
+
 	for (var key in chatData) {
 	  if (chatData.hasOwnProperty(key) && chatData[key]['text'] !== null ) {
 		if (typeof chatData[key]['user'] !== 'undefined' || chatData[key]['uuid'] == "system") {
@@ -213,21 +213,21 @@ function digestChatData(chatBoxId,chatData) {
 				lastMessageIdIsSet = true;
 			}
 			var date = new Date(chatData[key]['timestamp']);
-			
+
 			var hours = date.getHours();
 			var minutes = "0" + date.getMinutes();
 			var day = date.getDate();
 			var month = date.getMonth()+1;
 			var year = date.getFullYear();
 			var formattedDate = day +"/"+month+"/"+year;
-			
+
 			if (formattedDate == formattedToday) var displayedDate = "Today, ";
 			else if (day == todayDay - 1) var displayedDate = "Yesterday, "
 			else var displayedDate = date.toLocaleDateString();
-			
+
 			var formattedTime = "<span class='msg_time'>"+displayedDate+" " + hours + ':' + minutes.substr(minutes.length-2) + "</span>";
-			
-			
+
+
 			// The type of poster
 			if(chatData[key]['uuid'] == config['uuid'])  {
 				var posterClass = "userPoster";
@@ -257,14 +257,14 @@ function digestChatData(chatBoxId,chatData) {
 					if(numLikes > 9) var likeGlowClass = "gotlike_9";
 					else var likeGlowClass = "gotlike_"+numLikes;
 					numLikes = '<span class="likeNumberCont' + likeColorClass + '">+<span class="likeNumber">' + numLikes + '</span> </span>';
-				} 
+				}
 
 				extraActionIcon += numLikes + ' <span class="'+likeColorClass+' likeMessage glyphicon glyphicon-thumbs-up" onClick='+"'"+'likeMessage("'+chatBoxId+'","'+groupID+'","'+chatData[key]['id']+'");'+"'"+'></span>';
 				// The message
 				var chatText = emoji.replace_colons(mmd(chatData[key]['text']));
 			}
-			
-			
+
+
 			// The user label
 			// check if user has a contributor level, if not (ie: system), set it to undefined
 			var userLevel = chatData[key]['contributor'] ? chatData[key]['contributor']['level'] : undefined;
@@ -289,14 +289,14 @@ function digestChatData(chatBoxId,chatData) {
 				totalMentions = totalMentions + 1;
 				mentionAttribute = "mentionNumber='"+totalMentions+"'";
 			}
-			
+
 			// Create HTML
 			var chatMessage = "<div "+mentionAttribute+" id='mid_"+chatData[key]['id']+"' class='chatMessage "+posterClass+" "+mentionClass+"'><div class='msg_user'>" + userLabel + "</div><div class='bubble "+likeGlowClass+"'>" + chatText + "</div><div class='msg_footer'>"+formattedTime+extraActionIcon+"</div></div>";
 			$(html).prepend(chatMessage);
 		}
 	  }
 	}
-	
+
 	$(html).attr("lastMsgId", lastMessageId);
 	$(html).attr("totalMentions", totalMentions);
 	if(parseInt(totalMentions) <= 0) $("#"+chatBoxId+" .chatBoxMentionNav").remove();
@@ -309,9 +309,9 @@ function digestChatData(chatBoxId,chatData) {
 }
 
 function flagMessage(chatBoxId, gid, mid) {
-	
+
 	if($('#mid_'+mid+' .msg_footer .flagMessage').hasClass('flagged') || confirm('Reporting a message indicates that you believe it to be in violation of the community guidelines. Are you sure you wish to report this message?')) {
-		
+
 		var action = "groups/"+gid+"/chat/"+mid+"/flag";
 
 		$.ajax({
@@ -328,7 +328,7 @@ function flagMessage(chatBoxId, gid, mid) {
 }
 
 function deleteMessage(chatBoxId, gid, mid) {
-	
+
 		var action = "groups/"+gid+"/chat/"+mid;
 
 		$.ajax({
@@ -343,7 +343,7 @@ function deleteMessage(chatBoxId, gid, mid) {
 }
 
 function likeMessage(chatBoxId, gid, mid) {
-	
+
 		var action = "groups/"+gid+"/chat/"+mid+"/like";
 
 		$.ajax({
@@ -358,12 +358,12 @@ function likeMessage(chatBoxId, gid, mid) {
 				var numOfLikes = $($numLikes + ' .likeNumber').text(); // Get number of likes displayed
 				if(!numOfLikes) numOfLikes = 0; // If empty string, make it zero
 				numOfLikes = parseInt(numOfLikes); // Cast as an int instead of string so math will work
-				if($($numLikes).hasClass('liked')) { 
+				if($($numLikes).hasClass('liked')) {
 					// If post is being liked by user, increase the number by one
 					// Using html on the container is necessary for posts that had no
 					// likes previously, so it can be given a '+'
 					$($numLikes).html(' +<span class="likeNumber">' + (numOfLikes + 1) + '</span>');
-				} else if(numOfLikes - 1 > 0) { 
+				} else if(numOfLikes - 1 > 0) {
 					// If user is removing their like, make sure that result will be
 					// greater than zero, if so display the new number
 					$($numLikes + ' .likeNumber').text(numOfLikes - 1);
@@ -372,20 +372,20 @@ function likeMessage(chatBoxId, gid, mid) {
 					// would be zero, just remove it
 					$($numLikes).text('');
 				}
-				
-				
+
+
 			}
 		});
 }
 
 function sendChatMessage(chatBoxId) {
 
-	var targetTA = $('#TA_'+chatBoxId); 
-	var message = targetTA.val(); 
-	
-	
+	var targetTA = $('#TA_'+chatBoxId);
+	var message = targetTA.val();
+
+
 	if(message.match(/[a-z:]/i)) {
-	
+
 		// URI Encoding of the message
 		message = encodeURIComponent(message);
 
@@ -410,10 +410,10 @@ function sendChatMessage(chatBoxId) {
 
 function grabAttentionForNewMessage(chatBoxId) {
 	if(soundEnabled) ping.play();
-		
+
 	if($("#"+chatBoxId+" .chatBox_shower").is(":visible")) {
 		blink(chatBoxId);
-	}	
+	}
 }
 
 function blink(chatBoxId) {
@@ -454,7 +454,7 @@ var intervals = {};
 var config = {};
 for (var i = 0, len = attributes.length; i < len; i++) {
     config[attributes[i].name] = attributes[i].value;
-} 
+}
 if(config['sound'] == "true") var soundEnabled = true;
 else var soundEnabled = false;
 var user_id = config['uuid'];
