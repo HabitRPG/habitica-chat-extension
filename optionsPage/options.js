@@ -36,7 +36,7 @@ function restore_options() {
 }
 
 function openSettings() {
-	chrome.tabs.create({ url: "https://habitrpg.com/#/options/settings/api" });
+	chrome.tabs.create({ url: "https://habitica.com/#/options/settings/api" });
 }
 
 function openGitHub() {

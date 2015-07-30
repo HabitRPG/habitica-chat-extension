@@ -7,7 +7,8 @@ jQuery.fn.scrollTo = function(elem) {
 };
 
 // Automatic setup via API page
-if(document.URL == "https://habitrpg.com/#/options/settings/api") {
+if(document.URL == "https://habitrpg.com/#/options/settings/api"
+    || document.URL == "https://habitica.com/#/options/settings/api") {
 	var updatedConfig = {
 		"uuid": $('pre').first().text(),
 		"apik": $('pre').last().text(),
