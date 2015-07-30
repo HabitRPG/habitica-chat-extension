@@ -16,14 +16,16 @@
   "content_scripts": [ {
     "js":      [ "resources/jquery.js", "mainChat/chat.js" ],
     "css":     [ "mainChat/chat.css" ],
-	"matches": [ "http://*.habitrpg.com/*", "https://*.habitrpg.com/*"] 
+	"matches": [ 
+    "*://*.habitrpg.com/*",
+    "*://*.habitica.com/*"
+  ] 
 	
   }],
   "externally_connectable": {
 	"matches": [
-		"http://*.habitrpg.com/*",
-		"https://*.habitrpg.com/*",
-		"https://habitrpg.com/#/options/settings/api"
+    "*://*.habitrpg.com/*",
+    "*://*.habitica.com/*"
 		]
   },
   "web_accessible_resources": [
