@@ -442,7 +442,7 @@ function mention(chatBoxId, name) {
 ///////////////////////////////////////////////////////////////////////
 
 // Hardcoded settings
-var baseAPIUrl = "https://habitrpg.com/api/v2/";
+var baseAPIUrl = "https://habitica.com/api/v2/";
 var refreshRateFast = 5000;
 var refreshRateMedium = 45000;
 var refreshRateSlow = 60000;
