@@ -421,11 +421,11 @@ function blink(chatBoxId) {
 	var intervalIn = window.setInterval("$('#"+chatBoxId+" .chatBox_shower').css('background','#a0b4d7');",1000)
 	$('#'+chatBoxId+' .chatBox_shower').attr('intervalIn',intervalIn);
 	window.setTimeout("var intervalOut = window.setInterval(\"$('#"+chatBoxId+" .chatBox_shower').css('background','#c0d4f7');\",1000);$('#"+chatBoxId+" .chatBox_shower').attr('intervalOut',intervalOut);",500);
-	$('head title').text('(New messages) HabitRPG | Your Life The Role Playing Game');
+	$('head title').text('(New messages) Habitica | Your Life The Role Playing Game');
 }
 
 function unblink(chatBoxId) {
-	$('head title').text('HabitRPG | Your Life The Role Playing Game');
+	$('head title').text('Habitica | Your Life The Role Playing Game');
 	clearInterval($('#'+chatBoxId+' .chatBox_shower').attr('intervalIn'));
 	clearInterval($('#'+chatBoxId+' .chatBox_shower').attr('intervalOut'));
 	$('#'+chatBoxId+' .chatBox_shower').css('background','#c0d4f7');
@@ -525,11 +525,11 @@ function timerIncrement() {
     idleTime = idleTime + 1;
     if (chatIsActive == true && idleTime > 60) { // 60 minutes
 		chatIsActive = false;
-		$('head title').text('(Chat Paused) | HabitRPG | Your Life The Role Playing Game');
-		bootbox.alert("Welcome back! The HabitRPG chat has been paused while you were away for over 60 minutes.", function() {
+		$('head title').text('(Chat Paused) | Habitica | Your Life The Role Playing Game');
+		bootbox.alert("Welcome back! The Habitica chat has been paused while you were away for over 60 minutes.", function() {
 			idleTime = 0;
 			chatIsActive = true;
-			$('head title').text('HabitRPG | Your Life The Role Playing Game');
+			$('head title').text('Habitica | Your Life The Role Playing Game');
 		});
     }
 }
