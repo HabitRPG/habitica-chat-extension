@@ -17,7 +17,7 @@ chrome.storage.sync.get({
 
 // Call markdown to html script
 var s = document.createElement('script');
-s.src = chrome.extension.getURL('resources/mmd.js');
+s.src = chrome.extension.getURL('resources/habitica-markdown.min.js');
 s.onload = function() {
     this.parentNode.removeChild(this);
 };
@@ -59,7 +59,7 @@ window.addEventListener('message', function(event) {
   if (typeof message !== 'object' || message === null || !message.uuid || !message.apik || (
 	message.uuid == $('config').attr('uuid')
 	&&
-	message.apik == $('config').attr('apik') 
+	message.apik == $('config').attr('apik')
   )) {
     return;
   }
