@@ -8,7 +8,7 @@ Hi, and thanks for contributing to this humble project!
 
 # Version history
 
-### 1.2
+### 1.4
 * Use official Habitica Markdown module to render markdown
 * Upgrade routes to use version 3 of Habitica API
 
