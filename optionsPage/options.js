@@ -40,7 +40,7 @@ function openSettings() {
 }
 
 function openGitHub() {
-	chrome.tabs.create({ url: "https://github.com/Horacious/HabitRPG-Chat-Extension" });
+	chrome.tabs.create({ url: "https://github.com/HabitRPG/habitica-chat-extension" });
 }
 
 function displayManualOptions() {
