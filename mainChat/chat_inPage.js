@@ -31,7 +31,8 @@ if(document.URL == "https://habitrpg.com/#/options/settings/api"
       dataType: "json",
       url: baseAPIUrl + action,
       headers: apiHeaders,
-      success: function(groups) {
+      success: function(response) {
+        var groups = response.data;
 
         $("#chatWrapper_boxes").append("<div id='groupsBox'></div>");
         $("#groupsBox").append("<div class='hidders groupsBox_title'><div class='groupsBoxTitle_title'>Groups</div><button class='chatBox_minimizer'><i class='glyphicon glyphicon-chevron-down'></i></button></div></div>");
@@ -87,7 +88,8 @@ if(document.URL == "https://habitrpg.com/#/options/settings/api"
         dataType: "json",
         url: baseAPIUrl + action,
         headers: apiHeaders,
-        success: function(data) {
+        success: function(response) {
+          var data = response.data;
 
           $("#"+chatBoxId+" .chatBox_title").html("<div class='chatBoxTitle_title'><a href='#/options/groups/guilds/"+data['_id']+"'>"+data['name']+"</a></div><button class='chatBox_closer'><i class='glyphicon glyphicon-remove'></i></button><button class='chatBox_minimizer'><i class='glyphicon glyphicon-chevron-down'></i></button>");
           // Prevent link from minimizing window
@@ -168,7 +170,8 @@ if(document.URL == "https://habitrpg.com/#/options/settings/api"
         url: baseAPIUrl + action,
         data: data,
         headers: apiHeaders,
-        success: function(data) {
+        success: function(response) {
+          var data = response.data;
           var htmlChat = digestChatData(chatBoxId, data);
           if(htmlChat) {
             grabAttentionForNewMessage(chatBoxId);
@@ -320,7 +323,8 @@ if(document.URL == "https://habitrpg.com/#/options/settings/api"
         url: baseAPIUrl + action,
         type: "POST",
         headers: apiHeaders,
-        success: function(data) {
+        success: function(response) {
+          var data = response.data;
           updateChat(chatBoxId);
           $('#mid_'+mid+' .msg_footer .flagMessage').toggleClass('flagged');
         }
@@ -382,26 +386,22 @@ if(document.URL == "https://habitrpg.com/#/options/settings/api"
   function sendChatMessage(chatBoxId) {
 
     var targetTA = $('#TA_'+chatBoxId);
-    var message = targetTA.val();
+    var message = targetTA.val().trim();
 
 
-    if(message.match(/[a-z:]/i)) {
-
-      // URI Encoding of the message
-      message = encodeURIComponent(message);
-
+    if(message) {
       targetTA.val('');
       var sentMessage = {"message": message};
       var id = chatBoxId.replace('groups_','');
-      var action = "groups/"+id+"/chat?message="+message;
+      var action = "groups/"+id+"/chat";
 
       $.ajax({
         dataType: "json",
         url: baseAPIUrl + action,
         type: "POST",
-        //data: sentMessage,
+        data: sentMessage,
         headers: apiHeaders,
-        success: function() {
+        success: function(response) {
           updateChat(chatBoxId);
           $("#"+chatBoxId+" .chatBox_input textarea").focus();
         }
@@ -442,7 +442,7 @@ if(document.URL == "https://habitrpg.com/#/options/settings/api"
   ///////////////////////////////////////////////////////////////////////
 
   // Hardcoded settings
-  var baseAPIUrl = "https://habitica.com/api/v2/";
+  var baseAPIUrl = "https://habitica.com/api/v3/";
   var refreshRateFast = 5000;
   var refreshRateMedium = 45000;
   var refreshRateSlow = 60000;
@@ -473,7 +473,8 @@ if(document.URL == "https://habitrpg.com/#/options/settings/api"
       dataType: "json",
       url: baseAPIUrl + action,
       headers: apiHeaders,
-      success: function(data) {
+      success: function(response) {
+        var data = response.data;
         var heroName = data['profile']['name'];
       }
     });
