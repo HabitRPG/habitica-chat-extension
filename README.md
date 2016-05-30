@@ -1,5 +1,8 @@
-# HabitRPG-Chat-Extension
-A HabitRPG.com Chat Client for Chrome
+# Habitica-Chat-Extension
+
+<sup>Originally written by [Horacious](https://github.com/Horacious/). Now maintained by HabitRPG, Inc.</sup>
+
+A habitica.com Chat Client for Chrome
 
 Hi, and thanks for contributing to this humble project!
 
