@@ -6,9 +6,11 @@ jQuery.fn.scrollTo = function(elem) {
   return this;
 };
 
+var HABITICA_URL = 'https://habitica.com'
+
 // Automatic setup via API page
 if(document.URL == "https://habitrpg.com/#/options/settings/api"
-  || document.URL == "https://habitica.com/#/options/settings/api") {
+  || document.URL == HABITICA_URL + "/#/options/settings/api") {
     var updatedConfig = {
       "uuid": $('pre').first().text(),
       "apik": $('pre').last().text(),
@@ -442,7 +444,7 @@ if(document.URL == "https://habitrpg.com/#/options/settings/api"
   ///////////////////////////////////////////////////////////////////////
 
   // Hardcoded settings
-  var baseAPIUrl = "https://habitica.com/api/v3/";
+  var baseAPIUrl = HABITICA_URL + "/api/v3/";
   var refreshRateFast = 5000;
   var refreshRateMedium = 45000;
   var refreshRateSlow = 60000;
