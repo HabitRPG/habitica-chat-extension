@@ -7,6 +7,8 @@ A habitica.com Chat Client for Chrome
 Hi, and thanks for contributing to this humble project!
 
 # Version history
+### 1.4.1
+* fix: Re-impliment missing avatar feature
 
 ### 1.4
 * Use official Habitica Markdown module to render markdown
