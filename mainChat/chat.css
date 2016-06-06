@@ -188,20 +188,23 @@
 			}
 
 		.chatMessage.userPoster .msg_user {
-		margin-left: 0px;
 		margin-right: 0px;
 		}
 
 	.chatMessage .bubble {
 		position: relative;
 		margin-left: 25px;
-		width: 270px;
+		width: 240px;
 		padding: 5px;
 		background: rgba(15, 53, 119,0.1);
 		-webkit-border-radius: 5px;
 		-moz-border-radius: 5px;
 		border-radius: 5px;
 	}
+
+	.chatMessage.otherPoster .bubble {
+		margin-left: 65px;
+  }
 	
 		.chatMessage .bubble p:not(:first-child) {
 			margin-top: 8px;
@@ -262,7 +265,7 @@
 	}
 	
 		.chatMessage.userPoster .msg_footer {
-			margin-right: 25px;
+			margin-right: 55px;
 		}
 
 		.msg_footer .msg_time {
@@ -368,3 +371,46 @@
 			padding-top: 3px;
 		}
 
+.user_avatar {
+  padding: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+}
+
+.user_avatar .user-not-found {
+  background: #3B2269;
+  color: white;
+  border-radius: 100%;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  font-size: 2.5em;
+  margin-top: 5px;
+}
+
+.user_avatar .herobox {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 100%;
+}
+
+.user_avatar .herobox .character-sprites {
+  position: relative;
+  top: -20px;
+  left: -32px;
+}
+
+.chatMessage.otherPoster .user_avatar {
+  float: left;
+}
+
+.chatMessage.userPoster .user_avatar {
+  float: right;
+}
+
+.avatar-loading-spinner {
+  top: -5px;
+}

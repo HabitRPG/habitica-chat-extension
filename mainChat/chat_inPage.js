@@ -6,7 +6,8 @@ jQuery.fn.scrollTo = function(elem) {
   return this;
 };
 
-var HABITICA_URL = 'https://habitica.com'
+var HABITICA_URL = 'https://habitica.com';
+var membersCache = {};
 
 // Automatic setup via API page
 if(document.URL == "https://habitrpg.com/#/options/settings/api"
@@ -296,8 +297,16 @@ if(document.URL == "https://habitrpg.com/#/options/settings/api"
             mentionAttribute = "mentionNumber='"+totalMentions+"'";
           }
 
+          var sendersUuid = chatData[key].uuid;
+
           // Create HTML
-          var chatMessage = "<div "+mentionAttribute+" id='mid_"+chatData[key]['id']+"' class='chatMessage "+posterClass+" "+mentionClass+"'><div class='msg_user'>" + userLabel + "</div><div class='bubble "+likeGlowClass+"'>" + chatText + "</div><div class='msg_footer'>"+formattedTime+extraActionIcon+"</div></div>";
+          var chatMessage = "" +
+            "<div "+mentionAttribute+" id='mid_"+chatData[key]['id']+"' class='chatMessage "+posterClass+" "+mentionClass+"'>" +
+              generateAvatar(sendersUuid) +
+              "<div class='msg_user'>" + userLabel + "</div>" +
+              "<div class='bubble "+likeGlowClass+"'>" + chatText + "</div>" +
+              "<div class='msg_footer'>"+formattedTime+extraActionIcon+"</div>" +
+            "</div>";
           $(html).prepend(chatMessage);
         }
       }
@@ -312,6 +321,93 @@ if(document.URL == "https://habitrpg.com/#/options/settings/api"
     } else {
       return false;
     }
+  }
+
+  function createAvatarHead (member) {
+    var pref = member.preferences;
+    var gearType = pref.costume ? 'costume' : 'equipped';
+    var gear = member.items.gear[gearType];
+    var hairColor = '_' + pref.hair.color
+    var sleepClass = pref.sleep ? 'skin_' + pref.skin + '_sleep' : 'skin_' + pref.skin;
+
+    return '' +
+      '<div class="herobox">' +
+        '<div class="character-sprites">' +
+          '<span class="chair_' + pref.chair + '"></span>' +
+          '<span class="' + gear.back + '"></span>' +
+          '<span class="' + sleepClass + '"></span>' +
+          '<span class="' + pref.size + '_shirt_' + pref.shirt + '"></span>' +
+          '<span class="' + pref.size + '_' + gear.armor + '"></span>' +
+          '<span class="' + gear.back + '_collar' + '"></span>' +
+          '<span class="' + gear.body + '"></span>' +
+          '<span class="head_' + pref.head +'"></span>' +
+          '<span class="hair_base_' + pref.hair.base + hairColor + '"></span>' +
+          '<span class="hair_bangs_' + pref.hair.bangs + hairColor + '"></span>' +
+          '<span class="hair_mustache_' + pref.hair.mustache + hairColor + '"></span>' +
+          '<span class="hair_beard_' + pref.hair.beard + hairColor + '"></span>' +
+          '<span class="' + gear.eyewear + '"></span>' +
+          '<span class="' + gear.head + '"></span>' +
+          '<span class="' + gear.headAccessory + '"></span>' +
+          '<span class="' + gear.shield + '"></span>' +
+          '<span class="' + gear.weapon + '"></span>' +
+        '</div>' +
+      '</div>';
+  }
+
+  function lookUpMember (uuid) {
+    return $.ajax({
+      dataType: "json",
+      url: baseAPIUrl + 'members/' + uuid,
+      headers: apiHeaders,
+      error: function (err) {
+        membersCache[uuid].loaded = true;
+        membersCache[uuid].html = '<div class="user-not-found">?</div>';
+        $('.user_avatar.' + uuid).html(membersCache[uuid].html);
+      }
+    });
+  }
+
+  function replaceLoadingSpinner (response) {
+    var member = response.data;
+    var uuid = member.id
+    var cache = membersCache[uuid];
+
+    cache.html = createAvatarHead(member);
+    cache.loaded = true;
+    cache.lastUpdated = new Date();
+
+    $('.user_avatar.' + uuid).html(cache.html);
+  }
+
+  function generateAvatar (uuid) {
+    if (uuid === 'system') { return ''; }
+
+    if (uuid in membersCache) {
+      if (membersCache[uuid].loaded) {
+        return '' +
+          '<div class="user_avatar ' + uuid + '">' +
+            membersCache[uuid].html +
+          '</div>';
+      }
+    } else {
+      membersCache[uuid] = {
+        lastUpdated: new Date(),
+        loaded: false,
+        html: ''
+      };
+
+      lookUpMember(uuid).then(replaceLoadingSpinner)
+    }
+
+    return '' +
+      '<div class="user_avatar ' + uuid + '">' +
+        '<div class="avatar-loading-spinner sk-folding-cube">' +
+          '<div class="sk-cube1 sk-cube"></div>' +
+          '<div class="sk-cube2 sk-cube"></div>' +
+          '<div class="sk-cube4 sk-cube"></div>' +
+          '<div class="sk-cube3 sk-cube"></div>' +
+        '</div>' +
+      '</div>';
   }
 
   function flagMessage(chatBoxId, gid, mid) {

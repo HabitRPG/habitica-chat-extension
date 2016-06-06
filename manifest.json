@@ -15,7 +15,7 @@
   },
   "content_scripts": [ {
     "js":      [ "resources/jquery.js", "mainChat/chat.js" ],
-    "css":     [ "mainChat/chat.css" ],
+    "css":     [ "mainChat/chat.css", "resources/spinner.css" ],
 	"matches": [ 
     "*://*.habitrpg.com/*",
     "*://*.habitica.com/*"
