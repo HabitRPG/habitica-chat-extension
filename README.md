@@ -7,6 +7,9 @@ A habitica.com Chat Client for Chrome
 Hi, and thanks for contributing to this humble project!
 
 # Version history
+
+Release notes above version 1.4.1 can be viewed on the [releases page](https://github.com/HabitRPG/habitica-chat-extension/releases)
+
 ### 1.4.1
 * fix: Re-impliment missing avatar feature
 
