@@ -381,6 +381,9 @@ if(document.URL == "https://habitrpg.com/#/options/settings/api"
 
   function generateAvatar (uuid) {
     if (uuid === 'system') { return ''; }
+    if (config.disableavatars === 'true') {
+      return '';
+    }
 
     if (uuid in membersCache) {
       if (membersCache[uuid].loaded) {

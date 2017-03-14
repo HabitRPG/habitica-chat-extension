@@ -4,11 +4,14 @@ function save_options() {
   var api = document.getElementById('api').value;
   var enableSound = document.getElementById('enableSound').checked;
   var largeText = document.getElementById('largeText').checked;
+  var disableAvatars = document.getElementById('disableAvatars').checked;
+
   chrome.storage.sync.set({
     uuid: uuid,
     api: api,
     enableSound: enableSound,
-    largeText: largeText
+    largeText: largeText,
+    disableAvatars: disableAvatars
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -26,12 +29,14 @@ function restore_options() {
     uuid: '',
     api: '',
     enableSound: true,
-    largeText: false
+    largeText: false,
+    disableAvatars: false
   }, function(items) {
     document.getElementById('uuid').value = items.uuid;
     document.getElementById('api').value = items.api;
     document.getElementById('enableSound').checked = items.enableSound;
     document.getElementById('largeText').checked = items.largeText;
+    document.getElementById('disableAvatars').checked = items.disableAvatars;
   });
 }
 
@@ -57,6 +62,7 @@ document.getElementById('hint').addEventListener('click', openSettings);
 document.getElementById('gitHub').addEventListener('click', openGitHub);
 // Saving
 document.getElementById('largeText').addEventListener('click', save_options);
+document.getElementById('disableAvatars').addEventListener('click', save_options);
 document.getElementById('enableSound').addEventListener('click', save_options);
 document.getElementById('uuid').addEventListener('paste', save_options);
 document.getElementById('uuid').addEventListener('keyup', save_options);
