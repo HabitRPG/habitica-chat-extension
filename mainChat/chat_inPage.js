@@ -9,17 +9,34 @@ jQuery.fn.scrollTo = function(elem) {
 var HABITICA_URL = 'https://habitica.com';
 var membersCache = {};
 
-// Automatic setup via API page
-if(document.URL == "https://habitrpg.com/#/options/settings/api"
-  || document.URL == HABITICA_URL + "/#/options/settings/api") {
-    var updatedConfig = {
-      "uuid": $('pre').first().text(),
-      "apik": $('pre').last().text(),
-      "name": $('.main-herobox figure .avatar-name').text()
-    };
-    window.postMessage(updatedConfig, '*');
+function lookForApiKeys (retryCount) {
+  var twoSeconds = 2000;
+
+  if (retryCount > 2) {
+    console.error('Settings page took too long to load');
+    return;
   }
 
+  setTimeout(function () {
+    if(document.URL === "https://habitrpg.com/#/options/settings/api"
+      || document.URL === HABITICA_URL + "/#/options/settings/api") {
+        if ($('pre').first().text()) {
+          var updatedConfig = {
+            "uuid": $('pre').first().text(),
+            "apik": $('pre').last().text(),
+            "name": $('.main-herobox figure .avatar-name').text()
+          };
+          window.postMessage(updatedConfig, '*');
+        } else {
+          retryCount++;
+          lookForApiKeys (retryCount);
+        }
+      }
+  }, twoSeconds);
+}
+
+// Automatic setup via API page
+lookForApiKeys(0);
 
   function createChatWrapper() {
     $("body").append("<div id='chatWrapper'><div id='chatWrapper_boxes'></div></div>");
