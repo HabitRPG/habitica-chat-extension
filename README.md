@@ -8,8 +8,24 @@ A habitica.com Chat Client for Chrome
 
 Development on this project requires Node 8 or higher. 
 
+## Install Dependencies
+
+```sh
+npm install
+```
+
+# Testing
+
+```sh
+npm test
+```
+
+# Manual Testing
+
+To test in a browser, simply load the unpacked extension in the extenstion folder.
+
 TODO
 
 # Releasing
 
-The chrome extension gets packaged in the `dist` folder. When ready to release, compress the `dist` folder and upload to Google.
+The chrome extension gets packaged in the `extension` folder. When ready to release, compress the `extension` folder and upload to Google.

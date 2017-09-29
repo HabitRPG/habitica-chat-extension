@@ -19,26 +19,17 @@
     "js":      [ "resources/jquery.js", "mainChat/chat.js" ],
     "css":     [ "mainChat/chat.css", "resources/spinner.css" ],
     "matches": [
-      "*://*.habitrpg.com/",
       "*://*.habitica.com/",
-      "*://*.habitrpg.com/static/*",
       "*://*.habitica.com/static/*"
     ]
   }],
   "externally_connectable": {
     "matches": [
-      "*://*.habitrpg.com/",
       "*://*.habitica.com/",
-      "*://*.habitrpg.com/static/*",
       "*://*.habitica.com/static/*"
     ]
   },
   "web_accessible_resources": [
-    "mainChat/chat.css",
-    "mainChat/chat_inPage.js",
-    "resources/bootbox.min.js",
-    "resources/habitica-markdown.min.js",
-    "resources/miscFunctions.js"
   ],
   "permissions": [
     "storage",
