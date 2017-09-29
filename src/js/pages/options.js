@@ -1,6 +1,7 @@
 'use strict';
 
 const chromeStorage = require('../lib/chrome-storage');
+const habitica = require('../lib/habitica');
 const isBrowser = require('../lib/is-browser');
 const $ = require('../lib/query-selector');
 
@@ -18,6 +19,10 @@ function saveOptions () {
     setTimeout(() => {
       status.style.opacity = 0;
     }, 750);
+
+    if (uuid.value && api.value) {
+      habitica.setup(uuid.value, api.value);
+    }
   });
 }
 

@@ -1,6 +1,7 @@
 'use strict';
 
 const chromeStorage = require('../../src/js/lib/chrome-storage');
+const habitica = require('../../src/js/lib/habitica');
 const options = require('../../src/js/pages/options');
 
 describe('options page', function () {
@@ -59,6 +60,43 @@ describe('options page', function () {
         sandbox.clock.tick(760);
 
         expect(this.fakeStatus.style.opacity).to.equal(0);
+      });
+    });
+
+    it('does not set up habitica if user id is missing', function () {
+      sandbox.stub(chromeStorage, 'save').resolves();
+      sandbox.stub(habitica, 'setup');
+
+      this.fakeUUIDInput.value = '';
+      this.fakeAPIInput.value = 'user-api-token';
+
+      return options.saveOptions().then(() => {
+        expect(habitica.setup).to.not.be.called;
+      });
+    });
+
+    it('does not set up habitica if api token is missing', function () {
+      sandbox.stub(chromeStorage, 'save').resolves();
+      sandbox.stub(habitica, 'setup');
+
+      this.fakeUUIDInput.value = 'user-id';
+      this.fakeAPIInput.value = '';
+
+      return options.saveOptions().then(() => {
+        expect(habitica.setup).to.not.be.called;
+      });
+    });
+
+    it('sets up habitica if user id and api token exist', function () {
+      sandbox.stub(chromeStorage, 'save').resolves();
+      sandbox.stub(habitica, 'setup');
+
+      this.fakeUUIDInput.value = 'user-uuid';
+      this.fakeAPIInput.value = 'user-api-token';
+
+      return options.saveOptions().then(() => {
+        expect(habitica.setup).to.be.calledOnce;
+        expect(habitica.setup).to.be.calledWith('user-uuid', 'user-api-token');
       });
     });
   });
