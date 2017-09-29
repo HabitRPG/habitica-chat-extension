@@ -1,70 +1,113 @@
-// Saves options to chrome.storage
-function save_options() {
-  var uuid = document.getElementById('uuid').value;
-  var api = document.getElementById('api').value;
-  var enableSound = document.getElementById('enableSound').checked;
-  var largeText = document.getElementById('largeText').checked;
-  var disableAvatars = document.getElementById('disableAvatars').checked;
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function (global){
+'use strict';
 
-  chrome.storage.sync.set({
-    uuid: uuid,
-    api: api,
-    enableSound: enableSound,
-    largeText: largeText,
-    disableAvatars: disableAvatars
-  }, function() {
-    // Update status to let user know options were saved.
-    var status = document.getElementById('status');
-    status.style.display = "block";
-    setTimeout(function() {
-      status.style.display = "none";
+function load (params) {
+  return new Promise((resolve) => {
+    global.chrome.storage.sync.get(params, resolve);
+  });
+}
+
+function save (params) {
+  return new Promise((resolve) => {
+    global.chrome.storage.sync.set(params, () => {
+      resolve();
+    });
+  });
+}
+
+module.exports = {
+  load,
+  save,
+};
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],2:[function(require,module,exports){
+(function (global){
+'use strict';
+
+module.exports = function isBrowser () {
+  return Boolean(global.document && global.document.body);
+};
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],3:[function(require,module,exports){
+(function (global){
+'use strict';
+
+module.exports = function querySelector (selector) {
+  return global.document.querySelector(selector);
+};
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],4:[function(require,module,exports){
+(function (global){
+'use strict';
+
+const chromeStorage = require('../lib/chrome-storage');
+const isBrowser = require('../lib/is-browser');
+const $ = require('../lib/query-selector');
+
+function saveOptions () {
+  let uuid = $('#uuid');
+  let api = $('#api');
+  let status = $('#status');
+
+  return chromeStorage.save({
+    uuid: uuid.value,
+    api: api.value,
+  }).then(() => {
+    status.style.opacity = 1;
+
+    setTimeout(() => {
+      status.style.opacity = 0;
     }, 750);
   });
 }
 
-// Restores select box and checkbox state using the preferences
-// stored in chrome.storage.
-function restore_options() {
-  chrome.storage.sync.get({
+function restoreOptions () {
+  let uuidInput = $('#uuid');
+  let apiInput = $('#api');
+
+  return chromeStorage.load({
     uuid: '',
     api: '',
-    enableSound: true,
-    largeText: false,
-    disableAvatars: false
-  }, function(items) {
-    document.getElementById('uuid').value = items.uuid;
-    document.getElementById('api').value = items.api;
-    document.getElementById('enableSound').checked = items.enableSound;
-    document.getElementById('largeText').checked = items.largeText;
-    document.getElementById('disableAvatars').checked = items.disableAvatars;
+  }).then((options) => {
+    uuidInput.value = options.uuid;
+    apiInput.value = options.api;
   });
 }
 
-function openSettings() {
-	chrome.tabs.create({ url: "https://habitica.com/#/options/settings/api" });
+function setupDomListeners () {
+  let uuid = $('#uuid');
+  let api = $('#api');
+
+  function applySaveInTimeout () {
+    // the paste event doesn't have access to the correct value in the event loop, so we need to take it out to grab the right value
+    setTimeout(() => {
+      saveOptions();
+    }, 0);
+  }
+
+  global.document.addEventListener('DOMContentLoaded', restoreOptions);
+
+  uuid.addEventListener('paste', applySaveInTimeout);
+  api.addEventListener('paste', applySaveInTimeout);
 }
 
-function openGitHub() {
-	chrome.tabs.create({ url: "https://github.com/HabitRPG/habitica-chat-extension" });
+function start () {
+  setupDomListeners();
 }
 
-function displayManualOptions() {
-	document.getElementById('userForm').style.display = "block";
-	document.getElementById('manualSetupTrigger').style.display = "none";
+if (isBrowser()) {
+  start();
 }
 
-// Load options
-document.addEventListener('DOMContentLoaded', restore_options);
-// Display manual settings
-document.getElementById('manualSetupTrigger').addEventListener('click', displayManualOptions);
-// Link
-document.getElementById('hint').addEventListener('click', openSettings);
-document.getElementById('gitHub').addEventListener('click', openGitHub);
-// Saving
-document.getElementById('largeText').addEventListener('click', save_options);
-document.getElementById('disableAvatars').addEventListener('click', save_options);
-document.getElementById('enableSound').addEventListener('click', save_options);
-document.getElementById('uuid').addEventListener('paste', save_options);
-document.getElementById('uuid').addEventListener('keyup', save_options);
-document.getElementById('api').addEventListener('paste', save_options);
-document.getElementById('api').addEventListener('keyup', save_options);
+module.exports = {
+  saveOptions,
+  restoreOptions,
+  start,
+};
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"../lib/chrome-storage":1,"../lib/is-browser":2,"../lib/query-selector":3}]},{},[4]);

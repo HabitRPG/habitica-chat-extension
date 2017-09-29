@@ -62,17 +62,15 @@ body {
 }
 
 #status {
- position: absolute;
- width: 100%;
- text-align: center;
+  text-align: center;
   top:187px;
- color: #11aa33;
- display: none;
+  color: #11aa33;
+  opacity: 0;
+  transition: opacity .25s;
 }
 
 #userForm {
   margin-top: 30px;
- display: none; 
 }
 
 #gitHubButton {
