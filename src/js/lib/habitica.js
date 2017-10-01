@@ -16,7 +16,7 @@ function setup (id, apiToken) {
   return habitica;
 }
 
-function getGroups () {
+function getGuilds () {
   return habitica.get('/groups?type=guilds').then(result => result.data);
 }
 
@@ -37,7 +37,7 @@ function sendMessage (groupId, message) {
 module.exports = {
   setup,
   getChat,
-  getGroups,
+  getGuilds,
   getGroup,
   sendMessage,
 };

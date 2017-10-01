@@ -27,14 +27,67 @@ describe('habitica', function () {
     });
   });
 
-  describe('getMessages', function () {
-    it('requests messages from a group', function () {
-      let messages = [{}];
+  describe('getGroup', function () {
+    it('requests a group', function () {
+      let group = {
+        id: 'group-id',
+        name: 'Group',
+      };
 
-      Habitica.prototype.get.resolves(messages);
+      Habitica.prototype.get.resolves({
+        data: group,
+      });
 
-      habitica.getMessages('group-id').then((res) => {
-        expect(res).to.equal(messages);
+      return habitica.getGroup('group-id').then((res) => {
+        expect(res).to.equal(group);
+        expect(Habitica.prototype.get).to.be.calledOnce;
+        expect(Habitica.prototype.get).to.be.calledWith('/groups/group-id');
+      });
+    });
+  });
+
+  describe('getGuilds', function () {
+    it('requests user\'s guilds', function () {
+      let groups = [{
+        id: 'group-id',
+        name: 'Group',
+      }];
+
+      Habitica.prototype.get.resolves({
+        data: groups,
+      });
+
+      return habitica.getGuilds().then((res) => {
+        expect(res).to.equal(groups);
+        expect(Habitica.prototype.get).to.be.calledOnce;
+        expect(Habitica.prototype.get).to.be.calledWith('/groups?type=guilds');
+      });
+    });
+  });
+
+  describe('getChat', function () {
+    it('requests a group\'s chat messages', function () {
+      let chat = [{text: 'a message'}];
+
+      Habitica.prototype.get.resolves({
+        data: chat,
+      });
+
+      return habitica.getChat('group-id').then((res) => {
+        expect(res).to.equal(chat);
+        expect(Habitica.prototype.get).to.be.calledOnce;
+        expect(Habitica.prototype.get).to.be.calledWith('/groups/group-id/chat');
+      });
+    });
+  });
+
+  describe('sendMessage', function () {
+    it('sends a message', function () {
+      Habitica.prototype.post.resolves({});
+
+      return habitica.sendMessage('group-id', 'a message').then((res) => {
+        expect(Habitica.prototype.post).to.be.calledOnce;
+        expect(Habitica.prototype.post).to.be.calledWith('/groups/group-id/chat', {message: 'a message'});
       });
     });
   });
