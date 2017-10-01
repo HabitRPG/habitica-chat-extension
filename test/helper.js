@@ -14,6 +14,7 @@ beforeEach(function () {
   global.document = {
     addEventListener: sandbox.stub(),
     querySelector: sandbox.stub(),
+    querySelectorAll: sandbox.stub().returns([]),
   };
 });
 
