@@ -17,7 +17,7 @@
   },
   "content_scripts": [{
     "js":      [ "mainChat/chat.js" ],
-    "css":     [ "mainChat/chat.css", "resources/spinner.css" ],
+    "css":     [ "mainChat/chat.css" ],
     "matches": [
       "*://*.habitica.com/",
       "*://*.habitica.com/static/*"
