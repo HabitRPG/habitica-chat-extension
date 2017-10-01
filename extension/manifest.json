@@ -4,7 +4,7 @@
   "short_name": "Habit Chat",
   "description": "This extension adds a Habitica chat client to habitica.com",
   "version": "1.4.5",
-  "options_page": "optionsPage/options.html",
+  "options_page": "options-page/options.html",
   "icons": {
     "16": "images/icon16.png",
     "48": "images/icon48.png",
@@ -12,20 +12,20 @@
   },
   "browser_action": {
     "default_icon": "images/icon128.png",
-    "default_popup": "optionsPage/options.html",
+    "default_popup": "options-page/options.html",
     "name": "Habitica Chat Extension"
   },
   "content_scripts": [{
-    "js":      [ "mainChat/chat.js" ],
-    "css":     [ "mainChat/chat.css" ],
+    "js":      [ "chat/chat.js" ],
+    "css":     [ "chat/chat.css" ],
     "matches": [
-      "*://*.habitica.com/",
+      "*://*.habitica.com/*",
       "*://*.habitica.com/static/*"
     ]
   }],
   "externally_connectable": {
     "matches": [
-      "*://*.habitica.com/",
+      "*://*.habitica.com/*",
       "*://*.habitica.com/static/*"
     ]
   },

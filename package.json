@@ -5,8 +5,8 @@
   "description": "A Chrome extension for Habitica chat.",
   "main": "index.js",
   "scripts": {
-    "build:chat": "browserify src/js/pages/chat > extension/mainChat/chat.js",
-    "build:options": "browserify src/js/pages/options > extension/optionsPage/options.js",
+    "build:chat": "browserify src/js/pages/chat > extension/chat/chat.js",
+    "build:options": "browserify src/js/pages/options > extension/options-page/options.js",
     "build": "npm-run-all --parallel build:*",
     "development": "watch 'npm run build' src/js/ --wait=1",
     "lint": "eslint src test",
