@@ -85,7 +85,7 @@ describe('habitica', function () {
     it('sends a message', function () {
       Habitica.prototype.post.resolves({});
 
-      return habitica.sendMessage('group-id', 'a message').then((res) => {
+      return habitica.sendMessage('group-id', 'a message').then(() => {
         expect(Habitica.prototype.post).to.be.calledOnce;
         expect(Habitica.prototype.post).to.be.calledWith('/groups/group-id/chat', {message: 'a message'});
       });
