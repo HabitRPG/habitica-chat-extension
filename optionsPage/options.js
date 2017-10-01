@@ -41,7 +41,7 @@ function restore_options() {
 }
 
 function openSettings() {
-	chrome.tabs.create({ url: "https://habitica.com/#/options/settings/api" });
+	chrome.tabs.create({ url: "https://habitica.com/user/settings/api" });
 }
 
 function openGitHub() {

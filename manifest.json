@@ -16,20 +16,16 @@
     "name": "Habitica Chat Extension"
   },
   "content_scripts": [{
-    "js":      [ "resources/jquery.js", "mainChat/chat.js" ],
+    "js":      [ "mainChat/chat.js" ],
     "css":     [ "mainChat/chat.css", "resources/spinner.css" ],
     "matches": [
-      "*://*.habitrpg.com/",
-      "*://*.habitica.com/",
-      "*://*.habitrpg.com/static/*",
+      "*://*.habitica.com/*",
       "*://*.habitica.com/static/*"
     ]
   }],
   "externally_connectable": {
     "matches": [
-      "*://*.habitrpg.com/",
-      "*://*.habitica.com/",
-      "*://*.habitrpg.com/static/*",
+      "*://*.habitica.com/*",
       "*://*.habitica.com/static/*"
     ]
   },
