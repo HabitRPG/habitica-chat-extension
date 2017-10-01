@@ -2162,13 +2162,30 @@ function setup (id, apiToken) {
   return habitica;
 }
 
-function getMessages (groupId) {
-  return habitica.get(`/groups/${groupId}/chat`);
+function getGroups () {
+  return habitica.get('/groups?type=guilds').then(result => result.data);
+}
+
+function getGroup (groupId) {
+  return habitica.get(`/groups/${groupId}`).then(result => result.data);
+}
+
+function getChat (groupId) {
+  return habitica.get(`/groups/${groupId}/chat`).then(result => result.data);
+}
+
+function sendMessage (groupId, message) {
+  return habitica.post(`/groups/${groupId}/chat`, {
+    message,
+  }).then(result => result.data);
 }
 
 module.exports = {
   setup,
-  getMessages,
+  getChat,
+  getGroups,
+  getGroup,
+  sendMessage,
 };
 
 },{"habitica":2}],11:[function(require,module,exports){
@@ -2184,8 +2201,16 @@ module.exports = function isBrowser () {
 (function (global){
 'use strict';
 
-module.exports = function querySelector (selector) {
-  return global.document.querySelector(selector);
+module.exports = {
+  $: function querySelector (selector) {
+    return global.document.querySelector(selector);
+  },
+  $$: function querySelectorAll (selector) {
+    let nodeList = global.document.querySelectorAll(selector);
+
+    // convert to an Array
+    return Array.prototype.slice.call(nodeList);
+  }
 };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
@@ -2196,7 +2221,7 @@ module.exports = function querySelector (selector) {
 const chromeStorage = require('../lib/chrome-storage');
 const habitica = require('../lib/habitica');
 const isBrowser = require('../lib/is-browser');
-const $ = require('../lib/query-selector');
+const $ = require('../lib/query-selector').$;
 
 function saveOptions () {
   let uuid = $('#uuid');

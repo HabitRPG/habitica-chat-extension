@@ -16,7 +16,7 @@
     "name": "Habitica Chat Extension"
   },
   "content_scripts": [{
-    "js":      [ "resources/jquery.js", "mainChat/chat.js" ],
+    "js":      [ "mainChat/chat.js" ],
     "css":     [ "mainChat/chat.css", "resources/spinner.css" ],
     "matches": [
       "*://*.habitica.com/",

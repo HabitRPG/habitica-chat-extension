@@ -16,11 +16,28 @@ function setup (id, apiToken) {
   return habitica;
 }
 
-function getMessages (groupId) {
-  return habitica.get(`/groups/${groupId}/chat`);
+function getGroups () {
+  return habitica.get('/groups?type=guilds').then(result => result.data);
+}
+
+function getGroup (groupId) {
+  return habitica.get(`/groups/${groupId}`).then(result => result.data);
+}
+
+function getChat (groupId) {
+  return habitica.get(`/groups/${groupId}/chat`).then(result => result.data);
+}
+
+function sendMessage (groupId, message) {
+  return habitica.post(`/groups/${groupId}/chat`, {
+    message,
+  }).then(result => result.data);
 }
 
 module.exports = {
   setup,
-  getMessages,
+  getChat,
+  getGroups,
+  getGroup,
+  sendMessage,
 };

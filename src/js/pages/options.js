@@ -3,7 +3,7 @@
 const chromeStorage = require('../lib/chrome-storage');
 const habitica = require('../lib/habitica');
 const isBrowser = require('../lib/is-browser');
-const $ = require('../lib/query-selector');
+const $ = require('../lib/query-selector').$;
 
 function saveOptions () {
   let uuid = $('#uuid');

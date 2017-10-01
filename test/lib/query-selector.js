@@ -1,6 +1,6 @@
 'use strict';
 
-const $ = require('../../src/js/lib/query-selector');
+const $ = require('../../src/js/lib/query-selector').$;
 
 describe('querySelector', function () {
   it('calls document.querySelector', function () {
