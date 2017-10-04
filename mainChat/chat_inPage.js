@@ -114,7 +114,7 @@ lookForApiKeys(0);
         success: function(response) {
           var data = response.data;
 
-          $("#"+chatBoxId+" .chatBox_title").html("<div class='chatBoxTitle_title'><a href='#/options/groups/guilds/"+data['_id']+"'>"+data['name']+"</a></div><button class='chatBox_closer'><i class='glyphicon glyphicon-remove'></i></button><button class='chatBox_minimizer'><i class='glyphicon glyphicon-chevron-down'></i></button>");
+          $("#"+chatBoxId+" .chatBox_title").html("<div class='chatBoxTitle_title'><a href='/groups/guild/"+data['_id']+"'>"+data['name']+"</a></div><button class='chatBox_closer'><i class='glyphicon glyphicon-remove'></i></button><button class='chatBox_minimizer'><i class='glyphicon glyphicon-chevron-down'></i></button>");
           // Prevent link from minimizing window
           $("#"+chatBoxId+" .chatBox_title .chatBoxTitle_title a").click(function(e){
             e.stopPropagation();
