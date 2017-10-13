@@ -2,6 +2,7 @@
 
 const Habitica = require('habitica');
 const habitica = require('../../src/js/lib/habitica');
+const chromeStorage = require('../../src/js/lib/chrome-storage');
 
 describe('habitica', function () {
   beforeEach(function () {
@@ -23,6 +24,34 @@ describe('habitica', function () {
       expect(Habitica.prototype.setOptions).to.be.calledWith({
         id: 'user-id',
         apiToken: 'api-token',
+      });
+    });
+  });
+
+  describe('logout', function () {
+    beforeEach(function () {
+      sandbox.stub(chromeStorage, 'save');
+    });
+
+    it('sets options to blank', function () {
+      habitica.logout();
+
+      expect(Habitica.prototype.setOptions).to.be.calledOnce;
+      expect(Habitica.prototype.setOptions).to.be.calledWith({
+        id: '',
+        apiToken: '',
+      });
+    });
+
+    it('resets chrome storage', function () {
+      habitica.logout();
+
+      expect(chromeStorage.save).to.be.calledOnce;
+      expect(chromeStorage.save).to.be.calledWith({
+        uuid: '',
+        api: '',
+        accountVerified: false,
+        profile: {},
       });
     });
   });

@@ -1,6 +1,7 @@
 'use strict';
 
 const Habitica = require('habitica');
+const chromeStorage = require('./chrome-storage');
 
 let habitica = new Habitica({
   id: '',
@@ -14,6 +15,26 @@ function setup (id, apiToken) {
   });
 
   return habitica;
+}
+
+function logout () {
+  habitica.setOptions({
+    id: '',
+    apiToken: '',
+  });
+
+  chromeStorage.save({
+    uuid: '',
+    api: '',
+    accountVerified: false,
+    profile: {},
+  });
+
+  return habitica;
+}
+
+function getUser () {
+  return habitica.get('/user').then(result => result.data);
 }
 
 function getGuilds () {
@@ -36,8 +57,10 @@ function sendMessage (groupId, message) {
 
 module.exports = {
   setup,
+  logout,
   getChat,
   getGuilds,
   getGroup,
+  getUser,
   sendMessage,
 };

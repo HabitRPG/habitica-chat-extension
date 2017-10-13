@@ -11,10 +11,19 @@ global.sandbox = sinon.sandbox.create();
 global.expect = chai.expect;
 
 beforeEach(function () {
+  global.fakeDomNode = {
+    classList: {
+      add: sandbox.stub(),
+      remove: sandbox.stub(),
+    },
+  };
   global.document = {
     addEventListener: sandbox.stub(),
-    querySelector: sandbox.stub(),
+    querySelector: sandbox.stub().returns(global.fakeDomNode),
     querySelectorAll: sandbox.stub().returns([]),
+  };
+  global.location = {
+    pathname: '/',
   };
 });
 
