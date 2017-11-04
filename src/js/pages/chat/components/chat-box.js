@@ -1,11 +1,23 @@
 'use strict';
 
 const $ = require('../../../lib/query-selector').$;
+const habitica = require('../../../lib/habitica');
+const sleep = require('../../../lib/sleep');
+const habiticaMarkdown = require('habitica-markdown');
+
+const DEFAULT_CHAT_INTERVAL = 5000;
 
 class ChatBox {
   constructor (group) {
     this.element = this._constructElement(group);
+    this.groupId = group.id;
     this.open = false;
+
+    this.chatInterval = DEFAULT_CHAT_INTERVAL;
+  }
+
+  $ (selector) {
+    return this.element.shadowRoot.querySelector(selector);
   }
 
   toggle () {
@@ -13,13 +25,71 @@ class ChatBox {
 
     if (this.open) {
       container.removeChild(this.element);
-      // stop syncing
+      this.stopSyncing();
     } else {
       container.appendChild(this.element);
-      // start syncing
+      this.startSyncing(true);
     }
 
     this.open = !this.open;
+  }
+
+  sync () {
+    return habitica.getChat(this.groupId)
+      .then((chat) => this.processChat(chat));
+  }
+
+  processChat (chat) {
+    let mostRecentMessageId = chat[0].id;
+
+    chat.reverse();
+
+    if (mostRecentMessageId === this.mostRecentMessageId) {
+      return;
+    }
+
+    let messagesContainer = this.$('.messages');
+
+    this.mostRecentMessageId = mostRecentMessageId;
+    messagesContainer.innerHTML = '';
+
+    chat.forEach((message) => {
+      let div = document.createElement('div');
+
+      div.innerHTML = habiticaMarkdown.render(message.text);
+
+      messagesContainer.appendChild(div);
+    });
+
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  }
+
+  async startSyncing (isInitialSync) {
+    if (isInitialSync) {
+      this.pollForChat = true;
+    }
+
+    if (!this.pollForChat) {
+      return;
+    }
+
+    await this.sync();
+
+    if (isInitialSync) {
+      this.$('.loading').classList.add('hidden');
+    }
+
+    await this._sleep(this.chatInterval);
+
+    await this.startSyncing();
+  }
+
+  stopSyncing () {
+    this.pollForChat = false;
+  }
+
+  _sleep (value) {
+    return sleep(value);
   }
 
   _constructElement (group) {
@@ -39,6 +109,11 @@ class ChatBox {
 header {
   border-bottom: 2px solid #EDECEE;
   padding-bottom: 5px;
+  margin-bottom: 5px;
+  text-overflow: ellipsis;
+  height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .message-box {
@@ -99,6 +174,11 @@ textarea:focus {
 
 .loading.hidden {
   display: none;
+}
+
+.messages {
+  height: 270px;
+  overflow: scroll;
 }
 </style>
 <header>${group.name}</header>

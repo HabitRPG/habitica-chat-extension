@@ -81,15 +81,15 @@ class GroupList {
         margin-left: 0;
       }
 
-    #group-list {
-      height: 500px;
-      width: 250px;
-    }
+      #group-list {
+        height: 500px;
+        width: 250px;
+      }
 
       .chat-box {
         height: 400px;
         margin-top: 100px;
-        width: 300px;
+        width: 340px;
       }
 
     header {
