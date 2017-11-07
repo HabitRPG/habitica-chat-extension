@@ -37,6 +37,10 @@ function getUser () {
   return habitica.get('/user').then(result => result.data);
 }
 
+function getMember (id) {
+  return habitica.get(`/members/${id}`).then(result => result.data);
+}
+
 function getGuilds () {
   return habitica.get('/groups?type=guilds').then(result => result.data);
 }
@@ -61,6 +65,7 @@ module.exports = {
   getChat,
   getGuilds,
   getGroup,
+  getMember,
   getUser,
   sendMessage,
 };

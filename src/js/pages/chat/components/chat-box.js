@@ -1,7 +1,9 @@
 'use strict';
 
 const $ = require('../../../lib/query-selector').$;
+const avatar = require('../../../lib/avatar');
 const habitica = require('../../../lib/habitica');
+const userObject = require('../../../lib/user-object');
 const sleep = require('../../../lib/sleep');
 const habiticaMarkdown = require('habitica-markdown');
 
@@ -39,6 +41,16 @@ class ChatBox {
       .then((chat) => this.processChat(chat));
   }
 
+  addAvatar (userId, avatarNode) {
+    return userObject.get(userId).then((user) => {
+      if (user.failed) {
+        return;
+      }
+
+      avatarNode.appendChild(avatar.render(user.userObject));
+    });
+  }
+
   processChat (chat) {
     let mostRecentMessageId = chat[0].id;
 
@@ -54,9 +66,22 @@ class ChatBox {
     messagesContainer.innerHTML = '';
 
     chat.forEach((message) => {
-      let div = document.createElement('div');
+      let div = global.document.createElement('div');
+      let text = global.document.createElement('div');
+      let avatarContainer = global.document.createElement('div');
+      let avatarNode = global.document.createElement('div');
 
-      div.innerHTML = habiticaMarkdown.render(message.text);
+      avatarContainer.appendChild(avatarNode);
+      avatarNode.classList.add('avatar');
+      this.addAvatar(message.uuid, avatarNode);
+
+      div.classList.add('message');
+
+      avatarContainer.classList.add('avatar-container');
+      text.classList.add('text');
+      text.innerHTML = habiticaMarkdown.render(message.text);
+      div.appendChild(avatarContainer);
+      div.appendChild(text);
 
       messagesContainer.appendChild(div);
     });
@@ -180,6 +205,43 @@ textarea:focus {
   height: 270px;
   overflow: scroll;
 }
+
+.message {
+  margin: 5px auto;
+  position: relative;
+  min-height: 75px;
+}
+
+.message:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.message .avatar-container {
+  position: absolute;
+  border: 2px solid rgba(0, 0, 0, 0.125);
+  border-radius: 100%;
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  -webkit-mask-image: -webkit-radial-gradient(circle, white, black);
+}
+
+.message .avatar-container .avatar {
+  position: relative;
+  left: -47px;
+  top: -35px;
+}
+
+.message .text {
+  float: right;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  width: 75%;
+  padding: 0 10px;
+}
 </style>
 <header>${group.name}</header>
 <div class="chat">
@@ -191,13 +253,36 @@ textarea:focus {
   <button>Send</button>
 </div>`;
 
-    // let textarea = shadow.querySelector('.message-box textarea');
+    let textarea = shadow.querySelector('.message-box textarea');
 
-    shadow.querySelector('.message-box button').addEventListener('click', () => {
-      // send to habitica
-    });
+    shadow.querySelector('.message-box button').addEventListener('click', this.makeClickHandler(textarea));
 
     return element;
+  }
+
+  makeClickHandler (textarea) {
+    return () => {
+      let message = textarea.value;
+
+      if (!message) {
+        return;
+      }
+
+      textarea.setAttribute('disabled', true);
+
+      return habitica.sendMessage(this.groupId, message)
+        .then(() => {
+          textarea.value = '';
+        })
+        .then(() => {
+          return this.sync();
+        })
+        .catch(() => {
+          // handle error
+        }).then(() => {
+          textarea.removeAttribute('disabled');
+        });
+    };
   }
 }
 

@@ -120,4 +120,32 @@ describe('habitica', function () {
       });
     });
   });
+
+  describe('getUser', function () {
+    it('gets logged in user', function () {
+      let user = {};
+
+      Habitica.prototype.get.resolves({data: user});
+
+      return habitica.getUser().then((result) => {
+        expect(Habitica.prototype.get).to.be.calledOnce;
+        expect(Habitica.prototype.get).to.be.calledWith('/user');
+        expect(result).to.equal(user);
+      });
+    });
+  });
+
+  describe('getMember', function () {
+    it('gets specified member', function () {
+      let user = {};
+
+      Habitica.prototype.get.resolves({data: user});
+
+      return habitica.getMember('id').then((result) => {
+        expect(Habitica.prototype.get).to.be.calledOnce;
+        expect(Habitica.prototype.get).to.be.calledWith('/members/id');
+        expect(result).to.equal(user);
+      });
+    });
+  });
 });

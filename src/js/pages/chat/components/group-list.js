@@ -90,6 +90,7 @@ class GroupList {
         height: 400px;
         margin-top: 100px;
         width: 340px;
+        background: #F9F9F9;
       }
 
     header {

@@ -1,7 +1,8 @@
 'use strict';
 
 const habitica = require('../../../../src/js/lib/habitica');
-const sleep = require('../../../../src/js/lib/habitica');
+const userObject = require('../../../../src/js/lib/user-object');
+const avatar = require('../../../../src/js/lib/avatar');
 const ChatBox = require('../../../../src/js/pages/chat/components/chat-box');
 
 describe('ChatBox', function () {
@@ -30,7 +31,7 @@ describe('ChatBox', function () {
 
   describe('toggle', function () {
     beforeEach(function () {
-      let container = makeFakeDomNode();
+      let container = global.makeFakeDomNode();
 
       this.spies = {
         appendChild: sandbox.stub(),
@@ -102,7 +103,7 @@ describe('ChatBox', function () {
   describe('sync', function () {
     beforeEach(function () {
       sandbox.stub(habitica, 'getChat').resolves();
-      sandbox.stub(ChatBox.prototype, 'processChat').resolves()
+      sandbox.stub(ChatBox.prototype, 'processChat').resolves();
     });
 
     it('calls out to habitica to get chat for group id', function () {
@@ -131,13 +132,13 @@ describe('ChatBox', function () {
     beforeEach(function () {
       this.chat = [{
         id: '1',
-        text: 'Message 1'
+        text: 'Message 1',
       }, {
         id: '2',
-        text: 'Message 2'
+        text: 'Message 2',
       }, {
         id: '3',
-        text: 'Message 3'
+        text: 'Message 3',
       }];
     });
 
@@ -164,7 +165,7 @@ describe('ChatBox', function () {
 
     it('resets messages container with chat messages', function () {
       let box = new ChatBox({id: 'id', name: 'guild'});
-      let messagesContainer = makeFakeDomNode();
+      let messagesContainer = global.makeFakeDomNode();
 
       messagesContainer.innerHTML = 'something';
       sandbox.stub(box, '$').returns(messagesContainer);
@@ -177,15 +178,15 @@ describe('ChatBox', function () {
 
     it('renders messages as markdown', function () {
       let box = new ChatBox({id: 'id', name: 'guild'});
-      let messagesContainer = makeFakeDomNode();
-      let messageNode = makeFakeDomNode();
+      let messagesContainer = global.makeFakeDomNode();
+      let messageNode = global.makeFakeDomNode();
 
       sandbox.stub(box, '$').returns(messagesContainer);
-      document.createElement.returns(messageNode);
+      global.document.createElement.returns(messageNode);
 
       box.processChat([{
         id: '123',
-        text: '# heading'
+        text: '# heading',
       }]);
 
       expect(messageNode.innerHTML).to.contain('<h1>heading</h1>');
@@ -194,7 +195,7 @@ describe('ChatBox', function () {
 
     it('sets scrollTop value of messages container', function () {
       let box = new ChatBox({id: 'id', name: 'guild'});
-      let messagesContainer = makeFakeDomNode();
+      let messagesContainer = global.makeFakeDomNode();
 
       messagesContainer.scrollHeight = '123px';
       sandbox.stub(box, '$').returns(messagesContainer);
@@ -251,6 +252,107 @@ describe('ChatBox', function () {
       box.stopSyncing();
 
       expect(box.pollForChat).to.equal(false);
+    });
+  });
+
+  describe('addAvatar', function () {
+    beforeEach(function () {
+      this.user = {};
+      this.node = global.makeFakeDomNode();
+
+      sandbox.stub(userObject, 'get').resolves({
+        userObject: this.user,
+      });
+
+      sandbox.stub(avatar, 'render').returns(global.makeFakeDomNode());
+    });
+
+    it('returns early if user object has failed', function () {
+      let box = new ChatBox({id: 'id', name: 'guild'});
+
+      userObject.get.resolves({
+        failed: true,
+      });
+
+      return box.addAvatar('userId', this.node).then(() => {
+        expect(avatar.render).to.not.be.called;
+        expect(this.node.appendChild).to.not.be.called;
+      });
+    });
+
+    it('appends user object', function () {
+      let box = new ChatBox({id: 'id', name: 'guild'});
+      let avatarNode = global.makeFakeDomNode();
+
+      avatar.render.returns(avatarNode);
+
+      return box.addAvatar('userId', this.node).then(() => {
+        expect(avatar.render).to.be.calledOnce;
+        expect(avatar.render).to.be.calledWith(this.user);
+        expect(this.node.appendChild).to.be.calledOnce;
+        expect(this.node.appendChild).to.be.calledWith(avatarNode);
+      });
+    });
+  });
+
+  describe('sending messages to habitica', function () {
+    beforeEach(function () {
+      this.box = new ChatBox({id: 'id', name: 'guild'});
+      this.textarea = global.makeFakeDomNode();
+      this.handler = this.box.makeClickHandler(this.textarea);
+      sandbox.stub(habitica, 'sendMessage').resolves();
+      sandbox.stub(this.box, 'sync').resolves();
+    });
+
+    it('sends message to habitica with value from textarea', function () {
+      this.textarea.value = 'my message';
+
+      this.handler();
+
+      expect(habitica.sendMessage).to.be.calledOnce;
+      expect(habitica.sendMessage).to.be.calledWith('id', 'my message');
+    });
+
+    it('does not send message if textarea is blank', function () {
+      this.textarea.value = '';
+
+      this.handler();
+
+      expect(habitica.sendMessage).to.not.be.called;
+    });
+
+    it('syncs after sending message', function () {
+      this.textarea.value = 'my message';
+
+      return this.handler().then(() => {
+        expect(this.box.sync).to.be.calledOnce;
+      });
+    });
+
+    it('disables textarea while sending', function () {
+      this.textarea.value = 'my message';
+
+      return this.handler().then(() => {
+        expect(this.textarea.setAttribute).to.be.calledWith('disabled', true);
+        expect(this.textarea.removeAttribute).to.be.calledWith('disabled');
+      });
+    });
+
+    it('sets value to an empty string on success', function () {
+      this.textarea.value = 'my message';
+
+      return this.handler().then(() => {
+        expect(this.textarea.value).to.equal('');
+      });
+    });
+
+    it('does not force sync if habitica message failed', function () {
+      this.textarea.value = 'my message';
+      habitica.sendMessage.rejects(new Error('foo'));
+
+      return this.handler().then(() => {
+        expect(this.box.sync).to.not.be.called;
+      });
     });
   });
 });

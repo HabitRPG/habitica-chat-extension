@@ -25,6 +25,7 @@ beforeEach(function () {
       appendChild: sandbox.stub(),
       shadowRoot: shadow,
       setAttribute: sandbox.stub(),
+      removeAttribute: sandbox.stub(),
       getAttribute: sandbox.stub(),
       querySelector: sandbox.stub().callsFake(() => {
         return global.makeFakeDomNode();
