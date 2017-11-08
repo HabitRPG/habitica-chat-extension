@@ -24,12 +24,17 @@ function lookForApiKeys (retryCount) {
     if(document.URL === "https://habitica.com/user/settings/api"
       || document.URL === HABITICA_URL + "/user/settings/api") {
         if ($('pre.prettyprint').first().text()) {
-          var updatedConfig = {
-            "uuid": $('pre.prettyprint').first().text(),
-            "apik": $('pre.prettyprint').last().text(),
-            "name": $('.character-name').text()
-          };
-          window.postMessage(updatedConfig, '*');
+          $('.align-items-center button.btn-secondary').click()
+          setTimeout(function () {
+            var updatedConfig = {
+              "uuid": $('pre.prettyprint').first().text(),
+              "apik": $('pre.prettyprint').last().text(),
+              "name": $('.character-name').text()
+            };
+            window.postMessage(updatedConfig, '*');
+
+            $('.align-items-center button.btn-secondary').click()
+          }, 500);
         } else {
           retryCount++;
           lookForApiKeys (retryCount);
