@@ -51,6 +51,10 @@ class ChatBox {
     });
   }
 
+  getContributorClass () {
+    return '';
+  }
+
   processChat (chat) {
     let mostRecentMessageId = chat[0].id;
 
@@ -67,7 +71,7 @@ class ChatBox {
 
     chat.forEach((message) => {
       let div = global.document.createElement('div');
-      let text = global.document.createElement('div');
+      let messageContainer = global.document.createElement('div');
       let avatarContainer = global.document.createElement('div');
       let avatarNode = global.document.createElement('div');
 
@@ -78,10 +82,14 @@ class ChatBox {
       div.classList.add('message');
 
       avatarContainer.classList.add('avatar-container');
-      text.classList.add('text');
-      text.innerHTML = habiticaMarkdown.render(message.text);
+      messageContainer.classList.add('message-container');
+      messageContainer.innerHTML = `
+      <div class="name contributor-${this.getContributorClass(message)}">${message.user}</div>
+      <div class="text">
+        ${habiticaMarkdown.render(message.text)}
+      </div>`;
       div.appendChild(avatarContainer);
-      div.appendChild(text);
+      div.appendChild(messageContainer);
 
       messagesContainer.appendChild(div);
     });
@@ -234,7 +242,7 @@ textarea:focus {
   top: -35px;
 }
 
-.message .text {
+.message .message-container {
   float: right;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.125);
