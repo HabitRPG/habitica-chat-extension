@@ -414,3 +414,40 @@
 .avatar-loading-spinner {
   top: -5px;
 }
+
+/* Contributor Labels */
+.label-contributor-1 {
+  color: #c42870;
+}
+
+.label-contributor-2 {
+  color: #b01515;
+}
+
+.label-contributor-3 {
+  color: #d70e14
+}
+
+.label-contributor-4 {
+  color: #c24d00
+}
+
+.label-contributor-5 {
+  color: #2b8363;
+}
+
+.label-contributor-6 {
+  color: #167e87
+}
+
+.label-contributor-7 {
+  color: #167e87;
+}
+
+.label-contributor-8 {
+  color: #277eab
+}
+
+.label-contributor-9 {
+  color: #6133b4
+}
