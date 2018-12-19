@@ -124,7 +124,7 @@ lookForApiKeys(0);
           $("#"+chatBoxId+" .chatBox_title .chatBoxTitle_title a").click(function(e){
             e.stopPropagation();
           });
-          $("#"+chatBoxId+" .chatBox_input").html('<textarea id="TA_'+chatBoxId+'" "Type here..."></textarea><button onClick="sendChatMessage(\''+chatBoxId+'\')">Send</button>');
+          $("#"+chatBoxId+" .chatBox_input").html('<textarea id="TA_'+chatBoxId+'" placeholder="Type here..."></textarea><button onClick="sendChatMessage(\''+chatBoxId+'\')">Send</button>');
           $("#"+chatBoxId+" .chatBox_shower").html("<div class='shower_title'>"+data['name']+"</div><button class='chatBox_closer'><i class='glyphicon glyphicon-remove'></i></button>");
           $("#"+chatBoxId+" div .chatBox_closer").click(function() {
             removeChatBox(chatBoxId);
