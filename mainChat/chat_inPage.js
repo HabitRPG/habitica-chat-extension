@@ -119,7 +119,7 @@ lookForApiKeys(0);
         success: function(response) {
           var data = response.data;
 
-          $("#"+chatBoxId+" .chatBox_title").html("<div class='chatBoxTitle_title'><a href='/groups/guild/"+data['_id']+"'>"+data['name']+"</a></div><button class='chatBox_closer'><i class='glyphicon glyphicon-remove'></i></button><button class='chatBox_minimizer'><i class='glyphicon glyphicon-chevron-down'></i></button>");
+          $("#"+chatBoxId+" .chatBox_title").html("<div class='chatBoxTitle_title'><a href='/groups/guild/"+data['_id']+"'>"+data['name']+"</a></div><button class='chatBox_closer'>×</button><button class='chatBox_minimizer'>—</button>");
           // Prevent link from minimizing window
           $("#"+chatBoxId+" .chatBox_title .chatBoxTitle_title a").click(function(e){
             e.stopPropagation();
@@ -365,23 +365,23 @@ lookForApiKeys(0);
     return '' +
       '<div class="herobox">' +
         '<div class="character-sprites">' +
-          '<span class="chair_' + pref.chair + '"></span>' +
-          '<span class="' + gear.back + '"></span>' +
-          '<span class="' + sleepClass + '"></span>' +
-          '<span class="' + pref.size + '_shirt_' + pref.shirt + '"></span>' +
-          '<span class="' + pref.size + '_' + gear.armor + '"></span>' +
-          '<span class="' + gear.back + '_collar' + '"></span>' +
-          '<span class="' + gear.body + '"></span>' +
-          '<span class="head_' + pref.head +'"></span>' +
-          '<span class="hair_base_' + pref.hair.base + hairColor + '"></span>' +
-          '<span class="hair_bangs_' + pref.hair.bangs + hairColor + '"></span>' +
-          '<span class="hair_mustache_' + pref.hair.mustache + hairColor + '"></span>' +
-          '<span class="hair_beard_' + pref.hair.beard + hairColor + '"></span>' +
-          '<span class="' + gear.eyewear + '"></span>' +
-          '<span class="' + gear.head + '"></span>' +
-          '<span class="' + gear.headAccessory + '"></span>' +
-          '<span class="' + gear.shield + '"></span>' +
-          '<span class="' + gear.weapon + '"></span>' +
+          '<span class="chair_' + pref.chair + '" data-v-186433de></span>' +
+          '<span class="' + gear.back + '" data-v-186433de></span>' +
+          '<span class="' + sleepClass + '" data-v-186433de></span>' +
+          '<span class="' + pref.size + '_shirt_' + pref.shirt + '" data-v-186433de></span>' +
+          '<span class="' + pref.size + '_' + gear.armor + '" data-v-186433de></span>' +
+          '<span class="' + gear.back + '_collar' + '" data-v-186433de></span>' +
+          '<span class="' + gear.body + '" data-v-186433de></span>' +
+          '<span class="head_' + pref.head +'" data-v-186433de></span>' +
+          '<span class="hair_base_' + pref.hair.base + hairColor + '" data-v-186433de></span>' +
+          '<span class="hair_bangs_' + pref.hair.bangs + hairColor + '" data-v-186433de></span>' +
+          '<span class="hair_mustache_' + pref.hair.mustache + hairColor + '" data-v-186433de></span>' +
+          '<span class="hair_beard_' + pref.hair.beard + hairColor + '" data-v-186433de></span>' +
+          '<span class="' + gear.eyewear + '" data-v-186433de></span>' +
+          '<span class="' + gear.head + '" data-v-186433de></span>' +
+          '<span class="' + gear.headAccessory + '" data-v-186433de></span>' +
+          '<span class="' + gear.shield + '" data-v-186433de></span>' +
+          '<span class="' + gear.weapon + '" data-v-186433de></span>' +
         '</div>' +
       '</div>';
   }
@@ -413,8 +413,9 @@ lookForApiKeys(0);
 
   function generateAvatar (uuid) {
     if (uuid === 'system') { return ''; }
-    if (config.disableavatars === 'true') {
+    if (config.disableavatars === true) {
       return '';
+      console.log(config.disableavatars);
     }
 
     if (uuid in membersCache) {
