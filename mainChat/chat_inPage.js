@@ -417,7 +417,7 @@ lookForApiKeys(0);
 
   function generateAvatar (uuid, avatarData) {
     if (uuid === 'system') { return ''; }
-    if (config.disableavatars === true) {
+    if (config.disableavatars == 'true') {
       return '';
     }
     membersCache[uuid] = {
