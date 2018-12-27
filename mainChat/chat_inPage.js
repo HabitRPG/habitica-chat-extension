@@ -12,7 +12,10 @@ jQuery.fn.scrollTo = function(elem) {
 
 var HABITICA_URL = 'https://habitica.com';
 var membersCache = {};
-
+var userData;
+function setUserData(dataValue) {
+  userData = dataValue;
+}
 function lookForApiKeys (retryCount) {
   var twoSeconds = 2000;
 
@@ -347,6 +350,7 @@ lookForApiKeys(0);
               "<div class='msg_footer'>"+formattedTime+extraActionIcon+"</div>" +
             "</div>";
           $(html).prepend(chatMessage);
+          lookUpMember(sendersUuid, "mid_" + chatData[key]['id']);
         }
       }
     }
@@ -367,9 +371,8 @@ lookForApiKeys(0);
     var gear = avatarData["items"]["gear"][gearType];
     var hairColor = '_' + avatarData["preferences"]["hair"]["color"];
     var sleepClass = avatarData["preferences"]["sleep"] ? 'skin_' + avatarData["preferences"]["skin"] + '_sleep' : 'skin_' + avatarData["preferences"]["skin"];
-
     return '' +
-      '<div class="herobox">' +
+      '<div class="herobox" title="Loading...">' +
         '<div class="character-sprites">' +
           '<span class="chair_' + avatarData["preferences"].chair + '" data-v-186433de></span>' +
           '<span class="' + gear.back + '" data-v-186433de></span>' +
@@ -392,15 +395,21 @@ lookForApiKeys(0);
       '</div>';
   }
 
-  function lookUpMember (uuid) {
-    return $.ajax({
+  function lookUpMember (uuid, messageID) {
+    $.ajax({
       dataType: "json",
       url: baseAPIUrl + 'members/' + uuid,
       headers: apiHeaders,
-      error: function (err) {
-        membersCache[uuid].loaded = true;
-        membersCache[uuid].html = '<div class="user-not-found">?</div>';
-        $('.user_avatar.' + uuid).html(membersCache[uuid].html);
+      success: function (response) {
+        var data = response.data;
+        if (messageID && document.getElementById(messageID)) {
+          var chatMessage = document.getElementById(messageID).getElementsByClassName("herobox")[0];
+          if (data["contributor"] && data["contributor"]["level"]) {
+            chatMessage.setAttribute('title', 'Level ' + data['stats']['lvl'] + " " + data['stats']['class'].charAt(0).toUpperCase() + data['stats']['class'].substr(1) + "; Level " + data["contributor"]["level"] + " " + data["contributor"]["text"]);
+          } else {
+            chatMessage.setAttribute('title', 'Level ' + data['stats']['lvl'] + " " + data['stats']['class'].charAt(0).toUpperCase() + data['stats']['class'].substr(1));
+          }
+        }
       }
     });
   }
@@ -408,7 +417,7 @@ lookForApiKeys(0);
   function replaceLoadingSpinner (avatarData, uuid) {
     var cache = membersCache[uuid];
 
-    cache.html = createAvatarHead(avatarData);
+    cache.html = createAvatarHead(avatarData, lookUpMember(uuid));
     cache.loaded = true;
     cache.lastUpdated = new Date();
 
