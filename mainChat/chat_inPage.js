@@ -350,7 +350,7 @@ lookForApiKeys(0);
               "<div class='msg_footer'>"+formattedTime+extraActionIcon+"</div>" +
             "</div>";
           $(html).prepend(chatMessage);
-          lookUpMember(sendersUuid, "mid_" + chatData[key]['id']);
+          if (config.disableavatars == 'false') lookUpMember(sendersUuid, "mid_" + chatData[key]['id']);
         }
       }
     }
@@ -412,12 +412,13 @@ lookForApiKeys(0);
         }
       }
     });
+    return true;
   }
 
   function replaceLoadingSpinner (avatarData, uuid) {
     var cache = membersCache[uuid];
 
-    cache.html = createAvatarHead(avatarData, lookUpMember(uuid));
+    cache.html = createAvatarHead(avatarData);
     cache.loaded = true;
     cache.lastUpdated = new Date();
 
