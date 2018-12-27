@@ -12,9 +12,9 @@ jQuery.fn.scrollTo = function(elem) {
 
 var HABITICA_URL = 'https://habitica.com';
 var membersCache = {};
-var userData;
-function setUserData(dataValue) {
-  userData = dataValue;
+var titlesLoading = [];
+function setCacheTitle(uuid, dataValue) {
+  membersCache[uuid]['title'] = dataValue;
 }
 function lookForApiKeys (retryCount) {
   var twoSeconds = 2000;
@@ -350,7 +350,7 @@ lookForApiKeys(0);
               "<div class='msg_footer'>"+formattedTime+extraActionIcon+"</div>" +
             "</div>";
           $(html).prepend(chatMessage);
-          if (config.disableavatars == 'false') lookUpMember(sendersUuid, "mid_" + chatData[key]['id']);
+          if (titlesLoading.indexOf(sendersUuid) == -1 && sendersUuid != 'system' && config.disableavatars == 'false') lookUpMember(sendersUuid, "mid_" + chatData[key]['id']);
         }
       }
     }
@@ -396,6 +396,7 @@ lookForApiKeys(0);
   }
 
   function lookUpMember (uuid, messageID) {
+    titlesLoading.push(uuid);
     $.ajax({
       dataType: "json",
       url: baseAPIUrl + 'members/' + uuid,
@@ -403,11 +404,16 @@ lookForApiKeys(0);
       success: function (response) {
         var data = response.data;
         if (messageID && document.getElementById(messageID)) {
-          var chatMessage = document.getElementById(messageID).getElementsByClassName("herobox")[0];
+          var chatMessages = document.getElementsByClassName(uuid);
+          var elementTitle;
           if (data["contributor"] && data["contributor"]["level"]) {
-            chatMessage.setAttribute('title', 'Level ' + data['stats']['lvl'] + " " + data['stats']['class'].charAt(0).toUpperCase() + data['stats']['class'].substr(1) + "; Level " + data["contributor"]["level"] + " " + data["contributor"]["text"]);
+            elementTitle = 'Level ' + data['stats']['lvl'] + " " + data['stats']['class'].charAt(0).toUpperCase() + data['stats']['class'].substr(1) + "; Level " + data["contributor"]["level"] + " " + data["contributor"]["text"];
           } else {
-            chatMessage.setAttribute('title', 'Level ' + data['stats']['lvl'] + " " + data['stats']['class'].charAt(0).toUpperCase() + data['stats']['class'].substr(1));
+            elementTitle = 'Level ' + data['stats']['lvl'] + " " + data['stats']['class'].charAt(0).toUpperCase() + data['stats']['class'].substr(1);
+          }
+          setCacheTitle(uuid, elementTitle);
+          for (i=0;i<chatMessages.length;i++) {
+            chatMessages[i].getElementsByClassName('herobox')[0].setAttribute('title', elementTitle);
           }
         }
       }
