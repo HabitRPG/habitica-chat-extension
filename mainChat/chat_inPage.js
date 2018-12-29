@@ -106,7 +106,7 @@ lookForApiKeys(0);
       $("#"+chatBoxId).append("<div class='hidders chatBox_content'>Loading chat...</div>");
       $("#"+chatBoxId).append("<div class='hidders chatBox_input'></div>");
       $("#"+chatBoxId).append("<div class='showers chatBox_shower'></div>");
-      $("#"+chatBoxId).append("<div class='hidders chatBoxMentionNav' currentMentionPosition='0'><i class='mentionNav_up'>↑</i><i class='mentionNav_down'>↓</i></div>");
+      //$("#"+chatBoxId).append("<div class='hidders chatBoxMentionNav' currentMentionPosition='0'><i class='mentionNav_up'>↑</i><i class='mentionNav_down'>↓</i></div>");
       recalculateChatBoxPositions();
 
       // Populate, position and add triggers
