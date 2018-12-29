@@ -117,6 +117,9 @@ lookForApiKeys(0);
         headers: apiHeaders,
         success: function(response) {
           var data = response.data;
+          if (config['messagecount']) {
+            data["chat"] = data["chat"].slice(0, config['messagecount']);
+          }
 
           $("#"+chatBoxId+" .chatBox_title").html("<div class='chatBoxTitle_title'><a href='/groups/guild/"+data['_id']+"'>"+data['name']+"</a></div><button class='chatBox_closer'>×</button><button class='chatBox_minimizer'>—</button>");
           // Prevent link from minimizing window
@@ -199,6 +202,9 @@ lookForApiKeys(0);
         headers: apiHeaders,
         success: function(response) {
           var data = response.data;
+          if (config['messagecount'] >=1 && config['messagecount'] <= 199) {
+            data = data.slice(0, config['messagecount']);
+          }
           var htmlChat = digestChatData(chatBoxId, data);
           if(htmlChat) {
             grabAttentionForNewMessage(chatBoxId);

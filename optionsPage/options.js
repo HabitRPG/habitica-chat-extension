@@ -5,12 +5,13 @@ function save_options() {
   var enableSound = document.getElementById('enableSound').checked;
   var largeText = document.getElementById('largeText').checked;
   var disableAvatars = document.getElementById('disableAvatars').checked;
-
+  var messageCount = parseInt(document.getElementById('messageCount').value);
   chrome.storage.sync.set({
     uuid: uuid,
     api: api,
     enableSound: enableSound,
     largeText: largeText,
+    messageCount: (messageCount > 199 ? 0 : messageCount),
     disableAvatars: disableAvatars
   }, function() {
     // Update status to let user know options were saved.
@@ -30,13 +31,15 @@ function restore_options() {
     api: '',
     enableSound: true,
     largeText: false,
-    disableAvatars: false
+    disableAvatars: false,
+    messageCount: 200
   }, function(items) {
     document.getElementById('uuid').value = items.uuid;
     document.getElementById('api').value = items.api;
     document.getElementById('enableSound').checked = items.enableSound;
     document.getElementById('largeText').checked = items.largeText;
     document.getElementById('disableAvatars').checked = items.disableAvatars;
+    document.getElementById('messageCount').value = (items.messageCount ? items.messageCount : 200);
   });
 }
 
@@ -68,3 +71,4 @@ document.getElementById('uuid').addEventListener('paste', save_options);
 document.getElementById('uuid').addEventListener('keyup', save_options);
 document.getElementById('api').addEventListener('paste', save_options);
 document.getElementById('api').addEventListener('keyup', save_options);
+document.getElementById('messageCount').addEventListener('input', save_options);
