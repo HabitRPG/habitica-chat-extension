@@ -127,7 +127,7 @@ lookForApiKeys(0);
             e.stopPropagation();
           });
           $("#"+chatBoxId+" .chatBox_input").html('<textarea id="TA_'+chatBoxId+'" placeholder="Type here..."></textarea><button onClick="sendChatMessage(\''+chatBoxId+'\')">Send</button>');
-          $("#"+chatBoxId+" .chatBox_shower").html("<div class='shower_title'>"+data['name']+"</div><button class='chatBox_closer'><i class='glyphicon glyphicon-remove'></i></button>");
+          $("#"+chatBoxId+" .chatBox_shower").html("<div class='shower_title'>"+data['name']+"</div><button class='chatBox_closer'>×</button><button class='chatBox_minimizer'>—</button>");
           $("#"+chatBoxId+" div .chatBox_closer").click(function() {
             removeChatBox(chatBoxId);
           });
