@@ -64,7 +64,7 @@ lookForApiKeys(0);
         $("#chatWrapper_boxes").append("<div id='groupsBox'></div>");
         $("#groupsBox").append("<div class='hidders groupsBox_title'><div class='groupsBoxTitle_title'>Groups</div><button class='chatBox_minimizer'>—</button></div></div>");
         $("#groupsBox").append("<div class='hidders groupsBox_content'></div>");
-        $("#groupsBox").append("<div class='showers groupsBox_shower'><div class='shower_title'>Groups</div></div>");
+        $("#groupsBox").append("<div class='showers groupsBox_shower'><div class='shower_title'>Groups</div><button class='chatBox_minimizer'>—</button></div></div>");
 
         $("#groupsBox .showers").css('display',"none");
         $("#groupsBox .groupsBox_title, #groupsBox .groupsBox_shower").click(function() {
