@@ -414,8 +414,10 @@ lookForApiKeys(0);
           } else {
             elementTitle = 'Level ' + data['stats']['lvl'] + " " + data['stats']['class'].charAt(0).toUpperCase() + data['stats']['class'].substr(1);
           }
-          document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].innerHTML = elementTitle;
+          document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].innerHTML = "<br>" + elementTitle + "<br>" + uuid;
           document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].style.fontSize = "1.2em";
+          document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].style.display = "block";
+          document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].style.cursor = "default";
         }
       }
     });
