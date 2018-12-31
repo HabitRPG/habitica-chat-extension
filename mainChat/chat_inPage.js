@@ -353,8 +353,8 @@ lookForApiKeys(0);
           var chatMessage = "" +
             "<div "+mentionAttribute+" id='mid_"+chatData[key]['id']+"' class='chatMessage "+posterClass+" "+mentionClass+"'>" +
               generateAvatar(sendersUuid, avatarData) +
-              "<div class='msg_user'>" + userLabel + "</div>" +
-              "<div class='bubble "+likeGlowClass+"'>" + chatText + "</div>" +
+              "<div class='" + (config.disableavatars ? 'large_bubble ' : '') + "msg_user'>" + userLabel + "</div>" +
+              "<div class='" + (config.disableavatars ? 'large_bubble ' : '') + "bubble "+likeGlowClass+"'>" + chatText + "</div>" +
               "<div class='msg_footer'>"+formattedTime+extraActionIcon+"</div>" +
             "</div>";
           $(html).prepend(chatMessage);
