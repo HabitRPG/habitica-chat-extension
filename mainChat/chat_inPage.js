@@ -13,8 +13,12 @@ jQuery.fn.scrollTo = function(elem) {
 var HABITICA_URL = 'https://habitica.com';
 var membersCache = {};
 var contributorTier;
+var heroName;
 function setContributorTier(tierValue) {
   contributorTier = tierValue;
+}
+function setHeroName(nameValue) {
+  heroName = nameValue;
 }
 function countCharacters (chatBoxId) {
   document.getElementById("charactersLeftInMessage_" + chatBoxId).innerHTML = document.getElementById('TA_' + chatBoxId).value.length;
@@ -624,21 +628,17 @@ lookForApiKeys(0);
     "x-api-key": user_key
   }
   // Get player's name
-  heroName = "";
-  if(heroName == '') {
-    // Not all pages show main-herobox
-    var action = "user";
-    $.ajax({
-      dataType: "json",
-      url: baseAPIUrl + action,
-      headers: apiHeaders,
-      success: function(response) {
-        var data = response.data;
-        var heroName = data['profile']['username'];
-        setContributorTier(data['contributor']['level']);
-      }
-    });
-  }
+  var action = "user";
+  $.ajax({
+    dataType: "json",
+    url: baseAPIUrl + action,
+    headers: apiHeaders,
+    success: function(response) {
+      var data = response.data;
+      setContributorTier(data['contributor']['level']);
+      setHeroName(data['auth']['local']['username']);
+    }
+  });
   // Leaving the window changes refresh rate
   window.addEventListener('focus', function() {
     for (var key in intervals) {
