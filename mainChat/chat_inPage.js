@@ -374,6 +374,12 @@ lookForApiKeys(0);
   }
 
   function createAvatarHead (avatarData) {
+    if (!avatarData || !avatarData["items"] || !avatarData["preferences"]) {
+      return '<div class="herobox user-not-found">' +
+                '<div class="character-sprites">' +
+                '</div>' +
+              '</div>';
+    }
     var gearType = avatarData["items"]["gear"]["costume"] ? 'costume' : 'equipped';
     var gear = avatarData["items"]["gear"][gearType];
     var hairColor = '_' + avatarData["preferences"]["hair"]["color"];
