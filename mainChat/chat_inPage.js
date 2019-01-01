@@ -564,9 +564,8 @@ lookForApiKeys(0);
           updateChat(chatBoxId);
           $("#"+chatBoxId+" .chatBox_input textarea").focus();
         },
-        error: function (err) {
-          console.log(err);
-          alert("Your message could not be sent. This may be be because of a server error, your chat priveliges may have been revoked, or you may have used swear words.");
+        error: function () {
+          alert("Your message could not be sent. This could be for one of the following reasons:\n1. It looks like this post contains a swearword, religious oath, or reference to an addictive substance or adult topic. Habitica has users from all backgrounds, so we keep our chat very clean. Feel free to edit your message so you can post it!\n2. Your account has been banned from chat\n3. There was a network or server error");
         }
       });
     }
