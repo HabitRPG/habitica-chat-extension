@@ -559,6 +559,10 @@ lookForApiKeys(0);
         success: function(response) {
           updateChat(chatBoxId);
           $("#"+chatBoxId+" .chatBox_input textarea").focus();
+        },
+        error: function (err) {
+          console.log(err);
+          alert("Your message could not be sent. This may be be because of a server error, your chat priveliges may have been revoked, or you may have used swear words.");
         }
       });
     }
