@@ -206,9 +206,12 @@
 		border-radius: 5px;
   }
   
-  .large_bubble {
+  .large_bubble, .large_bubble ~ .msg_user {
     width: 290px!important;
     margin-left: 10px!important
+  }
+  .large_bubble ~ .msg_footer {
+    margin-right: 10px!important
   }
 
 	.chatMessage.otherPoster .bubble {
