@@ -364,11 +364,13 @@ lookForApiKeys(0);
           var mentionAttribute = "";
           var mentionClass = "";
           var positionOfMention = chatText.indexOf("@"+heroName);
+          var shouldMention = false
           if(positionOfMention > -1) {
             mentionClass = "mentionedInChat";
             chatText = chatText.replace("@"+heroName, "<span class='chatMention'>@"+heroName+"</span>");
             totalMentions = totalMentions + 1;
             mentionAttribute = "mentionNumber='"+totalMentions+"'";
+            var shouldMention = true;
           }
 
           var sendersUuid = chatData[key].uuid;
@@ -378,7 +380,7 @@ lookForApiKeys(0);
             "<div "+mentionAttribute+" id='mid_"+chatData[key]['id']+"' data-markdown='" + chatData[key]['text'] + "' class='chatMessage "+posterClass+" "+mentionClass+"'>" +
               generateAvatar(sendersUuid, avatarData) +
               "<div class='msg_user'>" + userLabel + "</div>" +
-              "<div class='" + (config.disableavatars == 'true' ? 'large_bubble ' : '') + "bubble "+likeGlowClass+"'>" + chatText + "</div>" +
+              "<div class='" + (config.disableavatars == 'true' ? 'large_bubble ' : '') + "bubble "+likeGlowClass+"'>" + (shouldMention ? "<span class='mentionsUserDot'></span>" : "") + chatText + "</div>" +
               "<div class='msg_footer'>"+formattedTime+extraActionIcon+"</div>" +
             "</div>";
           $(html).prepend(chatMessage);

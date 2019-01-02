@@ -471,3 +471,13 @@
 .label-contributor-10 {
   color: #77f4c7
 }
+
+.mentionsUserDot {
+  background-color: #bda8ff;
+  position: absolute;
+  border-radius: 100%;
+  width: 16px;
+  height: 16px;
+  top: -8px;
+  right: -8px;
+}
