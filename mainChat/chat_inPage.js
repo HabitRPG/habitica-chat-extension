@@ -148,7 +148,7 @@ lookForApiKeys(0);
           $("#"+chatBoxId+" .chatBox_title .chatBoxTitle_title a").click(function(e){
             e.stopPropagation();
           });
-          $("#"+chatBoxId+" .chatBox_input").html('<textarea id="TA_'+chatBoxId+'" placeholder="Type here..." maxlength="3000" oninput="countCharacters(\''+chatBoxId+'\')"></textarea><button onClick="sendChatMessage(\''+chatBoxId+'\')">Send<br>(<span id="charactersLeftInMessage_' + chatBoxId + '">0</span>/3k)</button>');
+          $("#"+chatBoxId+" .chatBox_input").html('<textarea id="TA_'+chatBoxId+'" placeholder="Type here..." maxlength="3000" oninput="countCharacters(\''+chatBoxId+'\')"></textarea><button onClick="sendChatMessage(\''+chatBoxId+'\')">Send<br><span class="characterCount">(<span id="charactersLeftInMessage_' + chatBoxId + '">0</span>/3k)</span></button>');
           $("#"+chatBoxId+" .chatBox_shower").html("<div class='shower_title'>"+data['name']+"</div><button class='chatBox_closer'>×</button><button class='chatBox_minimizer'>—</button>");
           $("#"+chatBoxId+" div .chatBox_closer").click(function() {
             removeChatBox(chatBoxId);

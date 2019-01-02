@@ -93,7 +93,10 @@
 		border: none;
 		background: #c0d4f7;
 		color: #0F3577;
-	}
+  }
+  .chatBox_input .characterCount {
+    font-size: 0.8em
+  }
 
 /* ChatBox Shower */ 
 
