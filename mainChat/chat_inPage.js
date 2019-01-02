@@ -338,7 +338,7 @@ lookForApiKeys(0);
           // The user label
           // check if user has a contributor level, if not (ie: system), set it to undefined
           var userLevel = chatData[key]['contributor'] ? chatData[key]['contributor']['level'] : undefined;
-          if (chatData[key]['backer']['npc']) {
+          if (chatData[key]['backer'] && chatData[key]['backer']['npc']) {
             userLevel = 10;
           }
           if(chatData[key]['uuid'] == "system" || typeof userLevel  == 'undefined') {
@@ -582,6 +582,7 @@ lookForApiKeys(0);
         success: function(response) {
           updateChat(chatBoxId);
           $("#"+chatBoxId+" .chatBox_input textarea").focus();
+          countCharacters(chatBoxId);
         },
         error: function () {
           alert("Your message could not be sent. This could be for one of the following reasons:\n1. It looks like this post contains a swearword, religious oath, or reference to an addictive substance or adult topic. Habitica has users from all backgrounds, so we keep our chat very clean. Feel free to edit your message so you can post it!\n2. Your account has been banned from chat\n3. There was a network or server error");
