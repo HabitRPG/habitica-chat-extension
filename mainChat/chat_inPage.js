@@ -406,6 +406,37 @@ lookForApiKeys(0);
                 '</div>' +
               '</div>';
     }
+    if (avatarData['stats']['buffs']) {
+      if (avatarData['stats']['buffs']['seafoam']) {
+        return '' +
+        '<div class="herobox">' +
+          '<div class="character-sprites">' +
+            '<span class="seafoam_star" data-v-186433de>' +
+          '</div>' +
+        '</div>';
+      } else if (avatarData['stats']['buffs']['shinySeed']) {
+        return '' +
+        '<div class="herobox">' +
+          '<div class="character-sprites">' +
+            '<span class="avatar_floral_' + avatarData['stats']['class'] + '" data-v-186433de>' +
+          '</div>' +
+        '</div>';
+      } else if (avatarData['stats']['buffs']['snowball']) {
+        return '' +
+        '<div class="herobox">' +
+          '<div class="character-sprites">' +
+            '<span class="snowman" data-v-186433de>' +
+          '</div>' +
+        '</div>';
+      } else if (avatarData['stats']['buffs']['spookySparkles']) {
+        return '' +
+        '<div class="herobox">' +
+          '<div class="character-sprites">' +
+            '<span class="ghost" data-v-186433de>' +
+          '</div>' +
+        '</div>';
+      }
+    }
     var gearType = avatarData["items"]["gear"]["costume"] ? 'costume' : 'equipped';
     var gear = avatarData["items"]["gear"][gearType];
     var hairColor = '_' + avatarData["preferences"]["hair"]["color"];
@@ -413,6 +444,7 @@ lookForApiKeys(0);
     return '' +
       '<div class="herobox">' +
         '<div class="character-sprites">' +
+          '<span class="hair_flower_' + avatarData['preferences']['hair']['flower'] + '" data-v-186433de></span>' +
           '<span class="chair_' + avatarData["preferences"].chair + '" data-v-186433de></span>' +
           '<span class="' + gear.back + '" data-v-186433de></span>' +
           '<span class="' + sleepClass + '" data-v-186433de></span>' +
