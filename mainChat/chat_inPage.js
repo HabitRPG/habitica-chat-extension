@@ -24,19 +24,14 @@ function countCharacters (chatBoxId) {
   document.getElementById("charactersLeftInMessage_" + chatBoxId).innerHTML = document.getElementById('TA_' + chatBoxId).value.length;
 }
 function copyMessageText(messageID) {
-  messageElement = document.getElementById(messageID).getElementsByClassName("bubble")[0].getElementsByTagName("p")[0];
-  if (document.body.createTextRange) {
-    const range = document.body.createTextRange();
-    range.moveToElementText();
-    range.select(messageElement);
-  } else if (window.getSelection) {
-    const selection = window.getSelection();
-    const range = document.createRange();
-    range.selectNodeContents(messageElement);
-    selection.removeAllRanges();
-    selection.addRange(range);
-  }
+  var dummy = document.createElement("textarea");
+  document.body.appendChild(dummy);
+  var messageElement = document.getElementById(messageID);
+  var chatMarkdown = messageElement.getAttribute('data-markdown');
+  dummy.innerHTML = chatMarkdown;
+  dummy.select();
   document.execCommand('copy');
+  document.body.removeChild(dummy);
   alert('Message contents copied to clipboard.');
 }
 function lookForApiKeys (retryCount) {
@@ -380,7 +375,7 @@ lookForApiKeys(0);
 
           // Create HTML
           var chatMessage = "" +
-            "<div "+mentionAttribute+" id='mid_"+chatData[key]['id']+"' class='chatMessage "+posterClass+" "+mentionClass+"'>" +
+            "<div "+mentionAttribute+" id='mid_"+chatData[key]['id']+"' data-markdown='" + chatData[key]['text'] + "' class='chatMessage "+posterClass+" "+mentionClass+"'>" +
               generateAvatar(sendersUuid, avatarData) +
               "<div class='msg_user'>" + userLabel + "</div>" +
               "<div class='" + (config.disableavatars == 'true' ? 'large_bubble ' : '') + "bubble "+likeGlowClass+"'>" + chatText + "</div>" +
