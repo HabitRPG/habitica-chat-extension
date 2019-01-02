@@ -689,6 +689,12 @@ lookForApiKeys(0);
       var data = response.data;
       setContributorTier(data['contributor']['level']);
       setHeroName(data['auth']['local']['username']);
+      if (!data['party']['_id']) {
+        var groupDIVs = document.getElementsByClassName('groupsBox_content')[0].getElementsByTagName("div");
+        for (i=0;i<groupDIVs.length;i++) {
+          if (groupDIVs[i].getAttribute('linkedid') == 'party') groupDIVs[i].style.display = 'none';
+        }       
+      }
     }
   });
   // Leaving the window changes refresh rate
