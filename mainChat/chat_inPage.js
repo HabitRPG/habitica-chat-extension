@@ -143,7 +143,7 @@ lookForApiKeys(0);
             data["chat"] = data["chat"].slice(0, config['messagecount']);
           }
 
-          $("#"+chatBoxId+" .chatBox_title").html("<div class='chatBoxTitle_title'><a href='/groups/guild/"+data['_id']+"'>"+data['name']+"</a></div><button class='chatBox_closer'>×</button><button class='chatBox_minimizer'>—</button>");
+          $("#"+chatBoxId+" .chatBox_title").html("<div class='chatBoxTitle_title'><a href='/groups/guild/"+data['_id']+"' target='_blank'>"+data['name']+"</a></div><button class='chatBox_closer'>×</button><button class='chatBox_minimizer'>—</button>");
           // Prevent link from minimizing window
           $("#"+chatBoxId+" .chatBox_title .chatBoxTitle_title a").click(function(e){
             e.stopPropagation();
@@ -262,7 +262,7 @@ lookForApiKeys(0);
     var todayDay = today.getDate();
     var todayMonth = today.getMonth()+1;
     var todayYear = today.getFullYear();
-    var formattedToday = todayDay + "/" + todayMonth + "/" + todayYear;
+    var formattedToday = todayYear + "-" + todayMonth + "-" + todayDay;
 
     for (var key in chatData) {
       if (chatData.hasOwnProperty(key) && chatData[key]['text'] !== null ) {
@@ -279,7 +279,7 @@ lookForApiKeys(0);
           var day = date.getDate();
           var month = date.getMonth()+1;
           var year = date.getFullYear();
-          var formattedDate = day +"/"+month+"/"+year;
+          var formattedDate = year +"-"+month+"-"+day;
 
           if (formattedDate == formattedToday) var displayedDate = "Today, ";
           else if (day == todayDay - 1) var displayedDate = "Yesterday, "
@@ -390,7 +390,7 @@ lookForApiKeys(0);
 
           // Create HTML
           var chatMessage = "" +
-            "<div "+mentionAttribute+" id='mid_"+chatData[key]['id']+"' data-markdown='" + chatData[key]['text'] + "' class='chatMessage "+posterClass+" "+mentionClass+"'>" +
+            "<div "+mentionAttribute+" id='mid_"+chatData[key]['id']+"' data-markdown=\"" + chatData[key]['text'].replace('"', "''") + "\" class='chatMessage "+posterClass+" "+mentionClass+"'>" +
               generateAvatar(sendersUuid, avatarData) +
               "<div class='msg_user'>" + userLabel + "</div>" +
               "<div class='" + (config.disableavatars == 'true' ? 'large_bubble ' : '') + "bubble "+likeGlowClass+"'>" + (shouldMention ? "<span class='mentionsUserDot'></span>" : "") + chatText + "</div>" +
@@ -491,7 +491,7 @@ lookForApiKeys(0);
           var elementTitle;
           var contributorTitle;
           var date = new Date(data['auth']['timestamps']['created']);
-          elementTitle = 'Level ' + data['stats']['lvl'] + " " + data['stats']['class'].charAt(0).toUpperCase() + data['stats']['class'].substr(1) + "; Joined " + date.getFullYear() + '-' + (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + (chatClient ? "; " + chatClient : '');
+          elementTitle = 'Level ' + data['stats']['lvl'] + " " + data['stats']['class'].charAt(0).toUpperCase() + data['stats']['class'].substr(1) + "; Joined " + date.getFullYear() + '-' + (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-' + (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' ' + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + (chatClient ? "; " + chatClient : '');
           elementTitle = elementTitle.replace('Wizard', 'Mage');
           if (data["contributor"] && data["contributor"]["level"]) {
             contributorTitle = "Tier " + data["contributor"]["level"] + " " + data["contributor"]["text"];
