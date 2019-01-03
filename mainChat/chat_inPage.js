@@ -478,7 +478,7 @@ lookForApiKeys(0);
           var elementTitle;
           var contributorTitle;
           var date = new Date(data['auth']['timestamps']['created']);
-          elementTitle = 'Level ' + data['stats']['lvl'] + " " + data['stats']['class'].charAt(0).toUpperCase() + data['stats']['class'].substr(1) + "; Joined " + date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + (chatClient ? "; " + chatClient : '');
+          elementTitle = 'Level ' + data['stats']['lvl'] + " " + data['stats']['class'].charAt(0).toUpperCase() + data['stats']['class'].substr(1) + "; Joined " + date.getFullYear() + '-' + (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + (chatClient ? "; " + chatClient : '');
           elementTitle = elementTitle.replace('Wizard', 'Mage');
           if (data["contributor"] && data["contributor"]["level"]) {
             contributorTitle = "Tier " + data["contributor"]["level"] + " " + data["contributor"]["text"];
