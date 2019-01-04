@@ -262,7 +262,7 @@ lookForApiKeys(0);
     var todayDay = today.getDate();
     var todayMonth = today.getMonth()+1;
     var todayYear = today.getFullYear();
-    var formattedToday = todayYear + "-" + todayMonth + "-" + todayDay;
+    var formattedToday = todayYear +"-"+(todayMonth < 10 ? '0' + todayMonth : todayMonth)+"-"+(todayDay < 10 ? '0' + todayDay : todayDay);
 
     for (var key in chatData) {
       if (chatData.hasOwnProperty(key) && chatData[key]['text'] !== null ) {
@@ -279,11 +279,11 @@ lookForApiKeys(0);
           var day = date.getDate();
           var month = date.getMonth()+1;
           var year = date.getFullYear();
-          var formattedDate = year +"-"+month+"-"+day;
+          var formattedDate = year +"-"+(month < 10 ? '0' + month : month)+"-"+(day < 10 ? '0' + day : day);
 
           if (formattedDate == formattedToday) var displayedDate = "Today, ";
           else if (day == todayDay - 1) var displayedDate = "Yesterday, "
-            else var displayedDate = date.toLocaleDateString();
+            else var displayedDate = formattedDate;
 
           var formattedTime = "<span class='msg_time'>"+displayedDate+" " + hours + ':' + minutes.substr(minutes.length-2) + "</span>";
 
@@ -631,6 +631,7 @@ lookForApiKeys(0);
           countCharacters(chatBoxId);
         },
         error: function () {
+          targetTA.val(sentMessage);
           alert("Your message could not be sent. This could be for one of the following reasons:\n1. It looks like this post contains a swearword, religious oath, or reference to an addictive substance or adult topic. Habitica has users from all backgrounds, so we keep our chat very clean. Feel free to edit your message so you can post it!\n2. Your account has been banned from chat\n3. There was a network or server error");
         }
       });
