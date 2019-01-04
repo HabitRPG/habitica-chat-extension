@@ -457,7 +457,6 @@ lookForApiKeys(0);
     return '' +
       '<div class="herobox">' +
         '<div class="character-sprites">' +
-          '<span class="hair_flower_' + avatarData['preferences']['hair']['flower'] + '" data-v-186433de></span>' +
           '<span class="chair_' + avatarData["preferences"].chair + '" data-v-186433de></span>' +
           '<span class="' + gear.back + '" data-v-186433de></span>' +
           '<span class="' + sleepClass + '" data-v-186433de></span>' +
@@ -473,6 +472,7 @@ lookForApiKeys(0);
           '<span class="' + gear.eyewear + '" data-v-186433de></span>' +
           '<span class="' + gear.head + '" data-v-186433de></span>' +
           '<span class="' + gear.headAccessory + '" data-v-186433de></span>' +
+          '<span class="hair_flower_' + avatarData['preferences']['hair']['flower'] + '" data-v-186433de></span>' +
           '<span class="' + gear.shield + '" data-v-186433de></span>' +
           '<span class="' + gear.weapon + '" data-v-186433de></span>' +
         '</div>' +
