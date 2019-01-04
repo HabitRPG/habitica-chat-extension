@@ -491,7 +491,17 @@ lookForApiKeys(0);
           var elementTitle;
           var contributorTitle;
           var date = new Date(data['auth']['timestamps']['created']);
-          elementTitle = 'Level ' + data['stats']['lvl'] + " " + data['stats']['class'].charAt(0).toUpperCase() + data['stats']['class'].substr(1) + "; Joined " + date.getFullYear() + '-' + (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-' + (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' ' + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + (chatClient ? "; " + chatClient : '');
+          var formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-' + (date.getDate() < 10 ? '0' + date.getDate() : date.getDate());
+          var today = new Date();
+          var todayDay = today.getDate();
+          var todayMonth = today.getMonth()+1;
+          var todayYear = today.getFullYear();
+          var formattedToday = todayYear +"-"+(todayMonth < 10 ? '0' + todayMonth : todayMonth)+"-"+(todayDay < 10 ? '0' + todayDay : todayDay);
+          if (formattedDate == formattedToday) var displayedDate = "Today ";
+          else if (date.getDate == todayDay - 1) var displayedDate = "Yesterday "
+            else var displayedDate = formattedDate;
+          var joinedDate = displayedDate  + ' ' + date.getHours() + ':' + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes());
+          elementTitle = 'Level ' + data['stats']['lvl'] + " " + data['stats']['class'].charAt(0).toUpperCase() + data['stats']['class'].substr(1) + "; Joined " + joinedDate + (chatClient ? "; " + chatClient : '');
           elementTitle = elementTitle.replace('Wizard', 'Mage');
           if (data["contributor"] && data["contributor"]["level"]) {
             contributorTitle = "Tier " + data["contributor"]["level"] + " " + data["contributor"]["text"];
