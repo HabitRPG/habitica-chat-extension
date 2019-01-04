@@ -450,7 +450,7 @@ lookForApiKeys(0);
         '</div>';
       }
     }
-    var gearType = avatarData["items"]["gear"]["costume"] ? 'costume' : 'equipped';
+    var gearType = avatarData["preferences"]["costume"] ? 'costume' : 'equipped';
     var gear = avatarData["items"]["gear"][gearType];
     var hairColor = '_' + avatarData["preferences"]["hair"]["color"];
     var sleepClass = avatarData["preferences"]["sleep"] ? 'skin_' + avatarData["preferences"]["skin"] + '_sleep' : 'skin_' + avatarData["preferences"]["skin"];
