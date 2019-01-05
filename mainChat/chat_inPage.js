@@ -390,7 +390,7 @@ lookForApiKeys(0);
 
           // Create HTML
           var chatMessage = "" +
-            "<div "+mentionAttribute+" id='mid_"+chatData[key]['id']+"' data-markdown=\"" + chatData[key]['text'].replace('"', "''") + "\" class='chatMessage "+posterClass+" "+mentionClass+"'>" +
+            "<div "+mentionAttribute+" id='mid_"+chatData[key]['id']+"' data-markdown=\"" + chatData[key]['text'].replace(/"/g, "''") + "\" class='chatMessage "+posterClass+" "+mentionClass+"'>" +
               generateAvatar(sendersUuid, avatarData) +
               "<div class='msg_user'>" + userLabel + "</div>" +
               "<div class='" + (config.disableavatars == 'true' ? 'large_bubble ' : '') + "bubble "+likeGlowClass+"'>" + (shouldMention ? "<span class='mentionsUserDot'></span>" : "") + chatText + "</div>" +
