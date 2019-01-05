@@ -76,7 +76,7 @@ window.addEventListener('message', function(event) {
     uuid: message.uuid,
     api: message.apik
   }, function() {
-      alert('The HabitRPG Chat is now linked with user '+message.name);
+      alert('The Habitica Chat Client is now linked with user '+message.name);
 	// Reload this page
 	window.location.reload();
   });
