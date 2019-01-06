@@ -189,7 +189,7 @@ lookForApiKeys(0);
             data["chat"] = data["chat"].slice(0, config['messagecount']);
           }
 
-          $("#"+chatBoxId+" .chatBox_title").html("<div class='chatBoxTitle_title'><a href='/groups/guild/"+data['_id']+"' target='_blank'>"+data['name']+"</a></div><button class='chatBox_closer'>×</button><button class='chatBox_minimizer'>—</button>");
+          $("#"+chatBoxId+" .chatBox_title").html("<div class='chatBoxTitle_title'><a href='/groups/" + (chatBoxId == 'groups_habitrpg' ? "tavern" : "guild/"+data['_id']) + "' target='_blank'>"+data['name']+"</a></div><button class='chatBox_closer'>×</button><button class='chatBox_minimizer'>—</button>");
           // Prevent link from minimizing window
           $("#"+chatBoxId+" .chatBox_title .chatBoxTitle_title a").click(function(e){
             e.stopPropagation();
