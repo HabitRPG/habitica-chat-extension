@@ -773,6 +773,19 @@ lookForApiKeys(0);
       }
     }
   });
+  //refresh notifications every 20 seconds
+  setInterval(function () {
+    var action = "user";
+    $.ajax({
+      dataType: "json",
+      url: baseAPIUrl + action,
+      headers: apiHeaders,
+      success: function(response) {
+        var notifications = response.notifications;
+        processNotifications(notifications);
+      }
+    });
+  }, 20000);
   // Leaving the window changes refresh rate
   window.addEventListener('focus', function() {
     for (var key in intervals) {
