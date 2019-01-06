@@ -484,3 +484,8 @@
   top: -8px;
   right: -8px;
 }
+
+/* Notifications */
+.unreadMessages {
+  background-color: #e0ff32;
+}

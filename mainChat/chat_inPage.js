@@ -14,6 +14,7 @@ var HABITICA_URL = 'https://habitica.com';
 var membersCache = {};
 var contributorTier;
 var heroName;
+var globalNotifications;
 function setContributorTier(tierValue) {
   contributorTier = tierValue;
 }
@@ -23,7 +24,36 @@ function setHeroName(nameValue) {
 function countCharacters (chatBoxId) {
   document.getElementById("charactersLeftInMessage_" + chatBoxId).innerHTML = document.getElementById('TA_' + chatBoxId).value.length;
 }
-function copyMessageText(messageID) {
+function processNotifications (notifications) {
+  globalNotifications = notifications;
+  var guildId;
+  $(".group.unreadMessages").prop('class', 'group');
+  for (var key in notifications) {
+    if (notifications[key]['data'] && notifications[key]['data']['group']) {
+      guildId = notifications[key]['data']['group']['id'];
+      document.querySelector("[linkedid='" + guildId + "']").setAttribute('class', 'group unreadMessages');
+    }
+  }
+}
+function markNotificationAsRead (groupID) {
+  var notifications = globalNotifications;
+  for (var key in notifications) {
+    if (notifications[key]['data']['group'] && notifications[key]['data']['group']['id'] == groupID) {
+      var notificationId = notifications[key]['id'];
+      var action = "notifications/" + notificationId + "/read";
+      $.ajax({
+        dataType: "json",
+        url: baseAPIUrl + action,
+        headers: apiHeaders,
+        method: 'post',
+        success: function(response) {
+          processNotifications(response.data);
+        }
+      });
+    }
+  }
+}
+function copyMessageText (messageID) {
   var dummy = document.createElement("textarea");
   document.body.appendChild(dummy);
   var messageElement = document.getElementById(messageID);
@@ -139,6 +169,8 @@ lookForApiKeys(0);
         headers: apiHeaders,
         success: function(response) {
           var data = response.data;
+          var notifications = response.notifications;
+          processNotifications(notifications);
           if (config['messagecount']) {
             data["chat"] = data["chat"].slice(0, config['messagecount']);
           }
@@ -224,11 +256,14 @@ lookForApiKeys(0);
         headers: apiHeaders,
         success: function(response) {
           var data = response.data;
+          var notifications = response.notifications;
+          processNotifications(notifications);
           if (config['messagecount'] >=1 && config['messagecount'] <= 199) {
             data = data.slice(0, config['messagecount']);
           }
           var htmlChat = digestChatData(chatBoxId, data);
           if(htmlChat) {
+            markNotificationAsRead(chatBoxId.replace('groups_', ''));
             grabAttentionForNewMessage(chatBoxId);
             $("#"+chatBoxId+" .chatBox_content").html(htmlChat);
             setTimeout("$('#"+chatBoxId+" .chatBox_content').scrollTop($('#"+chatBoxId+" .chatBox_content')[0].scrollHeight)",300);
@@ -711,6 +746,8 @@ lookForApiKeys(0);
     headers: apiHeaders,
     success: function(response) {
       var data = response.data;
+      var notifications = response.notifications;
+      processNotifications(notifications);
       setContributorTier(data['contributor']['level']);
       setHeroName(data['auth']['local']['username']);
       if (!data['party']['_id']) {
