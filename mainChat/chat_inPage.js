@@ -15,26 +15,38 @@ var membersCache = {};
 var contributorTier;
 var heroName;
 var globalNotifications;
+var partyId;
+
 function setContributorTier(tierValue) {
   contributorTier = tierValue;
 }
+
+function setPartyId(idValue) {
+  partyId = idValue;
+}
+
 function setHeroName(nameValue) {
   heroName = nameValue;
 }
+
 function countCharacters (chatBoxId) {
   document.getElementById("charactersLeftInMessage_" + chatBoxId).innerHTML = document.getElementById('TA_' + chatBoxId).value.length;
 }
+
 function processNotifications (notifications) {
   globalNotifications = notifications;
   var guildId;
   $(".group.unreadMessages").prop('class', 'group');
   for (var key in notifications) {
-    if (notifications[key]['data'] && notifications[key]['data']['group']) {
+    if (notifications[key]['data']['group'] && notifications[key]['data']['group']['id'] == partyId) {
+      document.querySelector("[linkedid='party']").setAttribute('class', 'group unreadMessages');
+    } else if (notifications[key]['data'] && notifications[key]['data']['group']) {
       guildId = notifications[key]['data']['group']['id'];
       document.querySelector("[linkedid='" + guildId + "']").setAttribute('class', 'group unreadMessages');
     }
   }
 }
+
 function markNotificationAsRead (groupID) {
   var notifications = globalNotifications;
   for (var key in notifications) {
@@ -53,6 +65,7 @@ function markNotificationAsRead (groupID) {
     }
   }
 }
+
 function copyMessageText (messageID) {
   var dummy = document.createElement("textarea");
   document.body.appendChild(dummy);
@@ -64,6 +77,7 @@ function copyMessageText (messageID) {
   document.body.removeChild(dummy);
   alert('Message contents copied to clipboard.');
 }
+
 function lookForApiKeys (retryCount) {
   var twoSeconds = 2000;
 
@@ -746,6 +760,7 @@ lookForApiKeys(0);
     headers: apiHeaders,
     success: function(response) {
       var data = response.data;
+      setPartyId(data['party']['_id']);
       var notifications = response.notifications;
       processNotifications(notifications);
       setContributorTier(data['contributor']['level']);
