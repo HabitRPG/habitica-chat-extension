@@ -14,7 +14,7 @@ body {
    text-decoration: none;
   }
   a:hover {
-   color: #000;
+   color: #000!important;
    text-decoration: underline;
   }
 
@@ -74,11 +74,11 @@ body {
  display: none; 
 }
 
-#gitHubButton {
+#gitHubButton, #wikiButton {
   margin-top: 10px;
   width: 100%;
 }
-#gitHub {
+#gitHub, #wiki {
   color: #777;
    text-decoration: underline;
 }

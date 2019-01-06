@@ -51,6 +51,10 @@ function openGitHub() {
 	chrome.tabs.create({ url: "https://github.com/HabitRPG/habitica-chat-extension" });
 }
 
+function openWiki() {
+	chrome.tabs.create({ url: "https://habitica.wikia.com/wiki/Chrome_Chat_Extension" });
+}
+
 function displayManualOptions() {
 	document.getElementById('userForm').style.display = "block";
 	document.getElementById('manualSetupTrigger').style.display = "none";
@@ -63,6 +67,7 @@ document.getElementById('manualSetupTrigger').addEventListener('click', displayM
 // Link
 document.getElementById('hint').addEventListener('click', openSettings);
 document.getElementById('gitHub').addEventListener('click', openGitHub);
+document.getElementById('wiki').addEventListener('click', openWiki);
 // Saving
 document.getElementById('largeText').addEventListener('click', save_options);
 document.getElementById('disableAvatars').addEventListener('click', save_options);
