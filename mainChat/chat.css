@@ -490,3 +490,7 @@
   background-color: rgba(15, 53, 119);
   color: #fff;
 }
+.unreadMessages:hover {
+  background-color: rgb(29, 88, 189);
+  color: #fff;
+}
