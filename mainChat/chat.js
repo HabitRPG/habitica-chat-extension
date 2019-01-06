@@ -13,14 +13,16 @@ chrome.storage.sync.get({
   largeText: false,
   disableAvatars: false,
   messageCount: 200,
-  disableNotifications: false
+  disableShowNotifications: false,
+  disableReadNotifications: false
 }, function(items) {
 	config.setAttribute("uuid" , items.uuid);
 	config.setAttribute("apiK" , items.api);
 	config.setAttribute("sound", items.enableSound);
 	config.setAttribute("largeText", items.largeText);
 	config.setAttribute("disableAvatars", items.disableAvatars);
-	config.setAttribute("disableNotifications", items.disableNotifications);
+	config.setAttribute("disableShowNotifications", items.disableShowNotifications);
+	config.setAttribute("disableReadNotifications", items.disableReadNotifications);
 	config.setAttribute("messageCount", items.messageCount);
 });
 (document.head||document.documentElement).appendChild(config);

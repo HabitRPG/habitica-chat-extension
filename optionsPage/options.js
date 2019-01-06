@@ -5,7 +5,8 @@ function save_options() {
   var enableSound = document.getElementById('enableSound').checked;
   var largeText = document.getElementById('largeText').checked;
   var disableAvatars = document.getElementById('disableAvatars').checked;
-  var disableNotifications = document.getElementById('disableNotifications').checked;
+  var disableShowNotifications = document.getElementById('disableShowNotifications').checked;
+  var disableReadNotifications = document.getElementById('disableReadNotifications').checked;
   var messageCount = parseInt(document.getElementById('messageCount').value);
   chrome.storage.sync.set({
     uuid: uuid,
@@ -14,7 +15,8 @@ function save_options() {
     largeText: largeText,
     messageCount: (messageCount > 199 ? 0 : messageCount),
     disableAvatars: disableAvatars,
-    disableNotifications: disableNotifications
+    disableShowNotifications: disableShowNotifications,
+    disableReadNotifications: disableReadNotifications
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -35,14 +37,16 @@ function restore_options() {
     largeText: false,
     disableAvatars: false,
     messageCount: 200,
-    disableNotifications: false
+    disableShowNotifications: false,
+    disableReadNotifications: false
   }, function(items) {
     document.getElementById('uuid').value = items.uuid;
     document.getElementById('api').value = items.api;
     document.getElementById('enableSound').checked = items.enableSound;
     document.getElementById('largeText').checked = items.largeText;
     document.getElementById('disableAvatars').checked = items.disableAvatars;
-    document.getElementById('disableNotifications').checked = items.disableNotifications;
+    document.getElementById('disableShowNotifications').checked = items.disableShowNotifications;
+    document.getElementById('disableReadNotifications').checked = items.disableReadNotifications;
     document.getElementById('messageCount').value = (items.messageCount ? items.messageCount : 200);
   });
 }
@@ -76,7 +80,8 @@ document.getElementById('wiki').addEventListener('click', openWiki);
 document.getElementById('largeText').addEventListener('click', save_options);
 document.getElementById('disableAvatars').addEventListener('click', save_options);
 document.getElementById('enableSound').addEventListener('click', save_options);
-document.getElementById('disableNotifications').addEventListener('click', save_options);
+document.getElementById('disableShowNotifications').addEventListener('click', save_options);
+document.getElementById('disableReadNotifications').addEventListener('click', save_options);
 document.getElementById('uuid').addEventListener('paste', save_options);
 document.getElementById('uuid').addEventListener('keyup', save_options);
 document.getElementById('api').addEventListener('paste', save_options);
