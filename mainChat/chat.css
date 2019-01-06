@@ -487,5 +487,6 @@
 
 /* Notifications */
 .unreadMessages {
-  background-color: #e0ff32;
+  background-color: rgba(15, 53, 119);
+  color: #fff;
 }
