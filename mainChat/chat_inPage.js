@@ -50,7 +50,7 @@ function processNotifications (notifications) {
 function markNotificationAsRead (groupID) {
   var notifications = globalNotifications;
   for (var key in notifications) {
-    if (notifications[key]['data']['group'] && notifications[key]['data']['group']['id'] == groupID) {
+    if (notifications[key]['data']['group'] && (groupID == 'party' ? notifications[key]['data']['group']['id'] == partyId : notifications[key]['data']['group']['id'] == groupID)) {
       var notificationId = notifications[key]['id'];
       var action = "notifications/" + notificationId + "/read";
       $.ajax({
