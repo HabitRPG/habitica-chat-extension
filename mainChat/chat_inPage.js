@@ -35,14 +35,16 @@ function countCharacters (chatBoxId) {
 
 function processNotifications (notifications) {
   globalNotifications = notifications;
-  var guildId;
-  $(".group.unreadMessages").prop('class', 'group');
-  for (var key in notifications) {
-    if (notifications[key]['data']['group'] && notifications[key]['data']['group']['id'] == partyId) {
-      document.querySelector("[linkedid='party']").setAttribute('class', 'group unreadMessages');
-    } else if (notifications[key]['data'] && notifications[key]['data']['group']) {
-      guildId = notifications[key]['data']['group']['id'];
-      document.querySelector("[linkedid='" + guildId + "']").setAttribute('class', 'group unreadMessages');
+  if (config.disableshownotifications == 'false') {
+    var guildId;
+    $(".group.unreadMessages").prop('class', 'group');
+    for (var key in notifications) {
+      if (notifications[key]['data']['group'] && notifications[key]['data']['group']['id'] == partyId) {
+        document.querySelector("[linkedid='party']").setAttribute('class', 'group unreadMessages');
+      } else if (notifications[key]['data'] && notifications[key]['data']['group']) {
+        guildId = notifications[key]['data']['group']['id'];
+        document.querySelector("[linkedid='" + guildId + "']").setAttribute('class', 'group unreadMessages');
+      }
     }
   }
 }
@@ -184,7 +186,7 @@ lookForApiKeys(0);
         success: function(response) {
           var data = response.data;
           var notifications = response.notifications;
-          if (config.disableshownotifications == 'false' && notifications && notifications != globalNotifications) processNotifications(notifications);
+          if (notifications && notifications != globalNotifications) processNotifications(notifications);
           if (config['messagecount']) {
             data["chat"] = data["chat"].slice(0, config['messagecount']);
           }
@@ -271,7 +273,7 @@ lookForApiKeys(0);
         success: function(response) {
           var data = response.data;
           var notifications = response.notifications;
-          if (config.disableshownotifications == 'false' && notifications && notifications != globalNotifications) processNotifications(notifications);
+          if (notifications && notifications != globalNotifications) processNotifications(notifications);
           if (config['messagecount'] >=1 && config['messagecount'] <= 199) {
             data = data.slice(0, config['messagecount']);
           }
@@ -762,7 +764,7 @@ lookForApiKeys(0);
       var data = response.data;
       setPartyId(data['party']['_id']);
       var notifications = response.notifications;
-      if (config.disableshownotifications == 'false' && notifications && notifications != globalNotifications) processNotifications(notifications);
+      if (notifications && notifications != globalNotifications) processNotifications(notifications);
       setContributorTier(data['contributor']['level']);
       setHeroName(data['auth']['local']['username']);
       if (!data['party']['_id']) {
@@ -782,7 +784,7 @@ lookForApiKeys(0);
       headers: apiHeaders,
       success: function(response) {
         var notifications = response.notifications;
-        if (config.disableshownotifications == 'false' && notifications && notifications != globalNotifications) processNotifications(notifications);
+        if (notifications && notifications != globalNotifications) processNotifications(notifications);
       }
     });
   }, 20000);
