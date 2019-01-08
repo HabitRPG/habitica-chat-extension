@@ -597,7 +597,9 @@ lookForApiKeys(0);
   }
 
   function flagMessage(chatBoxId, gid, mid, userComment) {
-
+    if (userComment == null) {
+      return false;
+    }
     if($('#mid_'+mid+' .msg_footer .flagMessage').hasClass('flagged') || confirm('Reporting a message indicates that you believe it to be in violation of the community guidelines. Are you sure you wish to report this message?')) {
 
       var action = "groups/"+gid+"/chat/"+mid+"/flag";
