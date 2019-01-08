@@ -620,18 +620,19 @@ lookForApiKeys(0);
   }
 
   function deleteMessage(chatBoxId, gid, mid) {
+    if (confirm("Are you sure you want to delete this post? You cannot undo this action.")) {
+      var action = "groups/"+gid+"/chat/"+mid;
 
-    var action = "groups/"+gid+"/chat/"+mid;
-
-    $.ajax({
-      dataType: "json",
-      url: baseAPIUrl + action,
-      type: "DELETE",
-      headers: apiHeaders,
-      success: function() {
-        updateChat(chatBoxId);
-      }
-    });
+      $.ajax({
+        dataType: "json",
+        url: baseAPIUrl + action,
+        type: "DELETE",
+        headers: apiHeaders,
+        success: function() {
+          updateChat(chatBoxId);
+        }
+      });
+    }
   }
 
   function likeMessage(chatBoxId, gid, mid) {
