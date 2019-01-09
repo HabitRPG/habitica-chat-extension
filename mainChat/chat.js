@@ -14,7 +14,8 @@ chrome.storage.sync.get({
   disableAvatars: false,
   messageCount: 200,
   disableShowNotifications: false,
-  disableReadNotifications: false
+  disableReadNotifications: false,
+  confirmDelete: true
 }, function(items) {
 	config.setAttribute("uuid" , items.uuid);
 	config.setAttribute("apiK" , items.api);
@@ -23,7 +24,8 @@ chrome.storage.sync.get({
 	config.setAttribute("disableAvatars", items.disableAvatars);
 	config.setAttribute("disableShowNotifications", items.disableShowNotifications);
 	config.setAttribute("disableReadNotifications", items.disableReadNotifications);
-	config.setAttribute("messageCount", items.messageCount);
+  config.setAttribute("messageCount", items.messageCount);
+  config.setAttribute("confirmDelete", items.confirmDelete);
 });
 (document.head||document.documentElement).appendChild(config);
 

@@ -620,7 +620,7 @@ lookForApiKeys(0);
   }
 
   function deleteMessage(chatBoxId, gid, mid) {
-    if (confirm("Are you sure you want to delete this post? You cannot undo this action.")) {
+    if (config.confirmdelete == 'false' || confirm("Are you sure you want to delete this post? You cannot undo this action.")) {
       var action = "groups/"+gid+"/chat/"+mid;
 
       $.ajax({

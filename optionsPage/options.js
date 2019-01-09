@@ -7,6 +7,7 @@ function save_options() {
   var disableAvatars = document.getElementById('disableAvatars').checked;
   var disableShowNotifications = document.getElementById('disableShowNotifications').checked;
   var disableReadNotifications = document.getElementById('disableReadNotifications').checked;
+  var confirmDelete = document.getElementById('confirmDelete').checked;
   var messageCount = parseInt(document.getElementById('messageCount').value);
   chrome.storage.sync.set({
     uuid: uuid,
@@ -16,7 +17,8 @@ function save_options() {
     messageCount: (messageCount > 199 ? 0 : messageCount),
     disableAvatars: disableAvatars,
     disableShowNotifications: disableShowNotifications,
-    disableReadNotifications: disableReadNotifications
+    disableReadNotifications: disableReadNotifications,
+    confirmDelete: confirmDelete
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -38,7 +40,8 @@ function restore_options() {
     disableAvatars: false,
     messageCount: 200,
     disableShowNotifications: false,
-    disableReadNotifications: false
+    disableReadNotifications: false,
+    confirmDelete: true
   }, function(items) {
     document.getElementById('uuid').value = items.uuid;
     document.getElementById('api').value = items.api;
@@ -47,6 +50,7 @@ function restore_options() {
     document.getElementById('disableAvatars').checked = items.disableAvatars;
     document.getElementById('disableShowNotifications').checked = items.disableShowNotifications;
     document.getElementById('disableReadNotifications').checked = items.disableReadNotifications;
+    document.getElementById('confirmDelete').checked = items.confirmDelete;
     document.getElementById('messageCount').value = (items.messageCount ? items.messageCount : 200);
   });
 }
@@ -82,6 +86,7 @@ document.getElementById('disableAvatars').addEventListener('click', save_options
 document.getElementById('enableSound').addEventListener('click', save_options);
 document.getElementById('disableShowNotifications').addEventListener('click', save_options);
 document.getElementById('disableReadNotifications').addEventListener('click', save_options);
+document.getElementById('confirmDelete').addEventListener('click', save_options);
 document.getElementById('uuid').addEventListener('paste', save_options);
 document.getElementById('uuid').addEventListener('keyup', save_options);
 document.getElementById('api').addEventListener('paste', save_options);
