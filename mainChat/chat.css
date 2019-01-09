@@ -139,7 +139,7 @@
     overflow-x: hidden;
 }
 
-	.group {
+	.group-item {
 		cursor: pointer;
 		border: 1px solid rgba(15, 53, 119,0.1);
 		background-color: white;
@@ -149,12 +149,12 @@
 		font-size: 0.8em;
 	}
 
-		.group:hover {
+    .group-item:hover {
 			border: 1px solid rgba(15, 53, 119,0.1);
 			background-color: rgba(15, 53, 119,0.05);
 		}
 			
-		.group.openChatBox {
+		.group-item.openChatBox {
 			border: 1px solid rgba(15, 53, 119,0.3);
 			background-color: rgba(15, 53, 119,0.1);
 		}

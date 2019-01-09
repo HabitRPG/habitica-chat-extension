@@ -37,13 +37,13 @@ function processNotifications (notifications) {
   globalNotifications = notifications;
   if (config.disableshownotifications == 'false') {
     var guildId;
-    $(".group.unreadMessages").prop('class', 'group');
+    $(".group-item.unreadMessages").prop('class', 'group');
     for (var key in notifications) {
       if (notifications[key]['data']['group'] && notifications[key]['data']['group']['id'] == partyId) {
-        document.querySelector("[linkedid='party']").setAttribute('class', 'group unreadMessages');
+        document.querySelector("[linkedid='party']").setAttribute('class', 'group-item unreadMessages');
       } else if (notifications[key]['data'] && notifications[key]['data']['group']) {
         guildId = notifications[key]['data']['group']['id'];
-        document.querySelector("[linkedid='" + guildId + "']").setAttribute('class', 'group unreadMessages');
+        document.querySelector("[linkedid='" + guildId + "']").setAttribute('class', 'group-item unreadMessages');
       }
     }
   }
@@ -141,12 +141,12 @@ lookForApiKeys(0);
         });
 
         $("#groupsBox .groupsBox_content").append("<div class='groupHR'>Regular Chatrooms</div>");
-        $("#groupsBox .groupsBox_content").append("<div linkedId='habitrpg' onClick='createChatBox(\"groups_habitrpg\")' class='group'>Tavern</div>");
-        $("#groupsBox .groupsBox_content").append("<div linkedId='party' onClick='createChatBox(\"groups_party\")' class='group'>My Party</div>");
+        $("#groupsBox .groupsBox_content").append("<div linkedId='habitrpg' onClick='createChatBox(\"groups_habitrpg\")' class='group-item'>Tavern</div>");
+        $("#groupsBox .groupsBox_content").append("<div linkedId='party' onClick='createChatBox(\"groups_party\")' class='group-item'>My Party</div>");
         $("#groupsBox .groupsBox_content").append("<div class='groupHR'>Guilds</div>");
         for (var key in groups) {
           if (groups.hasOwnProperty(key)) {
-            $("#groupsBox .groupsBox_content").append("<div linkedId='"+groups[key]['_id']+"' onClick='createChatBox(\"groups_"+groups[key]['_id']+"\")' class='group'>"+groups[key]['name'] + "</div>");
+            $("#groupsBox .groupsBox_content").append("<div linkedId='"+groups[key]['_id']+"' onClick='createChatBox(\"groups_"+groups[key]['_id']+"\")' class='group-item'>"+groups[key]['name'] + "</div>");
           }
         }
 
@@ -291,10 +291,10 @@ lookForApiKeys(0);
 
   function recalculateChatBoxPositions() {
     var iterator = 0;
-    $('.group').removeClass('openChatBox');
+    $('.group-item').removeClass('openChatBox');
     $('.chatBox').each(function() {
       $(this).css('right',((iterator * 350)+220)+"px");
-      $('.group[linkedId='+($(this).attr('id')).replace("groups_","")+']').addClass('openChatBox');
+      $('.group-item[linkedId='+($(this).attr('id')).replace("groups_","")+']').addClass('openChatBox');
       iterator++
     });
   }
