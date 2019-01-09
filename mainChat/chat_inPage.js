@@ -37,7 +37,7 @@ function processNotifications (notifications) {
   globalNotifications = notifications;
   if (config.disableshownotifications == 'false') {
     var guildId;
-    $(".group-item.unreadMessages").prop('class', 'group');
+    $(".group-item.unreadMessages").prop('class', 'group-item');
     for (var key in notifications) {
       if (notifications[key]['data']['group'] && notifications[key]['data']['group']['id'] == partyId) {
         document.querySelector("[linkedid='party']").setAttribute('class', 'group-item unreadMessages');
