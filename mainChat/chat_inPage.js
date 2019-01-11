@@ -829,17 +829,19 @@ lookForApiKeys(0);
     //Zero the idle timer on mouse movement.
     $(this).mousemove(function (e) {
       if (idleTime > parseInt(config.timeoutafter)) {
-        alert("Welcome back! The Habitica chat has been paused while you were away for over 60 minutes.");
         chatIsActive = true;
         $('head title').text('Habitica - Gamify Your Life');
+        refreshRateSlow = 60000;
+        alert("Welcome back! The Habitica chat has been paused while you were away for over " + config.timeoutafter + " minutes.");
       }
       idleTime = 0;
     });
     $(this).keypress(function (e) {
       if (idleTime > parseInt(config.timeoutafter)) {
-        alert("Welcome back! The Habitica chat has been paused while you were away for over 60 minutes.");
         chatIsActive = true;
         $('head title').text('Habitica - Gamify Your Life');
+        refreshRateSlow = 60000;
+        alert("Welcome back! The Habitica chat has been paused while you were away for over " + config.timeoutafter + " minutes.");
       }
       idleTime = 0;
     });
@@ -847,6 +849,14 @@ lookForApiKeys(0);
 
   function timerIncrement() {
     idleTime = idleTime + 1;
+    if (idleTime > 60) {
+      refreshRateSlow += 1000;
+      for (var key in intervals) {
+        clearInterval(intervals[key]);
+        delete intervals.key;
+        intervals[key] = window.setInterval("updateChat('"+key+"')", refreshRateSlow);
+      }
+    }
     if (chatIsActive == true && idleTime > parseInt(config.timeoutafter)) {
       chatIsActive = false;
       $('head title').text('(Chat Paused) | Habitica - Gamify Your Life');
