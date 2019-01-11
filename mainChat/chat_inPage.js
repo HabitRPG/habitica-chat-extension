@@ -828,9 +828,19 @@ lookForApiKeys(0);
     var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
     //Zero the idle timer on mouse movement.
     $(this).mousemove(function (e) {
+      if (idleTime > 60) {
+        alert("Welcome back! The Habitica chat has been paused while you were away for over 60 minutes.");
+        chatIsActive = true;
+        $('head title').text('Habitica - Gamify Your Life');
+      }
       idleTime = 0;
     });
     $(this).keypress(function (e) {
+      if (idleTime > 60) {
+        alert("Welcome back! The Habitica chat has been paused while you were away for over 60 minutes.");
+        chatIsActive = true;
+        $('head title').text('Habitica - Gamify Your Life');
+      }
       idleTime = 0;
     });
   });
@@ -839,11 +849,6 @@ lookForApiKeys(0);
     idleTime = idleTime + 1;
     if (chatIsActive == true && idleTime > 60) { // 60 minutes
       chatIsActive = false;
-      $('head title').text('(Chat Paused) | Habitica | Your Life The Role Playing Game');
-      bootbox.alert("Welcome back! The Habitica chat has been paused while you were away for over 60 minutes.", function() {
-        idleTime = 0;
-        chatIsActive = true;
-        $('head title').text('Habitica | Your Life The Role Playing Game');
-      });
+      $('head title').text('(Chat Paused) | Habitica - Gamify Your Life');
     }
   }
