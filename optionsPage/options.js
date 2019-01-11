@@ -9,12 +9,14 @@ function save_options() {
   var disableReadNotifications = document.getElementById('disableReadNotifications').checked;
   var confirmDelete = document.getElementById('confirmDelete').checked;
   var messageCount = parseInt(document.getElementById('messageCount').value);
+  var timeoutAfter = parseInt(document.getElementById('timeoutAfter').value);
   chrome.storage.sync.set({
     uuid: uuid,
     api: api,
     enableSound: enableSound,
     largeText: largeText,
     messageCount: (messageCount > 199 ? 0 : messageCount),
+    timeoutAfter: (timeoutAfter > 99 ? undefined : timeoutAfter),
     disableAvatars: disableAvatars,
     disableShowNotifications: disableShowNotifications,
     disableReadNotifications: disableReadNotifications,
@@ -39,6 +41,7 @@ function restore_options() {
     largeText: false,
     disableAvatars: false,
     messageCount: 200,
+    timeoutAfter: 60,
     disableShowNotifications: false,
     disableReadNotifications: false,
     confirmDelete: true
@@ -52,6 +55,7 @@ function restore_options() {
     document.getElementById('disableReadNotifications').checked = items.disableReadNotifications;
     document.getElementById('confirmDelete').checked = items.confirmDelete;
     document.getElementById('messageCount').value = (items.messageCount ? items.messageCount : 200);
+    document.getElementById('timeoutAfter').value = (items.timeoutAfter ? items.timeoutAfter : 60);
   });
 }
 
@@ -92,3 +96,4 @@ document.getElementById('uuid').addEventListener('keyup', save_options);
 document.getElementById('api').addEventListener('paste', save_options);
 document.getElementById('api').addEventListener('keyup', save_options);
 document.getElementById('messageCount').addEventListener('input', save_options);
+document.getElementById('timeoutAfter').addEventListener('input', save_options);

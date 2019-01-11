@@ -13,6 +13,7 @@ chrome.storage.sync.get({
   largeText: false,
   disableAvatars: false,
   messageCount: 200,
+  timeoutAfter: 60,
   disableShowNotifications: false,
   disableReadNotifications: false,
   confirmDelete: true
@@ -25,6 +26,7 @@ chrome.storage.sync.get({
 	config.setAttribute("disableShowNotifications", items.disableShowNotifications);
 	config.setAttribute("disableReadNotifications", items.disableReadNotifications);
   config.setAttribute("messageCount", items.messageCount);
+  config.setAttribute("timeoutAfter", items.timeoutAfter);
   config.setAttribute("confirmDelete", items.confirmDelete);
 });
 (document.head||document.documentElement).appendChild(config);
@@ -40,14 +42,6 @@ s.onload = function() {
 // Call other functions
 var s = document.createElement('script');
 s.src = chrome.extension.getURL('resources/miscFunctions.js');
-s.onload = function() {
-    this.parentNode.removeChild(this);
-};
-(document.head||document.documentElement).appendChild(s);
-
-// Call bootbox
-var s = document.createElement('script');
-s.src = chrome.extension.getURL('resources/bootbox.min.js');
 s.onload = function() {
     this.parentNode.removeChild(this);
 };
