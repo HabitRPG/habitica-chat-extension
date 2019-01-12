@@ -16,7 +16,7 @@ function save_options() {
     enableSound: enableSound,
     largeText: largeText,
     messageCount: (messageCount > 199 ? 0 : messageCount),
-    timeoutAfter: (timeoutAfter > 99 ? undefined : timeoutAfter),
+    timeoutAfter: (timeoutAfter > 200 || timeoutAfter < 15 ? undefined : timeoutAfter),
     disableAvatars: disableAvatars,
     disableShowNotifications: disableShowNotifications,
     disableReadNotifications: disableReadNotifications,
