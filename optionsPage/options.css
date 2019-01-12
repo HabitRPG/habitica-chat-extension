@@ -74,11 +74,11 @@ body {
  display: none; 
 }
 
-#gitHubButton, #wikiButton {
+#gitHubButton, #reportBugButton, #wikiButton {
   margin-top: 10px;
   width: 100%;
 }
-#gitHub, #wiki {
+#gitHub, #reportBug, #wiki {
   color: #777;
    text-decoration: underline;
 }

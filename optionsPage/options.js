@@ -16,7 +16,7 @@ function save_options() {
     enableSound: enableSound,
     largeText: largeText,
     messageCount: (messageCount > 199 ? 0 : messageCount),
-    timeoutAfter: (timeoutAfter > 200 || timeoutAfter < 15 ? undefined : timeoutAfter),
+    timeoutAfter: (timeoutAfter > 240 || timeoutAfter < 1 ? undefined : timeoutAfter),
     disableAvatars: disableAvatars,
     disableShowNotifications: disableShowNotifications,
     disableReadNotifications: disableReadNotifications,
@@ -71,6 +71,10 @@ function openWiki() {
 	chrome.tabs.create({ url: "https://habitica.wikia.com/wiki/Chrome_Chat_Extension" });
 }
 
+function reportBug() {
+	chrome.tabs.create({ url: "https://habitica.com/groups/guild/a29da26b-37de-4a71-b0c6-48e72a900dac" });
+}
+
 function displayManualOptions() {
 	document.getElementById('userForm').style.display = "block";
 	document.getElementById('manualSetupTrigger').style.display = "none";
@@ -84,6 +88,7 @@ document.getElementById('manualSetupTrigger').addEventListener('click', displayM
 document.getElementById('hint').addEventListener('click', openSettings);
 document.getElementById('gitHub').addEventListener('click', openGitHub);
 document.getElementById('wiki').addEventListener('click', openWiki);
+document.getElementById('reportBug').addEventListener('click', reportBug);
 // Saving
 document.getElementById('largeText').addEventListener('click', save_options);
 document.getElementById('disableAvatars').addEventListener('click', save_options);
