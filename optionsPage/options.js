@@ -10,13 +10,16 @@ function save_options() {
   var confirmDelete = document.getElementById('confirmDelete').checked;
   var messageCount = parseInt(document.getElementById('messageCount').value);
   var timeoutAfter = parseInt(document.getElementById('timeoutAfter').value);
+  if (timeoutAfter < 1) {
+    timeoutAfter = 1;
+  }
   chrome.storage.sync.set({
     uuid: uuid,
     api: api,
     enableSound: enableSound,
     largeText: largeText,
     messageCount: (messageCount > 199 ? 0 : messageCount),
-    timeoutAfter: (timeoutAfter > 240 || timeoutAfter < 1 ? undefined : timeoutAfter),
+    timeoutAfter: (timeoutAfter > 240 ? 240 : timeoutAfter),
     disableAvatars: disableAvatars,
     disableShowNotifications: disableShowNotifications,
     disableReadNotifications: disableReadNotifications,
