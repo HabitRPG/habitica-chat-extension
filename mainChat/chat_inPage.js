@@ -97,7 +97,7 @@ function lookForApiKeys (retryCount) {
             var updatedConfig = {
               "uuid": $('pre.prettyprint').first().text(),
               "apik": $('pre.prettyprint').last().text(),
-              "name": $('.character-name').text()
+              "name": $('.character-name').first().text()
             };
             window.postMessage(updatedConfig, '*');
 
