@@ -283,7 +283,6 @@ lookForApiKeys(0);
             if (config.disablereadnotifications == 'false') markNotificationAsRead(chatBoxId.replace('groups_', ''));
             grabAttentionForNewMessage(chatBoxId);
             $("#"+chatBoxId+" .chatBox_content").html(htmlChat);
-            setTimeout("$('#"+chatBoxId+" .chatBox_content').scrollTop($('#"+chatBoxId+" .chatBox_content')[0].scrollHeight)",500);
           }
         }
       });
@@ -712,6 +711,8 @@ lookForApiKeys(0);
 
     if($("#"+chatBoxId+" .chatBox_shower").is(":visible")) {
       blink(chatBoxId);
+    } else {
+      setTimeout("$('#"+chatBoxId+" .chatBox_content').scrollTop($('#"+chatBoxId+" .chatBox_content')[0].scrollHeight)",300);
     }
   }
 
