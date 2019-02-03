@@ -211,29 +211,37 @@ lookForApiKeys(0);
           // Mention navigation
           $("#"+chatBoxId+" .chatBoxMentionNav .mentionNav_up ").click(function() {
             var totalMentions = parseInt($("#"+chatBoxId+" .chatBox_content div").attr('totalMentions'));
-            var currentMentionPosition = parseInt($(this).parent().attr('currentMentionPosition'));
-            if(currentMentionPosition >= totalMentions) {
-              var nextMentionPosition = 1;
-            } else if(currentMentionPosition < 1) {
-              var nextMentionPosition = 1;
+            if (totalMentions > 0) {
+              var currentMentionPosition = parseInt($(this).parent().attr('currentMentionPosition'));
+              if(currentMentionPosition >= totalMentions) {
+                var nextMentionPosition = 1;
+              } else if(currentMentionPosition < 1) {
+                var nextMentionPosition = 1;
+              } else {
+                var nextMentionPosition = currentMentionPosition + 1;
+              }
+              $("#"+chatBoxId+" .chatBox_content").scrollTo($("#"+chatBoxId+" .chatBox_content div .chatMessage[mentionNumber='"+nextMentionPosition+"']"));
+              $(this).parent().attr('currentMentionPosition',nextMentionPosition);
             } else {
-              var nextMentionPosition = currentMentionPosition + 1;
+              alert("Looks like your fame has not yet spread here! Get chatting and soon your name will be on everyone's lips.");
             }
-            $("#"+chatBoxId+" .chatBox_content").scrollTo($("#"+chatBoxId+" .chatBox_content div .chatMessage[mentionNumber='"+nextMentionPosition+"']"));
-            $(this).parent().attr('currentMentionPosition',nextMentionPosition);
           });
           $("#"+chatBoxId+" .chatBoxMentionNav .mentionNav_down ").click(function() {
             var totalMentions = parseInt($("#"+chatBoxId+" .chatBox_content div").attr('totalMentions'));
-            var currentMentionPosition = parseInt($(this).parent().attr('currentMentionPosition'));
-            if(currentMentionPosition > totalMentions) {
-              var nextMentionPosition = 1;
-            } else if(currentMentionPosition <= 1) {
-              var nextMentionPosition = totalMentions;
+            if (totalMentions > 0) {
+              var currentMentionPosition = parseInt($(this).parent().attr('currentMentionPosition'));
+              if(currentMentionPosition > totalMentions) {
+                var nextMentionPosition = 1;
+              } else if(currentMentionPosition <= 1) {
+                var nextMentionPosition = totalMentions;
+              } else {
+                var nextMentionPosition = currentMentionPosition - 1;
+              }
+              $("#"+chatBoxId+" .chatBox_content").scrollTo($("#"+chatBoxId+" .chatBox_content div .chatMessage[mentionNumber='"+nextMentionPosition+"']"));
+              $(this).parent().attr('currentMentionPosition',nextMentionPosition);
             } else {
-              var nextMentionPosition = currentMentionPosition - 1;
+              alert("Looks like your fame has not yet spread here! Get chatting and soon your name will be on everyone's lips.");
             }
-            $("#"+chatBoxId+" .chatBox_content").scrollTo($("#"+chatBoxId+" .chatBox_content div .chatMessage[mentionNumber='"+nextMentionPosition+"']"));
-            $(this).parent().attr('currentMentionPosition',nextMentionPosition);
           });
         }
       });
@@ -453,7 +461,6 @@ lookForApiKeys(0);
 
     $(html).attr("lastMsgId", lastMessageId);
     $(html).attr("totalMentions", totalMentions);
-    if(parseInt(totalMentions) <= 0) $("#"+chatBoxId+" .chatBoxMentionNav").remove();
 
     if(typeof preUpdateLastMessageId == 'undefined' || preUpdateLastMessageId != lastMessageId) {
       return html;
