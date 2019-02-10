@@ -211,7 +211,7 @@ lookForApiKeys(0);
           // Mention navigation
           $("#"+chatBoxId+" .chatBoxMentionNav .mentionNav_up ").click(function() {
             var totalMentions = parseInt($("#"+chatBoxId+" .chatBox_content div").attr('totalMentions'));
-            if (totalMentions > 0) {
+            if (totalMentions > 1) {
               var currentMentionPosition = parseInt($(this).parent().attr('currentMentionPosition'));
               if(currentMentionPosition >= totalMentions) {
                 var nextMentionPosition = 1;
@@ -228,7 +228,7 @@ lookForApiKeys(0);
           });
           $("#"+chatBoxId+" .chatBoxMentionNav .mentionNav_down ").click(function() {
             var totalMentions = parseInt($("#"+chatBoxId+" .chatBox_content div").attr('totalMentions'));
-            if (totalMentions > 0) {
+            if (totalMentions > 1) {
               var currentMentionPosition = parseInt($(this).parent().attr('currentMentionPosition'));
               if(currentMentionPosition > totalMentions) {
                 var nextMentionPosition = 1;
@@ -436,12 +436,12 @@ lookForApiKeys(0);
           var mentionClass = "";
           var positionOfMention = chatText.indexOf("@"+heroName);
           var shouldMention = false
-          if(positionOfMention > -1) {
+          if((positionOfMention > -1)||(key==0)) {
             mentionClass = "mentionedInChat";
             chatText = chatText.replace("@"+heroName, "<span class='chatMention'>@"+heroName+"</span>");
             totalMentions = totalMentions + 1;
             mentionAttribute = "mentionNumber='"+totalMentions+"'";
-            var shouldMention = true;
+            if (positionOfMention > -1) var shouldMention = true;
           }
 
           var sendersUuid = chatData[key].uuid;
