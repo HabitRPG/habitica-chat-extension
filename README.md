@@ -18,76 +18,76 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 + please ensure you replicate the code changes in the other port and test both. 
 + It is important when completing changes to firefox to zip the files (not the folder but the files themselves) as described in this [article](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Package_your_extension). 
 + To make it easier on staff please ensure you update this ReadMe file with the latest version changes. This will be used for the release notes.
-+ Update manifest.json n both chrome and firefox with the latest version number.
++ Update manifest.json in both chrome and firefox with the latest version number.
 
 
 
 # Version history
 
 ### 2.0.0 
-+ Firefox port added to repo.
++ Firefox port added to repo.[#34](https://github.com/HabitRPG/habitica-chat-extension/issues/34)
 + Updated Readme files
 + Disabled chat on Contact Moderator form page. (does not behave correctly here).
 + Bumped version to 2.0.0 to indicate release.
 
 ### 1.8.9 (not released)
-+ Added the ability to scroll through the beginning of chat
++ Added the ability in mention navigation to scroll through the beginning of chat when cycling through.
 + Fixed timeout and number of chat lines so the min is 15 and 5 respectively. Negative numbers are handled correctly.
 + Pointing to wiki url so using fandom.com and correct page without Chrome.(Now is both)
 
 ### 1.8.8 (not released)
-+ Update message navigation to be friendly if not mention.
++ Update message navigation wtih friendly message if not mention.
 
 ### 1.8.7 (not released)
-+ Further attempt to Fixed scrolling issue
++ Further attempt to fix scrolling issue on opening chat
 
 ### 1.8.6 (not released)
 + Fixed Scrolling issue when opening and not scrolling to the end.
 
 ### 1.8.5 (not released)
-+ Renabling mention navigation and fixing based on Username.
++ Renabled mention navigation and modified to based on Username.
 
 ### 1.8.4 (not released)
 + Fixed account linking bug
 
 ### 1.8.3 (not released)
-+ Fixing options page bug
++ Fixed options page bug
 
 ### 1.8.2 (not released)
 + Added like icon to glow green when user likes message.
-+ Fixed API Loading issues.
++ Fixed APIDOC Loading issues. [#36](https://github.com/HabitRPG/habitica-chat-extension/issues/36)
 
 ### 1.8.1 (not released)
-+ Adding upper limits
++ Added upper limits
 
 ### 1.8.0 (not released)
-+ Update max time 
-+ Bump version as feature should be done previously
++ Updated max time 
++ Bumped version as feature should be done previously
 
 ### 1.7.10 (not released)
 + Added option to change timeout time.
-+ Replace bootbox, not working
++ Replaced bootbox, not working
 
 ### 1.7.9 (not released)
 + Added option for confirmation before deleting.
-+ Further changes to .group-item class
++ Further changes made to .group-item class
 
 ### 1.7.8 (not released)
 + Fixed issue when viewing shop pages.
 
 ### 1.7.7 (not released)
-+ Create two columns to shrink options page length.
++ Created two columns to shrink options page length.
 
 ### 1.7.6 (not released)
 + Added confirmation before deleting.
 
 ### 1.7.5 (not released)
 + Fixed bugs with notifications and flagging
-+ Replace unicode images with URI images so displays correctly with all keyboards.
++ Replaced unicode images with URI images so displays correctly with all keyboards.
 
 ### 1.7.4 (not released)
 + Further fixes to notifications
-+ Making options sepearte for read and clear.
++ Made options separate for read and clear.
 + Hide Tavern as a guild. [#14](https://github.com/HabitRPG/habitica-chat-extension/issues/14)
 
 ### 1.7.3 (not released)
@@ -110,7 +110,7 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 ### 1.6.5 (not released)
 + Fixed display bug with quotes in message.[#17](https://github.com/HabitRPG/habitica-chat-extension/issues/17)
 + Further reorder costume elements
-+ Modifying message to say Habitica not HabitRPG.
++ Fixed messages to say Habitica not HabitRPG.
 
 ### 1.6.4 (not released)
 + Put message back in chat when blocked (ie if swear or fails to transmit).
@@ -134,7 +134,7 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 + Added alert if message is blocked [#29](https://github.com/HabitRPG/habitica-chat-extension/issues/29)
 + Formating Character Account
 + Added Mention dot
-+ Fixes to Copy to clipboard
++ Fixed bug with copy to clipboard
 + Fixed NPC tier label bug [#3](https://github.com/HabitRPG/habitica-chat-extension/issues/3)
 
 
