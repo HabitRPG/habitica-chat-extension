@@ -24,7 +24,11 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 
 # Version history
 
-### 2.0.0 
+### 2.1.0 
++ Added link to Habitica profile [#13](https://github.com/HabitRPG/habitica-chat-extension/issues/3)
++ Showing datetimestamp on system messages
+
+### 2.0.0 (not released)
 + Firefox port added to repo.[#34](https://github.com/HabitRPG/habitica-chat-extension/issues/34)
 + Updated Readme files
 + Disabled chat on Contact Moderator form page. (does not behave correctly here).
