@@ -469,42 +469,42 @@ lookForApiKeys(0);
     }
   }
 
-  function createAvatarHead (avatarData) {
+  function createAvatarHead (avatarData, uuid) {
     if (!avatarData || !avatarData["items"] || !avatarData["preferences"]) {
-      return '<div class="herobox user-not-found">' +
+      return '<a href="/profile/' + uuid + '" target="_blank"><div class="herobox user-not-found">' +
                 '<div class="character-sprites">' +
                 '</div>' +
-              '</div>';
+              '</div></a>';
     }
     if (avatarData['stats']['buffs']) {
       if (avatarData['stats']['buffs']['seafoam']) {
         return '' +
-        '<div class="herobox">' +
+        '<a href="/profile/' + uuid + '" target="_blank"><div class="herobox">' +
           '<div class="character-sprites">' +
             '<span class="seafoam_star" data-v-186433de>' +
           '</div>' +
-        '</div>';
+        '</div></a>';
       } else if (avatarData['stats']['buffs']['shinySeed']) {
         return '' +
-        '<div class="herobox">' +
+        '<a href="/profile/' + uuid + '" target="_blank"><div class="herobox">' +
           '<div class="character-sprites">' +
             '<span class="avatar_floral_' + avatarData['stats']['class'] + '" data-v-186433de>' +
           '</div>' +
-        '</div>';
+        '</div></a>';
       } else if (avatarData['stats']['buffs']['snowball']) {
         return '' +
-        '<div class="herobox">' +
+        '<a href="/profile/' + uuid + '" target="_blank"><div class="herobox">' +
           '<div class="character-sprites">' +
             '<span class="snowman" data-v-186433de>' +
           '</div>' +
-        '</div>';
+        '</div></a>';
       } else if (avatarData['stats']['buffs']['spookySparkles']) {
         return '' +
-        '<div class="herobox">' +
+        '<a href="/profile/' + uuid + '" target="_blank"><div class="herobox">' +
           '<div class="character-sprites">' +
             '<span class="ghost" data-v-186433de>' +
           '</div>' +
-        '</div>';
+        '</div></a>';
       }
     }
     var gearType = avatarData["preferences"]["costume"] ? 'costume' : 'equipped';
@@ -512,7 +512,7 @@ lookForApiKeys(0);
     var hairColor = '_' + avatarData["preferences"]["hair"]["color"];
     var sleepClass = avatarData["preferences"]["sleep"] ? 'skin_' + avatarData["preferences"]["skin"] + '_sleep' : 'skin_' + avatarData["preferences"]["skin"];
     return '' +
-      '<div class="herobox">' +
+      '<a href="/profile/' + uuid + '" target="_blank"><div class="herobox">' +
         '<div class="character-sprites">' +
           '<span class="chair_' + avatarData["preferences"].chair + '" data-v-186433de></span>' +
           '<span class="' + gear.back + '" data-v-186433de></span>' +
@@ -533,7 +533,7 @@ lookForApiKeys(0);
           '<span class="' + gear.shield + '" data-v-186433de></span>' +
           '<span class="' + gear.weapon + '" data-v-186433de></span>' +
         '</div>' +
-      '</div>';
+      '</div></a>';
   }
 
   function lookUpMember (uuid, messageID, chatClient) {
@@ -565,7 +565,7 @@ lookForApiKeys(0);
           } else {
             contributorTitle = "No Contributor Tier";
           }
-          document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].innerHTML = "<br>" + elementTitle + "<br>" + contributorTitle + "<br>" + uuid;
+          document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].innerHTML = "<br>" + elementTitle + "<br>" + contributorTitle + "<br><a href=\"" + "/profile/" + uuid +  "\" target=\"" + "_blank" + "\">" + uuid + "</a>";
           document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].style.fontSize = "1.2em";
           document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].style.display = "block";
           document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].style.cursor = "text";
@@ -578,7 +578,7 @@ lookForApiKeys(0);
   function replaceLoadingSpinner (avatarData, uuid) {
     var cache = membersCache[uuid];
 
-    cache.html = createAvatarHead(avatarData);
+    cache.html = createAvatarHead(avatarData, uuid);
     cache.loaded = true;
     cache.lastUpdated = new Date();
 
