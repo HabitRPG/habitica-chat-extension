@@ -1,5 +1,4 @@
 body {
-	height: 400px;
 	width: 300px;
 	color: #333333;
   border: 1px solid #333;
@@ -15,7 +14,7 @@ body {
    text-decoration: none;
   }
   a:hover {
-   color: #000;
+   color: #000!important;
    text-decoration: underline;
   }
 
@@ -32,14 +31,14 @@ body {
  text-align: center; 
 }
 #checkBoxes {
- 	margin-top: 40px;
+ 	margin-top: 20px;
 }
 
 #checkBoxes label {
   width: 100px;
-  height: 20px;
+  height: 30px;
   margin: 0 auto;
-  display: block;
+  display: inline-block;
 }
 #checkBoxes label .field {
   width: 20px;
@@ -75,11 +74,11 @@ body {
  display: none; 
 }
 
-#gitHubButton {
+#gitHubButton, #reportBugButton, #wikiButton {
   margin-top: 10px;
   width: 100%;
 }
-#gitHub {
+#gitHub, #reportBug, #wiki {
   color: #777;
    text-decoration: underline;
 }

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Habitica Chat Chrome Extension</title>
+	<link rel="stylesheet" href="options.css" />
+</head>
+	<body>
+		<div id="logo"></div>
+		<div id="setupButton"><a href="#" id="hint">Click here to link to your account</a></div>
+
+		<div id="checkBoxes">
+			<label>
+				<div class="field"><input type="checkbox" id="enableSound"></div><div class="legend">Use sound?</div>
+			</label>
+			<label>
+				<div class="field"><input type="checkbox" id="largeText"></div><div class="legend">Use large text</div>
+			</label>
+			<label>
+        <div class="field"><input type="checkbox" id="disableAvatars"></div><div class="legend">Disable Avatars for Faster Load</div>
+      </label>
+      <label>
+        <div class="field"><input type="checkbox" id="disableShowNotifications"></div><div class="legend">Disable Showing Notifications</div>
+      </label>
+      <label>
+        <div class="field"><input type="checkbox" id="disableReadNotifications"></div><div class="legend">Disable Deleting Notifications</div>
+      </label>
+      <label>
+        <div class="field"><input type="checkbox" id="confirmDelete"></div><div class="legend">Confirm Before Deleting Messages</div>
+      </label>
+    </div>
+    <br>
+    <br>
+    <div id="textInputs">
+      <label>Message count limit: <input id="messageCount" type="number" min="1" max="200"></label>/200<br>
+      <label>Pause chat after <input id="timeoutAfter" type="number" min="15" max="240">/240 minutes of inactivity</label>
+    </div>
+    <br>
+    <div id="warning">If you change any settings, you will have to refresh Habitica to see them take effect.</div>
+		<div id="userForm">
+			<div class="row">
+				<div class="legend">User ID </div><div class="field"><input type="text" id="uuid" /></div>
+			</div>
+			<div class="row">
+				<div class="legend">API Key    </div><div class="field"><input type="text" id="api" /> </div>
+			</div>
+		</div>
+		<div id="status">Saved...</div>
+    <div id="manualSetupTriggerHolder"><a href="#" id="manualSetupTrigger">Manual Setup</a></div>
+		<div id="wikiButton"><a href="#" id="wiki">View a how-to on the Habitica wiki</a></div>
+		<div id="reportBugButton"><a href="#" id="reportBug">Report a Bug</a></div>
+		<div id="gitHubButton"><a href="#" id="gitHub">Want to contribute? Join us on GitHub!</a></div>
+		<script src="options.js"></script>
+	</body>
+</html>

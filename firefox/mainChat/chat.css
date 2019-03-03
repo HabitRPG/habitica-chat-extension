@@ -53,7 +53,8 @@
 			border-radius: 10px;	
 			padding-bottom: 3px;
 			margin-top: 3px;
-			margin-right: 5px;
+      margin-right: 5px;
+      cursor: pointer
 		}
 		
 			button.chatBox_closer:hover, button.chatBox_minimizer:hover {
@@ -92,7 +93,10 @@
 		border: none;
 		background: #c0d4f7;
 		color: #0F3577;
-	}
+  }
+  .chatBox_input .characterCount {
+    font-size: 0.8em
+  }
 
 /* ChatBox Shower */ 
 
@@ -135,7 +139,7 @@
     overflow-x: hidden;
 }
 
-	.group {
+	.group-item {
 		cursor: pointer;
 		border: 1px solid rgba(15, 53, 119,0.1);
 		background-color: white;
@@ -145,12 +149,12 @@
 		font-size: 0.8em;
 	}
 
-		.group:hover {
+    .group-item:hover {
 			border: 1px solid rgba(15, 53, 119,0.1);
 			background-color: rgba(15, 53, 119,0.05);
 		}
 			
-		.group.openChatBox {
+		.group-item.openChatBox {
 			border: 1px solid rgba(15, 53, 119,0.3);
 			background-color: rgba(15, 53, 119,0.1);
 		}
@@ -184,8 +188,11 @@
 		}
 
 			.chatBox .chatBox_content .chatMessage .msg_user .label {
-			 font-size: 0.8em;
-			}
+			  font-size: 0.8em;
+      }
+      .label-username {
+        color: #878190;
+      }
 
 		.chatMessage.userPoster .msg_user {
 		margin-right: 0px;
@@ -200,7 +207,15 @@
 		-webkit-border-radius: 5px;
 		-moz-border-radius: 5px;
 		border-radius: 5px;
-	}
+  }
+  
+  .large_bubble, .large_bubble ~ .msg_user {
+    width: 290px!important;
+    margin-left: 10px!important
+  }
+  .large_bubble ~ .msg_footer {
+    margin-right: 10px!important
+  }
 
 	.chatMessage.otherPoster .bubble {
 		margin-left: 65px;
@@ -274,7 +289,7 @@
 		vertical-align: top;
 		}
 
-		.msg_footer .flagMessage,.msg_footer .deleteMessage,.msg_footer .flagMessage,.msg_footer .likeMessage {
+		.msg_footer .flagMessage,.msg_footer .copyMessage,.msg_footer .deleteMessage,.msg_footer .flagMessage,.msg_footer .likeMessage, .msg_footer .showInfo {
 			margin-right: 5px;
 			cursor: pointer;
 			color: #aaa;
@@ -308,9 +323,11 @@
 
 /* System Messages */
 
+/*
 	.chatMessage.systemPoster .msg_footer {
 	display: none;
 	}
+*/
 
 	.chatMessage.systemPoster .msg_user {
 	display: none;
@@ -331,6 +348,10 @@
 #chatWrapper_boxes.largeText .chatBox_input button { font-size: 0.9em; }
 
 /* Mentions */
+
+  .mentionsUser {
+    background-color: #e9ff32!important
+  }
 
 	.mentionedInChat .bubble {
 		box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
@@ -413,4 +434,65 @@
 
 .avatar-loading-spinner {
   top: -5px;
+}
+
+/* Contributor Labels */
+.label-contributor-1 {
+  color: #c42870;
+}
+
+.label-contributor-2 {
+  color: #b01515;
+}
+
+.label-contributor-3 {
+  color: #d70e14
+}
+
+.label-contributor-4 {
+  color: #c24d00
+}
+
+.label-contributor-5 {
+  color: #9e650f;
+}
+
+.label-contributor-6 {
+  color: #2b8363
+}
+
+.label-contributor-7 {
+  color: #167e87;
+}
+
+.label-contributor-8 {
+  color: #277eab
+}
+
+.label-contributor-9 {
+  color: #6133b4
+}
+
+.label-contributor-10 {
+  color: #77f4c7
+}
+
+.mentionsUserDot {
+  background-color: #bda8ff;
+  position: absolute;
+  border-radius: 100%;
+  width: 16px;
+  height: 16px;
+  top: -8px;
+  right: -8px;
+}
+
+/* Notifications */
+.unreadMessages {
+  background-color: rgba(15, 53, 119);
+  color: #fff;
+}
+.unreadMessages:hover {
+  background-color: rgb(29, 88, 189);
+  color: #fff;
 }
