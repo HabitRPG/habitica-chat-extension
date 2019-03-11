@@ -776,7 +776,7 @@ lookForApiKeys(0);
   
   if (parseInt(config.timeoutafter) > 60) {
 	//do not need to do for the other refresh rates as gradual slows down after 60
-	refreshRateNotification = refreshRateNotification * celi(parseInt(config.timeoutafter)/60);  
+	refreshRateNotification = refreshRateNotification * Math.celi(parseInt(config.timeoutafter)/60);  
   }
   
   
