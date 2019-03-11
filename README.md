@@ -24,6 +24,11 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 
 # Version history
 
+### 2.1.1 
++ Do not start querying if UserId and API token are not set (ie are each 36 length long)
++ Stop checking for notifications if chat is not active, user ids not set and if chat windows are open
++ Increase notifications requery to 40 seconds * by factor greater than hour.
+
 ### 2.1.0 
 + Added link to Habitica profile [#13](https://github.com/HabitRPG/habitica-chat-extension/issues/3)
 + Showing datetimestamp on system messages
