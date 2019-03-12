@@ -24,6 +24,12 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 
 # Version history
 
+### 2.1.3
++ Increased the Refresh Rate as required by staff
++ Better checking if User Id / Api Token is valid 
++ Update Firefox to fix minor code issues.
+
+
 ### 2.1.2 
 + Do not start querying if UserId and API token are not set (ie are each 36 length long)
 + Stop checking for notifications if chat is not active, user ids not set and if chat windows are open
