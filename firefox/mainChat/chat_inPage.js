@@ -472,10 +472,10 @@ lookForApiKeys(0);
 
   function createAvatarHead (avatarData, uuid) {
     if (!avatarData || !avatarData["items"] || !avatarData["preferences"]) {
-      return '<div class="herobox user-not-found">' +
+      return '<a href="/profile/' + uuid + '" target="_blank"><div class="herobox user-not-found">' +
                 '<div class="character-sprites">' +
                 '</div>' +
-              '</div>';
+              '</div></a>';
     }
     if (avatarData['stats']['buffs']) {
       if (avatarData['stats']['buffs']['seafoam']) {
@@ -533,8 +533,8 @@ lookForApiKeys(0);
           '<span class="hair_flower_' + avatarData['preferences']['hair']['flower'] + '" data-v-186433de></span>' +
           '<span class="' + gear.shield + '" data-v-186433de></span>' +
           '<span class="' + gear.weapon + '" data-v-186433de></span>' +
-        '</div></a>' +
-      '</div>';
+        '</div>' +
+      '</div></a>';
   }
 
   function lookUpMember (uuid, messageID, chatClient) {
@@ -566,7 +566,7 @@ lookForApiKeys(0);
           } else {
             contributorTitle = "No Contributor Tier";
           }
-          document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].innerHTML = "<br>" + elementTitle + "<<br><a href=\"" + "/profile/" + uuid +  "\" target=\"" + "_blank" + "\">" + uuid + "</a>";
+          document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].innerHTML = "<br>" + elementTitle + "<br>" + contributorTitle + "<br><a href=\"" + "/profile/" + uuid +  "\" target=\"" + "_blank" + "\">" + uuid + "</a>";
           document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].style.fontSize = "1.2em";
           document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].style.display = "block";
           document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].style.cursor = "text";
@@ -750,11 +750,12 @@ lookForApiKeys(0);
 
   // Hardcoded settings
   var baseAPIUrl = HABITICA_URL + "/api/v3/";
-  var refreshRateFast = 5000;
+  var refreshRateFast = 30000; //previously 5000 
   var refreshRateMedium = 45000;
   var refreshRateSlow = 60000;
   var refreshRateNotification = 40000;
 
+  
   // Settings are fetched from attributes of an HTML tag
   // called "config" with id "habitRPGChatConfig"
   // and stored in object named config
@@ -772,39 +773,44 @@ lookForApiKeys(0);
     "x-api-user": user_id,
     "x-api-key": user_key
   }
+
   
-  
+  //Make timeouts longer if longer than hour idle time.
   if (parseInt(config.timeoutafter) > 60) {
-	//do not need to do for the other refresh rates as gradual slows down after 60
-	refreshRateNotification = refreshRateNotification * Math.ceil(parseInt(config.timeoutafter)/60);  
+	refreshRateFast =  Math.ceil(refreshRateFast * parseInt(config.timeoutafter)/60);  
+	refreshRateMedium =  Math.ceil(refreshRateMedium * parseInt(config.timeoutafter)/60);  
+    refreshRateSlow =  Math.ceil(refreshRateSlow * parseInt(config.timeoutafter)/60);
+	refreshRateNotification =  Math.ceil(refreshRateNotification * parseInt(config.timeoutafter)/60);  
   }
   
   
   // Get player's name
-   //only fetch if UserId and API Token are set.
+  //only fetch if UserId and API Token are set.
+  var userIdKeyCorrect = false
   if ((user_id.length == 36) && (user_key.length == 36)) {
 	var action = "user";
 	$.ajax({
-	dataType: "json",
-	url: baseAPIUrl + action,
-	headers: apiHeaders,
-	success: function(response) {
-	  var data = response.data;
-	  setPartyId(data['party']['_id']);
-	  var notifications = response.notifications;
-	  if (notifications && notifications != globalNotifications) processNotifications(notifications);
-	  setContributorTier(data['contributor']['level']);
-	  setHeroName(data['auth']['local']['username']);
-	  if (!data['party']['_id']) {
-		var groupDIVs = document.getElementsByClassName('groupsBox_content')[0].getElementsByTagName("div");
-		for (i=0;i<groupDIVs.length;i++) {
-		  if (groupDIVs[i].getAttribute('linkedid') == 'party') groupDIVs[i].style.display = 'none';
-		}       
-	  }
-	}
+		dataType: "json",
+		url: baseAPIUrl + action,
+		headers: apiHeaders,
+		success: function(response) {
+		  var data = response.data;
+		  setPartyId(data['party']['_id']);
+		  var notifications = response.notifications;
+		  if (notifications && notifications != globalNotifications) processNotifications(notifications);
+		  setContributorTier(data['contributor']['level']);
+		  setHeroName(data['auth']['local']['username']);
+		  if (!data['party']['_id']) {
+			var groupDIVs = document.getElementsByClassName('groupsBox_content')[0].getElementsByTagName("div");
+			for (i=0;i<groupDIVs.length;i++) {
+			  if (groupDIVs[i].getAttribute('linkedid') == 'party') groupDIVs[i].style.display = 'none';
+			}       
+		  }
+		  userIdKeyCorrect = true	
+		}
 	});
   }
-
+ 
   // Leaving the window changes refresh rate
   window.addEventListener('focus', function() {
     for (var key in intervals) {
@@ -830,13 +836,13 @@ lookForApiKeys(0);
   // Launch the chat!
   // only create if UserId and API Token are set.
   if ((user_id.length == 36) && (user_key.length == 36)) createChatWrapper();
-
-//refresh notifications every refreshRateNotification seconds 
+ 
+  //refresh notifications every refreshRateNotification seconds 
   //if no chat windows and if chat is active
   //if UserId and API Token are set.
   setInterval(function () {
-	if (((user_id.length == 36) && (user_key.length == 36)) && (globalNotifications) && (chatIsActive) && ($('.chatBox').length == 0)) {
-		var action = "user";
+	if ((userIdKeyCorrect) && (globalNotifications) && (chatIsActive) && ($('.chatBox').length == 0)) {
+		var action = "user?userFields=achievements";
 		$.ajax({
 		  dataType: "json",
 		  url: baseAPIUrl + action,
@@ -863,7 +869,6 @@ lookForApiKeys(0);
       if (idleTime > parseInt(config.timeoutafter)) {
         chatIsActive = true;
         $('head title').text('Habitica - Gamify Your Life');
-        refreshRateSlow = 60000;
         alert("Welcome back! The Habitica chat has been paused while you were away for over " + config.timeoutafter + " minutes.");
       }
       idleTime = 0;
@@ -872,7 +877,6 @@ lookForApiKeys(0);
       if (idleTime > parseInt(config.timeoutafter)) {
         chatIsActive = true;
         $('head title').text('Habitica - Gamify Your Life');
-        refreshRateSlow = 60000;
         alert("Welcome back! The Habitica chat has been paused while you were away for over " + config.timeoutafter + " minutes.");
       }
       idleTime = 0;
@@ -881,14 +885,6 @@ lookForApiKeys(0);
 
   function timerIncrement() {
     idleTime = idleTime + 1;
-    if (idleTime > 60) {
-      refreshRateSlow += 1000;
-      for (var key in intervals) {
-        clearInterval(intervals[key]);
-        delete intervals.key;
-        intervals[key] = window.setInterval("updateChat('"+key+"')", refreshRateSlow);
-      }
-    }
     if (chatIsActive == true && idleTime > parseInt(config.timeoutafter)) {
       chatIsActive = false;
       $('head title').text('(Chat Paused) | Habitica - Gamify Your Life');
