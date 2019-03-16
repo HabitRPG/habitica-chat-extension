@@ -27,6 +27,7 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 
 ### 2.1.4 
 + Set Party link in title to party not id.
++ Fix so notifications show on load of groups.
 
 ### 2.1.3 (Not Released)
 + Better checking if User Id / Api Token is valid 

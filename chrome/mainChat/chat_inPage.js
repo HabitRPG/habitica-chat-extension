@@ -130,7 +130,8 @@ lookForApiKeys(0);
       headers: apiHeaders,
       success: function(response) {
         var groups = response.data;
-
+		var notifications = response.notifications;
+		
         $("#chatWrapper_boxes").append("<div id='groupsBox'></div>");
         $("#groupsBox").append("<div class='hidders groupsBox_title'><div class='groupsBoxTitle_title'>Groups</div><button class='chatBox_minimizer'>—</button></div></div>");
         $("#groupsBox").append("<div class='hidders groupsBox_content'></div>");
@@ -151,6 +152,7 @@ lookForApiKeys(0);
             $("#groupsBox .groupsBox_content").append("<div linkedId='"+groups[key]['_id']+"' onClick='createChatBox(\"groups_"+groups[key]['_id']+"\")' class='group-item'>"+groups[key]['name'] + "</div>");
           }
         }
+		if (notifications) processNotifications(notifications); //No neeed to test global notifications as this occurs on load
 
       }
     });
