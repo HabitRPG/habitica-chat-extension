@@ -25,6 +25,9 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 + Increased the Refresh Rate as required by staff
 # Version history
 
+### 2.1.5 
++ Fix indentation of display names when avatars are disabled.
+
 ### 2.1.4 
 + Set Party link in title to party not id.
 + Fix so notifications show on load of groups.

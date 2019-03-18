@@ -182,7 +182,10 @@
 	font-weight: bold;
 	margin-bottom: 5px;
 	cursor: pointer;
-	}
+  }
+  .chatMessage.no_avatars .msg_user {
+    margin-left: 8px!important
+  }
 		.chatMessage.userPoster .msg_user {
 		margin-left: 10px;
 		}
