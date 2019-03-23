@@ -439,12 +439,15 @@ lookForApiKeys(0);
           var mentionClass = "";
           var positionOfMention = chatText.indexOf("@"+heroName);
           var shouldMention = false
-          if((positionOfMention > -1)||(key==0)) {
+          if((positionOfMention > -1)) {
             mentionClass = "mentionedInChat";
             chatText = chatText.replace("@"+heroName, "<span class='chatMention'>@"+heroName+"</span>");
             totalMentions = totalMentions + 1;
             mentionAttribute = "mentionNumber='"+totalMentions+"'";
             if (positionOfMention > -1) var shouldMention = true;
+          } else if (key==0) {
+            totalMentions = totalMentions + 1;
+            mentionAttribute = "mentionNumber='"+totalMentions+"'";
           }
 
           var sendersUuid = chatData[key].uuid;
@@ -772,6 +775,7 @@ lookForApiKeys(0);
   var user_id = config['uuid'];
   var user_key = config['apik'];
   var apiHeaders = {
+    "x-client": "chat-extension",
     "x-api-user": user_id,
     "x-api-key": user_key
   }
@@ -798,8 +802,6 @@ lookForApiKeys(0);
 		success: function(response) {
 		  var data = response.data;
 		  setPartyId(data['party']['_id']);
-		  var notifications = response.notifications;
-		  if (notifications && notifications != globalNotifications) processNotifications(notifications);
 		  setContributorTier(data['contributor']['level']);
 		  setHeroName(data['auth']['local']['username']);
 		  if (!data['party']['_id']) {
