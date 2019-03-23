@@ -575,6 +575,7 @@ lookForApiKeys(0);
           document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].style.fontSize = "1.2em";
           document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].style.display = "block";
           document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].style.cursor = "text";
+          document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].scrollIntoView(false);
         }
       }
     });

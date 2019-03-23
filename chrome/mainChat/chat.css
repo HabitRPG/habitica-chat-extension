@@ -325,13 +325,8 @@
 		}
 
 /* System Messages */
-/*
-	.chatMessage.systemPoster .msg_footer {
-	display: none;
-	}
-*/
 	.chatMessage.systemPoster .msg_user {
-	display: none;
+	  visibility: hidden
 	}
 
 	.chatMessage.systemPoster .bubble {
