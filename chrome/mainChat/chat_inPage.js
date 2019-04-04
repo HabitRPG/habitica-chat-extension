@@ -791,30 +791,7 @@ lookForApiKeys(0);
   }
   
   
-  // Get player's name
-  //only fetch if UserId and API Token are set.
-  var userIdKeyCorrect = false
-  if ((user_id.length == 36) && (user_key.length == 36)) {
-	var action = "user";
-	$.ajax({
-		dataType: "json",
-		url: baseAPIUrl + action,
-		headers: apiHeaders,
-		success: function(response) {
-		  var data = response.data;
-		  setPartyId(data['party']['_id']);
-		  setContributorTier(data['contributor']['level']);
-		  setHeroName(data['auth']['local']['username']);
-		  if (!data['party']['_id']) {
-			var groupDIVs = document.getElementsByClassName('groupsBox_content')[0].getElementsByTagName("div");
-			for (i=0;i<groupDIVs.length;i++) {
-			  if (groupDIVs[i].getAttribute('linkedid') == 'party') groupDIVs[i].style.display = 'none';
-			}       
-		  }
-		  userIdKeyCorrect = true	
-		}
-	});
-  }
+  
  
   // Leaving the window changes refresh rate
   window.addEventListener('focus', function() {
@@ -840,7 +817,31 @@ lookForApiKeys(0);
 
   // Launch the chat!
   // only create if UserId and API Token are set.
-  if ((user_id.length == 36) && (user_key.length == 36)) createChatWrapper();
+  // Get player's name
+  //only fetch if UserId and API Token are set.
+  var userIdKeyCorrect = false
+  if ((user_id.length == 36) && (user_key.length == 36)) {
+	var action = "user";
+	$.ajax({
+		dataType: "json",
+		url: baseAPIUrl + action,
+		headers: apiHeaders,
+		success: function(response) {
+		  var data = response.data;
+		  setPartyId(data['party']['_id']);
+		  setContributorTier(data['contributor']['level']);
+		  setHeroName(data['auth']['local']['username']);
+		  if (!data['party']['_id']) {
+			var groupDIVs = document.getElementsByClassName('groupsBox_content')[0].getElementsByTagName("div");
+			for (i=0;i<groupDIVs.length;i++) {
+			  if (groupDIVs[i].getAttribute('linkedid') == 'party') groupDIVs[i].style.display = 'none';
+			}       
+		  }
+		  createChatWrapper(); //Only launch group chat once party key is set.
+		  userIdKeyCorrect = true	
+		}
+	});
+  }
  
   //refresh notifications every refreshRateNotification seconds 
   //if no chat windows and if chat is active

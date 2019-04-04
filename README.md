@@ -25,10 +25,20 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 + Increased the Refresh Rate as required by staff
 # Version history
 
-### 2.1.5 
+### 2.1.8 
++ Errors on loading if there is a party notification
+
+### 2.1.7 (Not Released)
++ Fix info Bugs on party messages
+
+### 2.1.6 (Not Released)
++ Update API Headers, Fix Notification bug, and fix Shaded message bug
+
+
+### 2.1.5 (Not Released)
 + Fix indentation of display names when avatars are disabled.
 
-### 2.1.4 
+### 2.1.4 (Not Released)
 + Set Party link in title to party not id.
 + Fix so notifications show on load of groups.
 
