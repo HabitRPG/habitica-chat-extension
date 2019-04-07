@@ -15,6 +15,8 @@ if ((document.URL.indexOf("https://habitica.com/apidoc/") == -1) && (document.UR
     disableAvatars: false,
     messageCount: 200,
     timeoutAfter: 60,
+    dateFormat: 0,
+    timeFormat: 12,
     disableShowNotifications: false,
     disableReadNotifications: false,
     confirmDelete: true,
@@ -29,6 +31,8 @@ if ((document.URL.indexOf("https://habitica.com/apidoc/") == -1) && (document.UR
     config.setAttribute("disableReadNotifications", items.disableReadNotifications);
     config.setAttribute("messageCount", items.messageCount);
     config.setAttribute("timeoutAfter", items.timeoutAfter);
+    config.setAttribute("dateFormat", items.dateFormat);
+    config.setAttribute("timeFormat", items.timeFormat);
     config.setAttribute("confirmDelete", items.confirmDelete);
     config.setAttribute("hideGroups", items.hideGroups);
   });

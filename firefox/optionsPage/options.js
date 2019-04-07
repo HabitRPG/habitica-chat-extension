@@ -11,6 +11,8 @@ function save_options() {
   var hideGroups = document.getElementById('hideGroups').checked;
   var messageCount = parseInt(document.getElementById('messageCount').value);
   var timeoutAfter = parseInt(document.getElementById('timeoutAfter').value);
+  var dateFormat = parseInt(document.getElementById('dateFormat').value);
+  var timeFormat = parseInt(document.getElementById('timeFormat').value);
   if (messageCount < 5) {
     messageCount = 5;
   }
@@ -21,6 +23,8 @@ function save_options() {
     uuid: uuid,
     api: api,
     enableSound: enableSound,
+    dateFormat: dateFormat,
+    timeFormat: timeFormat,
     largeText: largeText,
     messageCount: (messageCount > 200 ? 0 : messageCount),
     timeoutAfter: (timeoutAfter > 240 ? 240 : timeoutAfter),
@@ -50,6 +54,8 @@ function restore_options() {
     disableAvatars: false,
     messageCount: 200,
     timeoutAfter: 60,
+    dateFormat: 0,
+    timeFormat: 12,
     disableShowNotifications: false,
     disableReadNotifications: false,
     confirmDelete: true,
@@ -58,6 +64,8 @@ function restore_options() {
     document.getElementById('uuid').value = items.uuid;
     document.getElementById('api').value = items.api;
     document.getElementById('enableSound').checked = items.enableSound;
+    document.getElementById('dateFormat').value = items.dateFormat;
+    document.getElementById('timeFormat').value = items.timeFormat;
     document.getElementById('largeText').checked = items.largeText;
     document.getElementById('disableAvatars').checked = items.disableAvatars;
     document.getElementById('disableShowNotifications').checked = items.disableShowNotifications;
@@ -113,3 +121,5 @@ document.getElementById('api').addEventListener('paste', save_options);
 document.getElementById('api').addEventListener('keyup', save_options);
 document.getElementById('messageCount').addEventListener('input', save_options);
 document.getElementById('timeoutAfter').addEventListener('input', save_options);
+document.getElementById('dateFormat').addEventListener('input', save_options);
+document.getElementById('timeFormat').addEventListener('input', save_options);

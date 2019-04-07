@@ -325,7 +325,20 @@ lookForApiKeys(0);
     var todayDay = today.getDate();
     var todayMonth = today.getMonth()+1;
     var todayYear = today.getFullYear();
-    var formattedToday = todayYear +"-"+(todayMonth < 10 ? '0' + todayMonth : todayMonth)+"-"+(todayDay < 10 ? '0' + todayDay : todayDay);
+    switch (parseInt(config.dateformat)) {
+      case 1:
+        var formattedToday = (todayDay < 10 ? '0' + todayDay : todayDay) +"-"+(todayMonth < 10 ? '0' + todayMonth : todayMonth)+"-"+todayYear;
+        break;
+      case 2:
+        var formattedToday = (todayMonth < 10 ? '0' + todayMonth : todayMonth) +"-"+(todayDay < 10 ? '0' + todayDay : todayDay)+"-"+todayYear;
+        break;
+      case 3:
+        var formattedToday = (todayDay < 10 ? '0' + todayDay : todayDay) +"-"+(todayMonth < 10 ? '0' + todayMonth : todayMonth)+"-"+todayYear.toString().substr(-2);
+        break;
+      default:
+        var formattedToday = todayYear +"-"+(todayMonth < 10 ? '0' + todayMonth : todayMonth)+"-"+(todayDay < 10 ? '0' + todayDay : todayDay);
+        break;
+    }
 
     for (var key in chatData) {
       if (chatData.hasOwnProperty(key) && chatData[key]['text'] !== null ) {
@@ -336,19 +349,32 @@ lookForApiKeys(0);
           }
           var avatarData = chatData[key]['userStyles'];
           var date = new Date(chatData[key]['timestamp']);
-
-          var hours = date.getHours();
+          if (config.timeformat != '24') var timePeriod = (date.getHours() > 12 ? 'p.m.' : 'a.m.');
+          var hours = (config.timeformat == "24" ? date.getHours() : (date.getHours() > 12 ? date.getHours() - 12 : date.getHours()));
           var minutes = "0" + date.getMinutes();
           var day = date.getDate();
           var month = date.getMonth()+1;
           var year = date.getFullYear();
-          var formattedDate = year +"-"+(month < 10 ? '0' + month : month)+"-"+(day < 10 ? '0' + day : day);
+          switch (parseInt(config.dateformat)) {
+            case 1:
+              var formattedDate = (day < 10 ? '0' + day : day) +"-"+(month < 10 ? '0' + month : month)+"-"+year;
+              break;
+            case 2:
+              var formattedDate = (month < 10 ? '0' + month : month) +"-"+(day < 10 ? '0' + day : day)+"-"+year;
+              break;
+            case 3:
+              var formattedDate = (day < 10 ? '0' + day : day) +"-"+(month < 10 ? '0' + month : month)+"-"+year.toString().substr(-2);
+              break;
+            default:
+              var formattedDate = year +"-"+(month < 10 ? '0' + month : month)+"-"+(day < 10 ? '0' + day : day);
+              break;
+          }
 
           if (formattedDate == formattedToday) var displayedDate = "Today, ";
           else if (day == todayDay - 1) var displayedDate = "Yesterday, "
             else var displayedDate = formattedDate;
 
-          var formattedTime = "<span class='msg_time'>"+displayedDate+" " + hours + ':' + minutes.substr(minutes.length-2) + "</span>";
+          var formattedTime = "<span class='msg_time'>"+displayedDate+" " + hours + ':' + minutes.substr(minutes.length-2) + (timePeriod ? " " + timePeriod : "") + "</span>";
 
 
           // The type of poster
