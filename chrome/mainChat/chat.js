@@ -55,12 +55,15 @@ if ((document.URL.indexOf("https://habitica.com/apidoc/") == -1) && (document.UR
   (document.head||document.documentElement).appendChild(s);
 
   // Call main chat script
-  var s = document.createElement('script');
-  s.src = chrome.extension.getURL('mainChat/chat_inPage.js');
-  s.onload = function() {
-      this.parentNode.removeChild(this);
-  };
-  (document.head||document.documentElement).appendChild(s);
+  //pause 1 seconds to allow everything to catch up
+  setTimeout(function() {										   
+	var s = document.createElement('script');
+	s.src = chrome.extension.getURL('mainChat/chat_inPage.js');
+	s.onload = function() {
+	  this.parentNode.removeChild(this);
+	};
+	(document.head||document.documentElement).appendChild(s);
+  }, 1000)
 
 
 

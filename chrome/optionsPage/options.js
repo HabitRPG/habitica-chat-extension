@@ -14,7 +14,7 @@ function save_options() {
   var dateFormat = parseInt(document.getElementById('dateFormat').value);
   var timeFormat = parseInt(document.getElementById('timeFormat').value);
   if (messageCount < 5) {
-    messageCount= 5;
+    messageCount = 5;
   }
   if (timeoutAfter < 15) {
     timeoutAfter = 15;

@@ -311,6 +311,7 @@ lookForApiKeys(0);
   }
 
   function digestChatData(chatBoxId,chatData) {
+	var monthShortName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     var newElementId = "id"+(Math.floor(Math.random() * 10000000) + 1);
     var html = $('<div>').attr('id',newElementId);
     var lastMessageIdIsSet = false;
@@ -326,13 +327,13 @@ lookForApiKeys(0);
     var todayYear = today.getFullYear();
     switch (parseInt(config.dateformat)) {
       case 1:
-        var formattedToday = (todayDay < 10 ? '0' + todayDay : todayDay) +"-"+(todayMonth < 10 ? '0' + todayMonth : todayMonth)+"-"+todayYear;
+        var formattedToday = (todayDay) +"-"+(todayMonth < 10 ? '0' + todayMonth : todayMonth)+"-"+todayYear;
         break;
       case 2:
         var formattedToday = (todayMonth < 10 ? '0' + todayMonth : todayMonth) +"-"+(todayDay < 10 ? '0' + todayDay : todayDay)+"-"+todayYear;
         break;
       case 3:
-        var formattedToday = (todayDay < 10 ? '0' + todayDay : todayDay) +"-"+(todayMonth < 10 ? '0' + todayMonth : todayMonth)+"-"+todayYear.toString().substr(-2);
+        var formattedToday = (todayDay) +" "+(monthShortName[todayMonth-1])+" "+todayYear.toString().substr(-2);
         break;
       default:
         var formattedToday = todayYear +"-"+(todayMonth < 10 ? '0' + todayMonth : todayMonth)+"-"+(todayDay < 10 ? '0' + todayDay : todayDay);
@@ -356,13 +357,13 @@ lookForApiKeys(0);
           var year = date.getFullYear();
           switch (parseInt(config.dateformat)) {
             case 1:
-              var formattedDate = (day < 10 ? '0' + day : day) +"-"+(month < 10 ? '0' + month : month)+"-"+year;
+              var formattedDate = (day) +"-"+(month < 10 ? '0' + month : month)+"-"+year;
               break;
             case 2:
               var formattedDate = (month < 10 ? '0' + month : month) +"-"+(day < 10 ? '0' + day : day)+"-"+year;
               break;
             case 3:
-              var formattedDate = (day < 10 ? '0' + day : day) +"-"+(month < 10 ? '0' + month : month)+"-"+year.toString().substr(-2);
+              var formattedDate = (day) +" "+(monthShortName[month-1])+" "+year.toString().substr(-2);
               break;
             default:
               var formattedDate = year +"-"+(month < 10 ? '0' + month : month)+"-"+(day < 10 ? '0' + day : day);

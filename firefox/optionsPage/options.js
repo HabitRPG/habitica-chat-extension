@@ -78,24 +78,24 @@ function restore_options() {
 }
 
 function openSettings() {
-  browser.tabs.create({ url: "https://habitica.com/user/settings/api" });
+	browser.tabs.create({ url: "https://habitica.com/user/settings/api" });
 }
 
 function openGitHub() {
-  browser.tabs.create({ url: "https://github.com/HabitRPG/habitica-chat-extension" });
+	browser.tabs.create({ url: "https://github.com/HabitRPG/habitica-chat-extension" });
 }
 
 function openWiki() {
-  browser.tabs.create({ url: "https://habitica.wikia.com/wiki/Chrome_Chat_Extension" });
+	browser.tabs.create({ url: "https://habitica.wikia.com/wiki/Chrome_Chat_Extension" });
 }
 
 function reportBug() {
-  browser.tabs.create({ url: "https://habitica.com/groups/guild/a29da26b-37de-4a71-b0c6-48e72a900dac" });
+	browser.tabs.create({ url: "https://habitica.com/groups/guild/a29da26b-37de-4a71-b0c6-48e72a900dac" });
 }
 
 function displayManualOptions() {
-  document.getElementById('userForm').style.display = "block";
-  document.getElementById('manualSetupTrigger').style.display = "none";
+	document.getElementById('userForm').style.display = "block";
+	document.getElementById('manualSetupTrigger').style.display = "none";
 }
 
 // Load options

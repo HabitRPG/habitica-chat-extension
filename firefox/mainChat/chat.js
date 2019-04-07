@@ -55,7 +55,7 @@ if ((document.URL.indexOf("https://habitica.com/apidoc/") == -1) && (document.UR
   (document.head||document.documentElement).appendChild(s);
 
   // Call main chat script
-  //pause 3 seconds to allow everything to catch up
+  //pause 1 seconds to allow everything to catch up
   setTimeout(function() {
 	  var s = document.createElement('script');
 	  s.src = browser.extension.getURL('mainChat/chat_inPage.js');
@@ -63,7 +63,7 @@ if ((document.URL.indexOf("https://habitica.com/apidoc/") == -1) && (document.UR
 		  this.parentNode.removeChild(this);
 	  };
 	  (document.head||document.documentElement).appendChild(s);
-  }, 800)
+  }, 1000)
 
 
 
