@@ -15,9 +15,12 @@ if ((document.URL.indexOf("https://habitica.com/apidoc/") == -1) && (document.UR
     disableAvatars: false,
     messageCount: 200,
     timeoutAfter: 60,
+    dateFormat: 0,
+    timeFormat: 12,
     disableShowNotifications: false,
     disableReadNotifications: false,
-    confirmDelete: true
+    confirmDelete: true,
+    hideGroups: true
   }, function(items) {
     config.setAttribute("uuid" , items.uuid);
     config.setAttribute("apiK" , items.api);
@@ -28,7 +31,10 @@ if ((document.URL.indexOf("https://habitica.com/apidoc/") == -1) && (document.UR
     config.setAttribute("disableReadNotifications", items.disableReadNotifications);
     config.setAttribute("messageCount", items.messageCount);
     config.setAttribute("timeoutAfter", items.timeoutAfter);
+    config.setAttribute("dateFormat", items.dateFormat);
+    config.setAttribute("timeFormat", items.timeFormat);
     config.setAttribute("confirmDelete", items.confirmDelete);
+    config.setAttribute("hideGroups", items.hideGroups);
   });
   (document.head||document.documentElement).appendChild(config);
 
@@ -49,13 +55,15 @@ if ((document.URL.indexOf("https://habitica.com/apidoc/") == -1) && (document.UR
   (document.head||document.documentElement).appendChild(s);
 
   // Call main chat script
-  var s = document.createElement('script');
-  s.src = browser.extension.getURL('mainChat/chat_inPage.js');
-  s.onload = function() {
-      this.parentNode.removeChild(this);
-  };
-  (document.head||document.documentElement).appendChild(s);
-
+  //pause 1 seconds to allow everything to catch up
+  setTimeout(function() {
+	  var s = document.createElement('script');
+	  s.src = browser.extension.getURL('mainChat/chat_inPage.js');
+	  s.onload = function() {
+		  this.parentNode.removeChild(this);
+	  };
+	  (document.head||document.documentElement).appendChild(s);
+  }, 1000)
 
 
 

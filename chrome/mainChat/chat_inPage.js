@@ -152,8 +152,8 @@ lookForApiKeys(0);
             $("#groupsBox .groupsBox_content").append("<div linkedId='"+groups[key]['_id']+"' onClick='createChatBox(\"groups_"+groups[key]['_id']+"\")' class='group-item'>"+groups[key]['name'] + "</div>");
           }
         }
-		if (notifications) processNotifications(notifications); //No neeed to test global notifications as this occurs on load
-
+		    if (notifications) processNotifications(notifications); //No neeed to test global notifications as this occurs on load
+        if (config.hidegroups == "true") document.getElementById("groupsBox").getElementsByClassName("chatBox_minimizer")[0].click()
       }
     });
   }
@@ -311,6 +311,7 @@ lookForApiKeys(0);
   }
 
   function digestChatData(chatBoxId,chatData) {
+	var monthShortName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     var newElementId = "id"+(Math.floor(Math.random() * 10000000) + 1);
     var html = $('<div>').attr('id',newElementId);
     var lastMessageIdIsSet = false;
@@ -324,7 +325,20 @@ lookForApiKeys(0);
     var todayDay = today.getDate();
     var todayMonth = today.getMonth()+1;
     var todayYear = today.getFullYear();
-    var formattedToday = todayYear +"-"+(todayMonth < 10 ? '0' + todayMonth : todayMonth)+"-"+(todayDay < 10 ? '0' + todayDay : todayDay);
+    switch (parseInt(config.dateformat)) {
+      case 1:
+        var formattedToday = (todayDay) +"-"+(todayMonth < 10 ? '0' + todayMonth : todayMonth)+"-"+todayYear;
+        break;
+      case 2:
+        var formattedToday = (todayMonth < 10 ? '0' + todayMonth : todayMonth) +"-"+(todayDay < 10 ? '0' + todayDay : todayDay)+"-"+todayYear;
+        break;
+      case 3:
+        var formattedToday = (todayDay) +" "+(monthShortName[todayMonth-1])+" "+todayYear.toString().substr(-2);
+        break;
+      default:
+        var formattedToday = todayYear +"-"+(todayMonth < 10 ? '0' + todayMonth : todayMonth)+"-"+(todayDay < 10 ? '0' + todayDay : todayDay);
+        break;
+    }
 
     for (var key in chatData) {
       if (chatData.hasOwnProperty(key) && chatData[key]['text'] !== null ) {
@@ -335,19 +349,32 @@ lookForApiKeys(0);
           }
           var avatarData = chatData[key]['userStyles'];
           var date = new Date(chatData[key]['timestamp']);
-
-          var hours = date.getHours();
+          if (config.timeformat != '24') var timePeriod = (date.getHours() > 12 ? 'p.m.' : 'a.m.');
+          var hours = (config.timeformat == "24" ? date.getHours() : (date.getHours() > 12 ? date.getHours() - 12 : date.getHours()));
           var minutes = "0" + date.getMinutes();
           var day = date.getDate();
           var month = date.getMonth()+1;
           var year = date.getFullYear();
-          var formattedDate = year +"-"+(month < 10 ? '0' + month : month)+"-"+(day < 10 ? '0' + day : day);
+          switch (parseInt(config.dateformat)) {
+            case 1:
+              var formattedDate = (day) +"-"+(month < 10 ? '0' + month : month)+"-"+year;
+              break;
+            case 2:
+              var formattedDate = (month < 10 ? '0' + month : month) +"-"+(day < 10 ? '0' + day : day)+"-"+year;
+              break;
+            case 3:
+              var formattedDate = (day) +" "+(monthShortName[month-1])+" "+year.toString().substr(-2);
+              break;
+            default:
+              var formattedDate = year +"-"+(month < 10 ? '0' + month : month)+"-"+(day < 10 ? '0' + day : day);
+              break;
+          }
 
           if (formattedDate == formattedToday) var displayedDate = "Today, ";
           else if (day == todayDay - 1) var displayedDate = "Yesterday, "
             else var displayedDate = formattedDate;
 
-          var formattedTime = "<span class='msg_time'>"+displayedDate+" " + hours + ':' + minutes.substr(minutes.length-2) + "</span>";
+          var formattedTime = "<span class='msg_time'>"+displayedDate+" " + hours + ':' + minutes.substr(minutes.length-2) + (timePeriod ? " " + timePeriod : "") + "</span>";
 
 
           // The type of poster
@@ -439,19 +466,22 @@ lookForApiKeys(0);
           var mentionClass = "";
           var positionOfMention = chatText.indexOf("@"+heroName);
           var shouldMention = false
-          if((positionOfMention > -1)||(key==0)) {
+          if((positionOfMention > -1)) {
             mentionClass = "mentionedInChat";
             chatText = chatText.replace("@"+heroName, "<span class='chatMention'>@"+heroName+"</span>");
             totalMentions = totalMentions + 1;
             mentionAttribute = "mentionNumber='"+totalMentions+"'";
             if (positionOfMention > -1) var shouldMention = true;
+          } else if (key==0) {
+            totalMentions = totalMentions + 1;
+            mentionAttribute = "mentionNumber='"+totalMentions+"'";
           }
 
           var sendersUuid = chatData[key].uuid;
 
           // Create HTML
           var chatMessage = "" +
-            "<div "+mentionAttribute+" id='mid_"+chatData[key]['id']+"' data-markdown=\"" + chatData[key]['text'].replace(/"/g, "''") + "\" class='chatMessage "+posterClass+" "+mentionClass+"'>" +
+            "<div "+mentionAttribute+" id='mid_"+chatData[key]['id']+"' data-markdown=\"" + chatData[key]['text'].replace(/"/g, "''") + "\" class='chatMessage "+posterClass+" "+mentionClass+" " + (config.disableavatars == 'true' ? 'no_avatars' : '') + "'>" +
               generateAvatar(sendersUuid, avatarData) +
               "<div class='msg_user'>" + userLabel + "</div>" +
               "<div class='" + (config.disableavatars == 'true' ? 'large_bubble ' : '') + "bubble "+likeGlowClass+"'>" + (shouldMention ? "<span class='mentionsUserDot'></span>" : "") + chatText + "</div>" +
@@ -572,6 +602,7 @@ lookForApiKeys(0);
           document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].style.fontSize = "1.2em";
           document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].style.display = "block";
           document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].style.cursor = "text";
+          document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].scrollIntoView(false);
         }
       }
     });
@@ -772,6 +803,7 @@ lookForApiKeys(0);
   var user_id = config['uuid'];
   var user_key = config['apik'];
   var apiHeaders = {
+    "x-client": "chat-extension",
     "x-api-user": user_id,
     "x-api-key": user_key
   }
@@ -786,32 +818,7 @@ lookForApiKeys(0);
   }
   
   
-  // Get player's name
-  //only fetch if UserId and API Token are set.
-  var userIdKeyCorrect = false
-  if ((user_id.length == 36) && (user_key.length == 36)) {
-	var action = "user";
-	$.ajax({
-		dataType: "json",
-		url: baseAPIUrl + action,
-		headers: apiHeaders,
-		success: function(response) {
-		  var data = response.data;
-		  setPartyId(data['party']['_id']);
-		  var notifications = response.notifications;
-		  if (notifications && notifications != globalNotifications) processNotifications(notifications);
-		  setContributorTier(data['contributor']['level']);
-		  setHeroName(data['auth']['local']['username']);
-		  if (!data['party']['_id']) {
-			var groupDIVs = document.getElementsByClassName('groupsBox_content')[0].getElementsByTagName("div");
-			for (i=0;i<groupDIVs.length;i++) {
-			  if (groupDIVs[i].getAttribute('linkedid') == 'party') groupDIVs[i].style.display = 'none';
-			}       
-		  }
-		  userIdKeyCorrect = true	
-		}
-	});
-  }
+  
  
   // Leaving the window changes refresh rate
   window.addEventListener('focus', function() {
@@ -837,7 +844,31 @@ lookForApiKeys(0);
 
   // Launch the chat!
   // only create if UserId and API Token are set.
-  if ((user_id.length == 36) && (user_key.length == 36)) createChatWrapper();
+  // Get player's name
+  //only fetch if UserId and API Token are set.
+  var userIdKeyCorrect = false
+  if ((user_id.length == 36) && (user_key.length == 36)) {
+	var action = "user";
+	$.ajax({
+		dataType: "json",
+		url: baseAPIUrl + action,
+		headers: apiHeaders,
+		success: function(response) {
+		  var data = response.data;
+		  setPartyId(data['party']['_id']);
+		  setContributorTier(data['contributor']['level']);
+		  setHeroName(data['auth']['local']['username']);
+		  if (!data['party']['_id']) {
+			var groupDIVs = document.getElementsByClassName('groupsBox_content')[0].getElementsByTagName("div");
+			for (i=0;i<groupDIVs.length;i++) {
+			  if (groupDIVs[i].getAttribute('linkedid') == 'party') groupDIVs[i].style.display = 'none';
+			}       
+		  }
+		  createChatWrapper(); //Only launch group chat once party key is set.
+		  userIdKeyCorrect = true	
+		}
+	});
+  }
  
   //refresh notifications every refreshRateNotification seconds 
   //if no chat windows and if chat is active

@@ -25,13 +25,32 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 + Increased the Refresh Rate as required by staff
 # Version history
 
-### 2.1.4 
-+ Set Party link in title to party not id.
-+ Fix so notifications show on load of groups.
+### 2.2.0 (Not Released)
++ Add the option to start the group list minimised on loading
++ Add option to format the date in 3 other formats
++ Add option to format time in 12 hour format instead of 24 hours format
+
+### 2.1.8 (Not Released)
++ Errors on loading if there is a party notification
++ Handle error in firefox when attritubes not passed fast enough
+
+### 2.1.7 (Not Released)
++ Fix info Bugs on party messages
+
+### 2.1.6 (Not Released)
++ Update API Headers, Fix Notification bug, and fix Shaded message bug
+
+
+### 2.1.5 (Not Released)
++ Fix indentation of display names when avatars are disabled
+
+### 2.1.4 (Not Released)
++ Set Party link in title to party not id
++ Fix so notifications show on load of groups
 
 ### 2.1.3 (Not Released)
 + Better checking if User Id / Api Token is valid 
-+ Update Firefox to fix minor code issues.
++ Update Firefox to fix minor code issues
 
 
 ### 2.1.2 
@@ -40,7 +59,7 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 + Increase notifications requery to 40 seconds * by factor greater than hour.
 
 ### 2.1.1
-+ Maintenance version to disable specific calls due to server issues.
++ Maintenance version to disable specific calls due to server issues
 
 ### 2.1.0 
 + Added link to Habitica profile [#13](https://github.com/HabitRPG/habitica-chat-extension/issues/3)
@@ -49,8 +68,8 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 ### 2.0.0 (not released)
 + Firefox port added to repo.[#34](https://github.com/HabitRPG/habitica-chat-extension/issues/34)
 + Updated Readme files
-+ Disabled chat on Contact Moderator form page. (does not behave correctly here).
-+ Bumped version to 2.0.0 to indicate release.
++ Disabled chat on Contact Moderator form page. (does not behave correctly here)
++ Bumped version to 2.0.0 to indicate release
 
 ### 1.8.9 (not released)
 + Added the ability in mention navigation to scroll through the beginning of chat when cycling through.
@@ -58,16 +77,16 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 + Pointing to wiki url so using fandom.com and correct page without Chrome.(Now is both)
 
 ### 1.8.8 (not released)
-+ Update message navigation wtih friendly message if not mention.
++ Update message navigation wtih friendly message if not mention
 
 ### 1.8.7 (not released)
 + Further attempt to fix scrolling issue on opening chat
 
 ### 1.8.6 (not released)
-+ Fixed Scrolling issue when opening and not scrolling to the end.
++ Fixed Scrolling issue when opening and not scrolling to the end
 
 ### 1.8.5 (not released)
-+ Renabled mention navigation and modified to based on Username.
++ Renabled mention navigation and modified to based on Username
 
 ### 1.8.4 (not released)
 + Fixed account linking bug
@@ -76,8 +95,8 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 + Fixed options page bug
 
 ### 1.8.2 (not released)
-+ Added like icon to glow green when user likes message.
-+ Fixed APIDOC Loading issues. [#36](https://github.com/HabitRPG/habitica-chat-extension/issues/36)
++ Added like icon to glow green when user likes message
++ Fixed APIDOC Loading issues [#36](https://github.com/HabitRPG/habitica-chat-extension/issues/36)
 
 ### 1.8.1 (not released)
 + Added upper limits
@@ -87,21 +106,21 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 + Bumped version as feature should be done previously
 
 ### 1.7.10 (not released)
-+ Added option to change timeout time.
++ Added option to change timeout time
 + Replaced bootbox, not working
 
 ### 1.7.9 (not released)
-+ Added option for confirmation before deleting.
++ Added option for confirmation before deleting
 + Further changes made to .group-item class
 
 ### 1.7.8 (not released)
-+ Fixed issue when viewing shop pages.
++ Fixed issue when viewing shop pages
 
 ### 1.7.7 (not released)
-+ Created two columns to shrink options page length.
++ Created two columns to shrink options page length
 
 ### 1.7.6 (not released)
-+ Added confirmation before deleting.
++ Added confirmation before deleting
 
 ### 1.7.5 (not released)
 + Fixed bugs with notifications and flagging
@@ -109,37 +128,37 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 
 ### 1.7.4 (not released)
 + Further fixes to notifications
-+ Made options separate for read and clear.
++ Made options separate for read and clear
 + Hide Tavern as a guild. [#14](https://github.com/HabitRPG/habitica-chat-extension/issues/14)
 
 ### 1.7.3 (not released)
 + Modification to style of unread messages
-+ Added options to disable showing and clearing of notifications.
++ Added options to disable showing and clearing of notifications
 
 
 ### 1.7.2 (not released)
-+ Fixed to auto refresh notifications and stop them flashing.
++ Fixed to auto refresh notifications and stop them flashing
 + Mark Party Notifications as read
 
 ### 1.7.1 (not released)
 + Show notification for party chat
 
 ### 1.7.0 (not released)
-+ Highlight guild names if notifications.
++ Highlight guild names if notifications
 + Added the ability to clear chat notifications when view guild chat.[#15](https://github.com/HabitRPG/habitica-chat-extension/issues/15)
 + Added link to wiki
 
 ### 1.6.5 (not released)
 + Fixed display bug with quotes in message.[#17](https://github.com/HabitRPG/habitica-chat-extension/issues/17)
 + Further reorder costume elements
-+ Fixed messages to say Habitica not HabitRPG.
++ Fixed messages to say Habitica not HabitRPG
 
 ### 1.6.4 (not released)
-+ Put message back in chat when blocked (ie if swear or fails to transmit).
++ Put message back in chat when blocked (ie if swear or fails to transmit)
 + Fixed gear display
 
 ### 1.6.3 (not released)
-+ More formating with dates. Ensuring all dates displayed using the same formating.
++ More formating with dates. Ensuring all dates displayed using the same formating
 
 ### 1.6.2 (not released)
 + Fixed bugs with dates and in areas of Habitica. 
@@ -161,7 +180,7 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 
 
 ### 1.5.1 (not released)
-+ Fixed date format so it is International friendly.
++ Fixed date format so it is International friendly
 
 ### 1.5.0 (not released)
 + Added Character Limit to box
