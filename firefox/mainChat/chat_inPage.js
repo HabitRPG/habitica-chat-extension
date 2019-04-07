@@ -152,7 +152,8 @@ lookForApiKeys(0);
             $("#groupsBox .groupsBox_content").append("<div linkedId='"+groups[key]['_id']+"' onClick='createChatBox(\"groups_"+groups[key]['_id']+"\")' class='group-item'>"+groups[key]['name'] + "</div>");
           }
         }
-		if (notifications) processNotifications(notifications); //No neeed to test global notifications as this occurs on load
+		    if (notifications) processNotifications(notifications); //No neeed to test global notifications as this occurs on load
+        if (config.hidegroups == "true") document.getElementById("groupsBox").getElementsByClassName("chatBox_minimizer")[0].click()
 
       }
     });
