@@ -27,6 +27,7 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 
 ### 2.1.8 
 + Errors on loading if there is a party notification
++ Handle error in firefox when attritubes not passed fast enough.
 
 ### 2.1.7 (Not Released)
 + Fix info Bugs on party messages
