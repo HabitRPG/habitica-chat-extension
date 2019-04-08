@@ -27,6 +27,7 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 
 ### 2.2.1 
 + Modify link for wiki to pointing to correct page (avoiding double redirect)
++ Excluding translate.habitica
 
 ### 2.2.0 (Not Released)
 + Add the option to start the group list minimised on loading
