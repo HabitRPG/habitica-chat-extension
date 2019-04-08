@@ -86,7 +86,7 @@ function openGitHub() {
 }
 
 function openWiki() {
-	browser.tabs.create({ url: "https://habitica.wikia.com/wiki/Chrome_Chat_Extension" });
+	browser.tabs.create({ url: "https://habitica.fandom.com/wiki/Chat_Extension" });
 }
 
 function reportBug() {

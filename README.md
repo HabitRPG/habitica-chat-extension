@@ -25,6 +25,9 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 + Increased the Refresh Rate as required by staff
 # Version history
 
+### 2.2.1 
++ Modify link for wiki to pointing to correct page (avoiding double redirect)
+
 ### 2.2.0 (Not Released)
 + Add the option to start the group list minimised on loading
 + Add option to format the date in 3 other formats
