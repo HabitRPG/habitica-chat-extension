@@ -8,8 +8,11 @@ function save_options() {
   var disableShowNotifications = document.getElementById('disableShowNotifications').checked;
   var disableReadNotifications = document.getElementById('disableReadNotifications').checked;
   var confirmDelete = document.getElementById('confirmDelete').checked;
+  var hideGroups = document.getElementById('hideGroups').checked;
   var messageCount = parseInt(document.getElementById('messageCount').value);
   var timeoutAfter = parseInt(document.getElementById('timeoutAfter').value);
+  var dateFormat = parseInt(document.getElementById('dateFormat').value);
+  var timeFormat = parseInt(document.getElementById('timeFormat').value);
   if (messageCount < 5) {
     messageCount = 5;
   }
@@ -20,13 +23,16 @@ function save_options() {
     uuid: uuid,
     api: api,
     enableSound: enableSound,
+    dateFormat: dateFormat,
+    timeFormat: timeFormat,
     largeText: largeText,
     messageCount: (messageCount > 200 ? 0 : messageCount),
     timeoutAfter: (timeoutAfter > 240 ? 240 : timeoutAfter),
     disableAvatars: disableAvatars,
     disableShowNotifications: disableShowNotifications,
     disableReadNotifications: disableReadNotifications,
-    confirmDelete: confirmDelete
+    confirmDelete: confirmDelete,
+    hideGroups: hideGroups
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -48,42 +54,48 @@ function restore_options() {
     disableAvatars: false,
     messageCount: 200,
     timeoutAfter: 60,
+    dateFormat: 0,
+    timeFormat: 12,
     disableShowNotifications: false,
     disableReadNotifications: false,
-    confirmDelete: true
+    confirmDelete: true,
+    hideGroups: true
   }, function(items) {
     document.getElementById('uuid').value = items.uuid;
     document.getElementById('api').value = items.api;
     document.getElementById('enableSound').checked = items.enableSound;
+    document.getElementById('dateFormat').value = items.dateFormat;
+    document.getElementById('timeFormat').value = items.timeFormat;
     document.getElementById('largeText').checked = items.largeText;
     document.getElementById('disableAvatars').checked = items.disableAvatars;
     document.getElementById('disableShowNotifications').checked = items.disableShowNotifications;
     document.getElementById('disableReadNotifications').checked = items.disableReadNotifications;
     document.getElementById('confirmDelete').checked = items.confirmDelete;
+    document.getElementById('hideGroups').checked = items.hideGroups;
     document.getElementById('messageCount').value = (items.messageCount ? items.messageCount : 200);
     document.getElementById('timeoutAfter').value = (items.timeoutAfter ? items.timeoutAfter : 60);
   });
 }
 
 function openSettings() {
-  browser.tabs.create({ url: "https://habitica.com/user/settings/api" });
+	browser.tabs.create({ url: "https://habitica.com/user/settings/api" });
 }
 
 function openGitHub() {
-  browser.tabs.create({ url: "https://github.com/HabitRPG/habitica-chat-extension" });
+	browser.tabs.create({ url: "https://github.com/HabitRPG/habitica-chat-extension" });
 }
 
 function openWiki() {
-  browser.tabs.create({ url: "https://habitica.wikia.com/wiki/Chrome_Chat_Extension" });
+	browser.tabs.create({ url: "https://habitica.fandom.com/wiki/Chat_Extension" });
 }
 
 function reportBug() {
-  browser.tabs.create({ url: "https://habitica.com/groups/guild/a29da26b-37de-4a71-b0c6-48e72a900dac" });
+	browser.tabs.create({ url: "https://habitica.com/groups/guild/a29da26b-37de-4a71-b0c6-48e72a900dac" });
 }
 
 function displayManualOptions() {
-  document.getElementById('userForm').style.display = "block";
-  document.getElementById('manualSetupTrigger').style.display = "none";
+	document.getElementById('userForm').style.display = "block";
+	document.getElementById('manualSetupTrigger').style.display = "none";
 }
 
 // Load options
@@ -102,9 +114,12 @@ document.getElementById('enableSound').addEventListener('click', save_options);
 document.getElementById('disableShowNotifications').addEventListener('click', save_options);
 document.getElementById('disableReadNotifications').addEventListener('click', save_options);
 document.getElementById('confirmDelete').addEventListener('click', save_options);
+document.getElementById('hideGroups').addEventListener('click', save_options);
 document.getElementById('uuid').addEventListener('paste', save_options);
 document.getElementById('uuid').addEventListener('keyup', save_options);
 document.getElementById('api').addEventListener('paste', save_options);
 document.getElementById('api').addEventListener('keyup', save_options);
 document.getElementById('messageCount').addEventListener('input', save_options);
 document.getElementById('timeoutAfter').addEventListener('input', save_options);
+document.getElementById('dateFormat').addEventListener('input', save_options);
+document.getElementById('timeFormat').addEventListener('input', save_options);
