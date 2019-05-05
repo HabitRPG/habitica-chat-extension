@@ -1,0 +1,20 @@
+{
+  "name": "habitica-chat-extension",
+  "version": "2.2.1",
+  "private": true,
+  "description": "Habitica Chat Extension",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HabitRPG/habitica-chat-extension.git"
+  },
+  "keywords": [],
+  "author": "HabitRPG",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HabitRPG/habitica-chat-extension/issues"
+  },
+  "homepage": "https://github.com/HabitRPG/habitica-chat-extension#readme"
+}
