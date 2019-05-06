@@ -5,9 +5,11 @@
   "description": "Habitica Chat Extension",
   "scripts": {
     "browserify": "browserify src/js/$SOURCE > $BROWSER/$DEST",
-    "build": "npm run build:chrome",
+    "build": "npm run build:chrome && npm run build:firefox",
+    "build:manifest": "node scripts/build-manifest.js > $BROWSER/manifest.json",
     "build:chrome": "export BROWSER=chrome; npm run build:base && npm run build:js",
-    "build:base": "rm -rf $BROWSER/* && cp -r src/{manifest.json,images,mainChat,optionsPage,resources} $BROWSER/",
+    "build:firefox": "export BROWSER=firefox; npm run build:base && npm run build:js",
+    "build:base": "rm -rf $BROWSER/* && cp -r src/{images,mainChat,optionsPage,resources} $BROWSER/ && npm run build:manifest",
     "build:js": "npm run build:js:options && npm run build:js:chat && npm run build:js:chatInPage",
     "build:js:options": "SOURCE=options.js DEST=optionsPage/options.js npm run browserify",
     "build:js:chat": "SOURCE=chat.js DEST=mainChat/chat.js npm run browserify",

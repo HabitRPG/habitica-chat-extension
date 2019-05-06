@@ -3,32 +3,31 @@
   "name": "Habitica Chat Client",
   "short_name": "Habit Chat",
   "description": "This extension adds a Habitica chat client to habitica.com",
-  "version": "2.2.1",
-  "options_page": "optionsPage/options.html",
   "icons": {
     "16": "images/icon16.png",
     "48": "images/icon48.png",
     "128": "images/icon128.png"
   },
   "browser_action": {
-    "default_icon": "images/icon128.png",
     "default_popup": "optionsPage/options.html",
+    "default_icon": "images/icon128.png",
     "name": "Habitica Chat Extension"
   },
-  "content_scripts": [{
-    "js":      [ "mainChat/chat.js" ],
-    "css":     [ "mainChat/chat.css", "resources/spinner.css" ],
-    "matches": [
-      "*://*.habitica.com/*",
-      "*://*.habitica.com/static/*"
-    ]
-  }],
-  "externally_connectable": {
-    "matches": [
-      "*://*.habitica.com/*",
-      "*://*.habitica.com/static/*"
-    ]
-  },
+  "content_scripts": [
+    {
+      "js": [
+        "mainChat/chat.js"
+      ],
+      "css": [
+        "mainChat/chat.css",
+        "resources/spinner.css"
+      ],
+      "matches": [
+        "*://*.habitica.com/*",
+        "*://*.habitica.com/static/*"
+      ]
+    }
+  ],
   "web_accessible_resources": [
     "mainChat/chat.css",
     "mainChat/chat_inPage.js",
@@ -39,5 +38,13 @@
     "storage",
     "activeTab",
     "https://ajax.googleapis.com/"
-  ]
+  ],
+  "version": "2.2.1",
+  "options_page": "optionsPage/options.html",
+  "externally_connectable": {
+    "matches": [
+      "*://*.habitica.com/*",
+      "*://*.habitica.com/static/*"
+    ]
+  }
 }

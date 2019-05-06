@@ -182,7 +182,7 @@
 	font-weight: bold;
 	margin-bottom: 5px;
 	cursor: pointer;
-	}
+  }
   .chatMessage.no_avatars .msg_user {
     margin-left: 8px!important
   }
@@ -325,7 +325,6 @@
 		}
 
 /* System Messages */
-
 	.chatMessage.systemPoster .msg_user {
 	  visibility: hidden
 	}
@@ -349,6 +348,10 @@
   .mentionsUser {
     background-color: #e9ff32!important
   }
+
+	.mentionedInChat .bubble {
+		box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+	}
 	
 	.chatMention {
 		font-weight: bold;

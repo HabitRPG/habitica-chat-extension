@@ -1,3 +1,46 @@
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+let extension;
+let storage;
+let tabs;
+
+
+if ("firefox" === 'chrome') {
+  extension = chrome.extension;
+  storage = chrome.storage.sync;
+  tabs = chrome.tabs;
+} else if ("firefox" === 'firefox') {
+  extension = browser.extension;
+  storage = browser.storage.local;
+  tabs = browser.tabs;
+}
+
+function getStorage (options, cb) {
+  storage.get(options, cb)
+}
+
+function setStorage (options, cb) {
+  storage.set(options, cb)
+}
+
+function getExtensionURL (url) {
+  return extension.getURL(url);
+}
+
+function createTab(url) {
+  return tabs.create({
+    url
+  });
+}
+
+module.exports = {
+  getStorage,
+  setStorage,
+  getExtensionURL
+};
+
+},{}],2:[function(require,module,exports){
+const browser = require('./lib/browser');
+
 // Saves options to browser.storage
 function save_options() {
   var uuid = document.getElementById('uuid').value;
@@ -19,7 +62,7 @@ function save_options() {
   if (timeoutAfter < 15) {
     timeoutAfter = 15;
   }
-  browser.storage.local.set({
+  browser.setStorage({
     uuid: uuid,
     api: api,
     enableSound: enableSound,
@@ -46,7 +89,7 @@ function save_options() {
 // Restores select box and checkbox state using the preferences
 // stored in browser.storage.
 function restore_options() {
-  browser.storage.local.get({
+  browser.setStorage({
     uuid: '',
     api: '',
     enableSound: true,
@@ -78,19 +121,19 @@ function restore_options() {
 }
 
 function openSettings() {
-	browser.tabs.create({ url: "https://habitica.com/user/settings/api" });
+	browser.createTab("https://habitica.com/user/settings/api");
 }
 
 function openGitHub() {
-	browser.tabs.create({ url: "https://github.com/HabitRPG/habitica-chat-extension" });
+	browser.createTab("https://github.com/HabitRPG/habitica-chat-extension");
 }
 
 function openWiki() {
-	browser.tabs.create({ url: "https://habitica.fandom.com/wiki/Chat_Extension" });
+	browser.createTab("https://habitica.fandom.com/wiki/Chat_Extension");
 }
 
 function reportBug() {
-	browser.tabs.create({ url: "https://habitica.com/groups/guild/a29da26b-37de-4a71-b0c6-48e72a900dac" });
+	browser.createTab("https://habitica.com/groups/guild/a29da26b-37de-4a71-b0c6-48e72a900dac");
 }
 
 function displayManualOptions() {
@@ -123,3 +166,5 @@ document.getElementById('messageCount').addEventListener('input', save_options);
 document.getElementById('timeoutAfter').addEventListener('input', save_options);
 document.getElementById('dateFormat').addEventListener('input', save_options);
 document.getElementById('timeFormat').addEventListener('input', save_options);
+
+},{"./lib/browser":1}]},{},[2]);
