@@ -12,18 +12,47 @@ Hi, and thanks for contributing to this humble project!
 
 This is an official Habitica (HabitRPG) Chrome and Firefox Extension that it is maintained only by volunteer contributors to Habitica. This code is not maintained by staff.
 
-Please note that the Chrome and Firefox port are almost identical. Coding requirements for porting chrome extensions to firefox can be found in [this article](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Porting_a_Google_Chrome_extension).  
+# Development
 
-To allow for ease of deployment the code is kept in separate folders, chrome, and firefox. If changing the code, 
-+ please ensure you replicate the code changes in the other port and test both. 
-+ It is important when completing changes to firefox to zip the files (not the folder but the files themselves) as described in this [article](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Package_your_extension). 
+Since the Chrome and Firefox extensions are almost identical, we use [npm](https://www.npmjs.com) and [browserify](https://www.npmjs.com/package/browserify) to maintain a single source code to build both extensions.  To get started, install Node and npm on your computer and run:
+
+```bash
+npm install
+```
+
+The code resides in the `src` directory. Once the code is built for Chrome and Firefox, they will appear in the `chrome` and `firefox` folders. You can build the extensions with:
+
+```bash
+npm run build
+```
+
+If you're doing development work, and want to build new versions of the extension as you make changes, you can run the following:
+
+```bash
+npm run dev
+```
+
+# Releasing
+
+When a staff member is ready to release the extension, run the following command (use minor if a new feature was added or patch if only bugfixes were added):
+
+```
+npm version minor|patch
+```
+
+This will update the package.json version and tag the release in git. It will also build a new version of the extension with the new version. 
+
+It is important when completing changes to firefox to zip the files (not the folder but the files themselves) as described in this [article](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Package_your_extension). 
+
+# Helpful Notes
++ Coding requirements for porting chrome extensions to firefox can be found in [this article](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Porting_a_Google_Chrome_extension).  
+
 + To make it easier on staff please ensure you update this ReadMe file with the latest version changes. This will be used for the release notes.
-+ Update manifest.json in both chrome and firefox with the latest version number.
 
-
-
-+ Increased the Refresh Rate as required by staff
 # Version history
+
+### unreleased patch
+* Use unminifed version of jQuery and habitica-markdown (closes #40)
 
 ### 2.2.1 
 + Modify link for wiki to pointing to correct page (avoiding double redirect)
@@ -49,6 +78,7 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 + Fix indentation of display names when avatars are disabled
 
 ### 2.1.4 (Not Released)
++ Increased the Refresh Rate as required by staff
 + Set Party link in title to party not id
 + Fix so notifications show on load of groups
 

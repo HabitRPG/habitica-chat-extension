@@ -14,7 +14,8 @@
     "build:js:options": "SOURCE=options.js DEST=optionsPage/options.js npm run browserify",
     "build:js:chat": "SOURCE=chat.js DEST=mainChat/chat.js npm run browserify",
     "build:js:chatInPage": "SOURCE=chat_inPage.js DEST=mainChat/chat_inPage.js npm run browserify",
-    "dev": "watch 'npm run build' src/"
+    "dev": "watch 'npm run build' src/",
+    "postversion": "npm run build"
   },
   "repository": {
     "type": "git",
