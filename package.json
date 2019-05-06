@@ -4,7 +4,14 @@
   "private": true,
   "description": "Habitica Chat Extension",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "browserify": "browserify src/js/$SOURCE > $BROWSER/$DEST",
+    "build": "npm run build:chrome",
+    "build:chrome": "export BROWSER=chrome; npm run build:base && npm run build:js",
+    "build:base": "rm -rf $BROWSER/* && cp -r src/{manifest.json,images,mainChat,optionsPage,resources} $BROWSER/",
+    "build:js": "npm run build:js:options && npm run build:js:chat && npm run build:js:chatInPage",
+    "build:js:options": "SOURCE=options.js DEST=optionsPage/options.js npm run browserify",
+    "build:js:chat": "SOURCE=chat.js DEST=mainChat/chat.js npm run browserify",
+    "build:js:chatInPage": "SOURCE=chat_inPage.js DEST=mainChat/chat_inPage.js npm run browserify"
   },
   "repository": {
     "type": "git",
@@ -16,5 +23,15 @@
   "bugs": {
     "url": "https://github.com/HabitRPG/habitica-chat-extension/issues"
   },
-  "homepage": "https://github.com/HabitRPG/habitica-chat-extension#readme"
+  "homepage": "https://github.com/HabitRPG/habitica-chat-extension#readme",
+  "devDependencies": {
+    "browserify": "^16.2.3",
+    "envify": "^4.1.0",
+    "watchify": "^3.11.1"
+  },
+  "browserify": {
+    "transform": [
+      "envify"
+    ]
+  }
 }
