@@ -35,7 +35,8 @@ function createTab(url) {
 module.exports = {
   getStorage,
   setStorage,
-  getExtensionURL
+  getExtensionURL,
+  createTab
 };
 
 },{}],2:[function(require,module,exports){
