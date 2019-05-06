@@ -31,8 +31,7 @@
   "web_accessible_resources": [
     "mainChat/chat.css",
     "mainChat/chat_inPage.js",
-    "resources/habitica-markdown.min.js",
-    "resources/miscFunctions.js"
+    "resources/habitica-markdown.min.js"
   ],
   "permissions": [
     "storage",
