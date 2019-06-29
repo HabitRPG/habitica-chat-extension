@@ -515,28 +515,28 @@ lookForApiKeys(0);
         return '' +
         '<a href="/profile/' + uuid + '" target="_blank"><div class="herobox">' +
           '<div class="character-sprites">' +
-            '<span class="seafoam_star" data-v-186433de>' +
+            '<span class="seafoam_star" data-v-114900ec>' +
           '</div>' +
         '</div></a>';
       } else if (avatarData['stats']['buffs']['shinySeed']) {
         return '' +
         '<a href="/profile/' + uuid + '" target="_blank"><div class="herobox">' +
           '<div class="character-sprites">' +
-            '<span class="avatar_floral_' + avatarData['stats']['class'] + '" data-v-186433de>' +
+            '<span class="avatar_floral_' + avatarData['stats']['class'] + '" data-v-114900ec>' +
           '</div>' +
         '</div></a>';
       } else if (avatarData['stats']['buffs']['snowball']) {
         return '' +
         '<a href="/profile/' + uuid + '" target="_blank"><div class="herobox">' +
           '<div class="character-sprites">' +
-            '<span class="snowman" data-v-186433de>' +
+            '<span class="snowman" data-v-114900ec>' +
           '</div>' +
         '</div></a>';
       } else if (avatarData['stats']['buffs']['spookySparkles']) {
         return '' +
         '<a href="/profile/' + uuid + '" target="_blank"><div class="herobox">' +
           '<div class="character-sprites">' +
-            '<span class="ghost" data-v-186433de>' +
+            '<span class="ghost" data-v-114900ec>' +
           '</div>' +
         '</div></a>';
       }
@@ -548,24 +548,24 @@ lookForApiKeys(0);
     return '' +
       '<a href="/profile/' + uuid + '" target="_blank"><div class="herobox">' +
         '<div class="character-sprites">' +
-          '<span class="chair_' + avatarData["preferences"].chair + '" data-v-186433de></span>' +
-          '<span class="' + gear.back + '" data-v-186433de></span>' +
-          '<span class="' + sleepClass + '" data-v-186433de></span>' +
-          '<span class="' + avatarData["preferences"].size + '_shirt_' + avatarData["preferences"].shirt + '" data-v-186433de></span>' +
-          '<span class="' + avatarData["preferences"].size + '_' + gear.armor + '" data-v-186433de></span>' +
-          '<span class="' + gear.back + '_collar' + '" data-v-186433de></span>' +
-          '<span class="' + gear.body + '" data-v-186433de></span>' +
-          '<span class="head_' + avatarData["preferences"].head +'" data-v-186433de></span>' +
-          '<span class="hair_base_' + avatarData["preferences"].hair.base + hairColor + '" data-v-186433de></span>' +
-          '<span class="hair_bangs_' + avatarData["preferences"].hair.bangs + hairColor + '" data-v-186433de></span>' +
-          '<span class="hair_mustache_' + avatarData["preferences"].hair.mustache + hairColor + '" data-v-186433de></span>' +
-          '<span class="hair_beard_' + avatarData["preferences"].hair.beard + hairColor + '" data-v-186433de></span>' +
-          '<span class="' + gear.eyewear + '" data-v-186433de></span>' +
-          '<span class="' + gear.head + '" data-v-186433de></span>' +
-          '<span class="' + gear.headAccessory + '" data-v-186433de></span>' +
-          '<span class="hair_flower_' + avatarData['preferences']['hair']['flower'] + '" data-v-186433de></span>' +
-          '<span class="' + gear.shield + '" data-v-186433de></span>' +
-          '<span class="' + gear.weapon + '" data-v-186433de></span>' +
+          '<span class="chair_' + avatarData["preferences"].chair + '" data-v-114900ec></span>' +
+          '<span class="' + gear.back + '" data-v-114900ec></span>' +
+          '<span class="' + sleepClass + '" data-v-114900ec></span>' +
+          '<span class="' + avatarData["preferences"].size + '_shirt_' + avatarData["preferences"].shirt + '" data-v-114900ec></span>' +
+          '<span class="' + avatarData["preferences"].size + '_' + gear.armor + '" data-v-114900ec></span>' +
+          '<span class="' + gear.back + '_collar' + '" data-v-114900ec></span>' +
+          '<span class="' + gear.body + '" data-v-114900ec></span>' +
+          '<span class="head_' + avatarData["preferences"].head +'" data-v-114900ec></span>' +
+          '<span class="hair_base_' + avatarData["preferences"].hair.base + hairColor + '" data-v-114900ec></span>' +
+          '<span class="hair_bangs_' + avatarData["preferences"].hair.bangs + hairColor + '" data-v-114900ec></span>' +
+          '<span class="hair_mustache_' + avatarData["preferences"].hair.mustache + hairColor + '" data-v-114900ec></span>' +
+          '<span class="hair_beard_' + avatarData["preferences"].hair.beard + hairColor + '" data-v-114900ec></span>' +
+          '<span class="' + gear.eyewear + '" data-v-114900ec></span>' +
+          '<span class="' + gear.head + '" data-v-114900ec></span>' +
+          '<span class="' + gear.headAccessory + '" data-v-114900ec></span>' +
+          '<span class="hair_flower_' + avatarData['preferences']['hair']['flower'] + '" data-v-114900ec></span>' +
+          '<span class="' + gear.shield + '" data-v-114900ec></span>' +
+          '<span class="' + gear.weapon + '" data-v-114900ec></span>' +
         '</div>' +
       '</div></a>';
   }
