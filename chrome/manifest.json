@@ -3,7 +3,7 @@
   "name": "Habitica Chat Client",
   "short_name": "Habit Chat",
   "description": "This extension adds a Habitica chat client to habitica.com",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "options_page": "optionsPage/options.html",
   "icons": {
     "16": "images/icon16.png",
@@ -33,7 +33,8 @@
     "mainChat/chat.css",
     "mainChat/chat_inPage.js",
     "resources/habitica-markdown.min.js",
-    "resources/miscFunctions.js"
+    "resources/miscFunctions.js",
+    "resources/jquery.js"
   ],
   "permissions": [
     "storage",
