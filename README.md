@@ -25,6 +25,13 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 + Increased the Refresh Rate as required by staff
 # Version history
 
+### 2.2.3 
++ Fix avatar not loading bug 
++ unminify jQuery (requirement from Firefox)
+
+### 2.2.2 (Missed) 
++ Attempt to use Browserify
+
 ### 2.2.1 
 + Modify link for wiki to pointing to correct page (avoiding double redirect)
 + Excluding translate.habitica
