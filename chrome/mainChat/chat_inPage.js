@@ -140,7 +140,7 @@ lookForApiKeys(0);
 
         $("#groupsBox .groupsBox_content").append("<div class='groupHR'>Regular Chatrooms</div>");
         $("#groupsBox .groupsBox_content").append("<div linkedId='habitrpg' onClick='createChatBox(\"groups_habitrpg\")' class='group-item'>Tavern</div>");
-        if (partyId) $("#groupsBox .groupsBox_content").append("<div linkedId='party' onClick='createChatBox(\"groups_party\")' class='group-item'>My Party</div>");
+        if (partyId != "") $("#groupsBox .groupsBox_content").append("<div linkedId='party' onClick='createChatBox(\"groups_party\")' class='group-item'>My Party</div>");
         $("#groupsBox .groupsBox_content").append("<div class='groupHR'>Guilds</div>");
         for (var key in groups) {
           if (groups.hasOwnProperty(key)) {
@@ -204,7 +204,6 @@ lookForApiKeys(0);
           $("#"+chatBoxId+" .chatBox_input textarea").keyup(function(e){
             if (!e) e = window.event;
             var keyCode = e.keyCode || e.which;
-            if (keyCode == '13' && !e.shiftKey){ sendChatMessage($(this).parent().parent().attr('id')) }
           });
 
           // Mention navigation
