@@ -27,6 +27,8 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 
 ### 2.2.4
 + Fix like-counting bug
++ Fix no-party bug
++ Add no-guild message
 
 ### 2.2.3 
 + Fix avatar not loading bug 

@@ -140,13 +140,14 @@ lookForApiKeys(0);
 
         $("#groupsBox .groupsBox_content").append("<div class='groupHR'>Regular Chatrooms</div>");
         $("#groupsBox .groupsBox_content").append("<div linkedId='habitrpg' onClick='createChatBox(\"groups_habitrpg\")' class='group-item'>Tavern</div>");
-        $("#groupsBox .groupsBox_content").append("<div linkedId='party' onClick='createChatBox(\"groups_party\")' class='group-item'>My Party</div>");
+        if (partyId) $("#groupsBox .groupsBox_content").append("<div linkedId='party' onClick='createChatBox(\"groups_party\")' class='group-item'>My Party</div>");
         $("#groupsBox .groupsBox_content").append("<div class='groupHR'>Guilds</div>");
         for (var key in groups) {
           if (groups.hasOwnProperty(key)) {
             $("#groupsBox .groupsBox_content").append("<div linkedId='"+groups[key]['_id']+"' onClick='createChatBox(\"groups_"+groups[key]['_id']+"\")' class='group-item'>"+groups[key]['name'] + "</div>");
           }
         }
+        if (groups.length == 0) $("#groupsBox .groupsBox_content").append("<p style='text-align:center'>You're not in any guilds.</p>");
 		    if (notifications) processNotifications(notifications); //No neeed to test global notifications as this occurs on load
         if (config.hidegroups == "true") document.getElementById("groupsBox").getElementsByClassName("chatBox_minimizer")[0].click()
       }
@@ -863,16 +864,10 @@ lookForApiKeys(0);
 		url: baseAPIUrl + action,
 		headers: apiHeaders,
 		success: function(response) {
-		  var data = response.data;
-		  setPartyId(data['party']['_id']);
+      var data = response.data;
+		  setPartyId(data['party']['_id'] ? data['party']['_id'] : "");
 		  setContributorTier(data['contributor']['level']);
 		  setHeroName(data['auth']['local']['username']);
-		  if (!data['party']['_id']) {
-			var groupDIVs = document.getElementsByClassName('groupsBox_content')[0].getElementsByTagName("div");
-			for (i=0;i<groupDIVs.length;i++) {
-			  if (groupDIVs[i].getAttribute('linkedid') == 'party') groupDIVs[i].style.display = 'none';
-			}       
-		  }
 		  createChatWrapper(); //Only launch group chat once party key is set.
 		  userIdKeyCorrect = true	
 		}
