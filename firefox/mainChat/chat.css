@@ -489,3 +489,8 @@
   background-color: rgb(29, 88, 189);
   color: #fff;
 }
+
+/*Markdown Amendments*/
+.markdown-img {
+  max-width:100%;
+}
