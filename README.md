@@ -25,6 +25,9 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 + Increased the Refresh Rate as required by staff
 # Version history
 
+### 2.2.4
++ Fix like-counting bug
+
 ### 2.2.3 
 + Fix avatar not loading bug 
 + unminify jQuery (requirement from Firefox)
