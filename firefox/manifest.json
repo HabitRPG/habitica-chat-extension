@@ -32,5 +32,5 @@
     "resources/habitica-markdown.js",
     "resources/miscFunctions.js"
   ],
-  "permissions": ["storage", "activeTab", "https://ajax.googleapis.com/"]
+  "permissions": ["storage", "activeTab"]
 }

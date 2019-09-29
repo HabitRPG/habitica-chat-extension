@@ -32,5 +32,5 @@
     "resources/miscFunctions.js",
     "resources/jquery.js"
   ],
-  "permissions": ["storage", "activeTab", "https://ajax.googleapis.com/"]
+  "permissions": ["storage", "activeTab"]
 }
