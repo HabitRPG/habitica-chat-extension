@@ -71,6 +71,14 @@ if (
   };
   (document.head || document.documentElement).appendChild(s);
 
+  // Load Purify.js to sanitize inputs
+  var s = document.createElement("script");
+  s.src = browser.extension.getURL("resources/purify.js");
+  s.onload = function() {
+    this.parentNode.removeChild(this);
+  };
+  (document.head || document.documentElement).appendChild(s);
+
   // Call main chat script
   //pause 2 seconds to allow everything to catch up
   setTimeout(function() {
