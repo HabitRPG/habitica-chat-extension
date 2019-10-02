@@ -26,9 +26,9 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 # Version history
 
 ### 2.2.5
-+ Unminify habitica-markdown
-+ Remove ajax permission
-+ Sanitize html strings
++ Unminify habitica-markdown (requirement from Firefox)
++ Remove ajax permission (requirement from Firefox)
++ Sanitize html strings (requirement from Firefox)
 
 ### 2.2.4
 + Fix like-counting bug
