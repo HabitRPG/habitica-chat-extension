@@ -30,7 +30,9 @@
     "mainChat/chat.css",
     "mainChat/chat_inPage.js",
     "resources/habitica-markdown.js",
-    "resources/miscFunctions.js"
+    "resources/miscFunctions.js",
+    "resources/jquery.js",
+    "resources/purify.js"
   ],
   "permissions": ["storage", "activeTab"]
 }
