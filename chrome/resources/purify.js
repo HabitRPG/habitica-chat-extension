@@ -1,3 +1,15 @@
+// DOMPurify
+// Copyright 2015 Mario Heiderich
+// https://github.com/cure53/DOMPurify/
+
+// DOMPurify is free software; you can redistribute it and/or modify it under the
+// terms of either:
+
+// a) the Apache License Version 2.0, or
+// b) the Mozilla Public License Version 2.0
+//
+// More information at https://github.com/cure53/DOMPurify/blob/master/LICENSE
+
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
