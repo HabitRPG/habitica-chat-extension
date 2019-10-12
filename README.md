@@ -25,6 +25,10 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 + Increased the Refresh Rate as required by staff
 # Version history
 
+### 2.2.5
++ Fix avatars
++ Add ctrl+enter sending of messages
+
 ### 2.2.4
 + Fix like-counting bug
 + Fix no-party bug
