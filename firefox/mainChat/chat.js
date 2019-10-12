@@ -36,7 +36,7 @@ if ((document.URL.indexOf("https://habitica.com/apidoc/") == -1) && (document.UR
 
   // Call markdown to html script
   var s = document.createElement('script');
-  s.src = browser.extension.getURL('resources/habitica-markdown.min.js');
+  s.src = browser.extension.getURL('resources/habitica-markdown.js');
   s.onload = function() {
       this.parentNode.removeChild(this);
   };

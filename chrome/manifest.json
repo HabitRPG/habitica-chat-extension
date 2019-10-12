@@ -32,13 +32,12 @@
   "web_accessible_resources": [
     "mainChat/chat.css",
     "mainChat/chat_inPage.js",
-    "resources/habitica-markdown.min.js",
+    "resources/habitica-markdown.js",
     "resources/miscFunctions.js",
     "resources/jquery.js"
   ],
   "permissions": [
     "storage",
-    "activeTab",
-    "https://ajax.googleapis.com/"
+    "activeTab"
   ]
 }

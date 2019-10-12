@@ -202,6 +202,11 @@ lookForApiKeys(0);
           $("#"+chatBoxId+" div .chatBox_closer").click(function() {
             removeChatBox(chatBoxId);
           });
+          $("#"+chatBoxId+" .chatBox_input textarea").keyup(function(e){
+            if (!e) e = window.event;
+            var keyCode = e.keyCode || e.which;
+            if (keyCode == '13' && (event.ctrlKey)){ sendChatMessage($(this).parent().parent().attr('id')) }
+          });
 
           // Mention navigation
           $("#"+chatBoxId+" .chatBoxMentionNav .mentionNav_up ").click(function() {
