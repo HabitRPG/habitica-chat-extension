@@ -3,7 +3,7 @@
   "name": "Habitica Chat Client",
   "short_name": "Habit Chat",
   "description": "This extension adds a Habitica chat client to habitica.com",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "options_page": "optionsPage/options.html",
   "icons": {
     "16": "images/icon16.png",
@@ -15,30 +15,23 @@
     "default_popup": "optionsPage/options.html",
     "name": "Habitica Chat Extension"
   },
-  "content_scripts": [{
-    "js":      [ "mainChat/chat.js" ],
-    "css":     [ "mainChat/chat.css", "resources/spinner.css" ],
-    "matches": [
-      "*://*.habitica.com/*",
-      "*://*.habitica.com/static/*"
-    ]
-  }],
+  "content_scripts": [
+    {
+      "js": ["mainChat/chat.js"],
+      "css": ["mainChat/chat.css", "resources/spinner.css"],
+      "matches": ["*://*.habitica.com/*", "*://*.habitica.com/static/*"]
+    }
+  ],
   "externally_connectable": {
-    "matches": [
-      "*://*.habitica.com/*",
-      "*://*.habitica.com/static/*"
-    ]
+    "matches": ["*://*.habitica.com/*", "*://*.habitica.com/static/*"]
   },
   "web_accessible_resources": [
     "mainChat/chat.css",
     "mainChat/chat_inPage.js",
-    "resources/habitica-markdown.min.js",
+    "resources/habitica-markdown.js",
     "resources/miscFunctions.js",
-    "resources/jquery.js"
+    "resources/jquery.js",
+    "resources/purify.js"
   ],
-  "permissions": [
-    "storage",
-    "activeTab",
-    "https://ajax.googleapis.com/"
-  ]
+  "permissions": ["storage", "activeTab"]
 }

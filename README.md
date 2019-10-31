@@ -16,7 +16,7 @@ Please note that the Chrome and Firefox port are almost identical. Coding requir
 
 To allow for ease of deployment the code is kept in separate folders, chrome, and firefox. If changing the code, 
 + please ensure you replicate the code changes in the other port and test both. 
-+ It is important when completing changes to firefox to zip the files (not the folder but the files themselves) as described in this [article](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Package_your_extension). 
++ It is important when completing changes to firefox to zip the files (not the folder but the files themselves) as described in this [article](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Package_your_extension_). 
 + To make it easier on staff please ensure you update this ReadMe file with the latest version changes. This will be used for the release notes.
 + Update manifest.json in both chrome and firefox with the latest version number.
 
@@ -24,6 +24,11 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 
 + Increased the Refresh Rate as required by staff
 # Version history
+
+### 2.2.5
++ Unminify habitica-markdown (requirement from Firefox)
++ Remove ajax permission (requirement from Firefox)
++ Sanitize html strings (requirement from Firefox)
 
 ### 2.2.4
 + Fix like-counting bug
