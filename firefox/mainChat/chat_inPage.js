@@ -342,8 +342,9 @@ lookForApiKeys(0);
           }
           var avatarData = chatData[key]['userStyles'];
           var date = new Date(chatData[key]['timestamp']);
-          if (config.timeformat != '24') var timePeriod = (date.getHours() > 12 ? 'p.m.' : 'a.m.');
-          var hours = (config.timeformat == "24" ? date.getHours() : (date.getHours() > 12 ? date.getHours() - 12 : date.getHours()));
+          if (config.timeformat != '24') var timePeriod = (date.getHours() >= 12 ? 'p.m.' : 'a.m.');
+          var hours = (config.timeformat == "24" ? date.getHours() : (date.getHours() % 12));
+          if (config.timeformat != '24') hours = hours ? hours : 12; // hour '0' is '12' for 12 hour clock
           var minutes = "0" + date.getMinutes();
           var day = date.getDate();
           var month = date.getMonth()+1;
