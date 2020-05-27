@@ -7,7 +7,7 @@ if (
   var config = document.createElement("config");
   config.setAttribute("id", "habitRPGChatConfig");
   config.setAttribute("style", "display: none;");
-  chrome.storage.local.get(
+  chrome.storage.sync.get(
     {
       uuid: "",
       api: "",
@@ -21,7 +21,8 @@ if (
       disableShowNotifications: false,
       disableReadNotifications: false,
       confirmDelete: true,
-      hideGroups: true
+      hideGroups: true,
+      hideSystem: false
     },
     function(items) {
       config.setAttribute("uuid", items.uuid);
@@ -43,6 +44,7 @@ if (
       config.setAttribute("timeFormat", items.timeFormat);
       config.setAttribute("confirmDelete", items.confirmDelete);
       config.setAttribute("hideGroups", items.hideGroups);
+      config.setAttribute("hideSystem", items.hideSystem);
     }
   );
   (document.head || document.documentElement).appendChild(config);
@@ -107,7 +109,7 @@ if (
       return;
     }
 
-    chrome.storage.local.set(
+    chrome.storage.sync.set(
       {
         uuid: message.uuid,
         api: message.apik

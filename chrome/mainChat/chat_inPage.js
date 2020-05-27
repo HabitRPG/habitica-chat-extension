@@ -336,6 +336,9 @@ lookForApiKeys(0);
     for (var key in chatData) {
       if (chatData.hasOwnProperty(key) && chatData[key]['text'] !== null ) {
         if (typeof chatData[key]['user'] !== 'undefined' || chatData[key]['uuid'] == "system") {
+          if (config.hidesystem == "true" && chatData[key]['uuid'] == "system") {
+            continue;
+          }
           if(!lastMessageIdIsSet) {
             lastMessageId = chatData[key]['id'];
             lastMessageIdIsSet = true;
