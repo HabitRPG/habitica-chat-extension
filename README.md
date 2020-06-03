@@ -26,6 +26,7 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 # Version history
 
 ### 2.2.6
++ Modify Sanitization to not remove required functions
 + When using a 12-hour time format, show noon as "noon" and midnight as "12:01 am"
 
 ### 2.2.5
