@@ -25,6 +25,9 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 + Increased the Refresh Rate as required by staff
 # Version history
 
+### 2.2.6
++ Modify Sanitization to not remove required functions
+
 ### 2.2.5
 + Unminify habitica-markdown (requirement from Firefox)
 + Remove ajax permission (requirement from Firefox)
