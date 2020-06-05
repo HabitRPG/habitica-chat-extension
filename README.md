@@ -27,6 +27,7 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 
 ### 2.2.6
 + Modify Sanitization to not remove required functions
++ Added the option to hide system messages
 
 ### 2.2.5
 + Unminify habitica-markdown (requirement from Firefox)

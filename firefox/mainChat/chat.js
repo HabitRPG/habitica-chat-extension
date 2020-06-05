@@ -21,7 +21,8 @@ if (
       disableShowNotifications: false,
       disableReadNotifications: false,
       confirmDelete: true,
-      hideGroups: true
+      hideGroups: true,
+      hideSystem: false
     },
     function(items) {
       config.setAttribute("uuid", items.uuid);
@@ -43,6 +44,7 @@ if (
       config.setAttribute("timeFormat", items.timeFormat);
       config.setAttribute("confirmDelete", items.confirmDelete);
       config.setAttribute("hideGroups", items.hideGroups);
+      config.setAttribute("hideSystem", items.hideSystem);
     }
   );
   (document.head || document.documentElement).appendChild(config);

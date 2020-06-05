@@ -9,6 +9,7 @@ function save_options() {
   var disableReadNotifications = document.getElementById('disableReadNotifications').checked;
   var confirmDelete = document.getElementById('confirmDelete').checked;
   var hideGroups = document.getElementById('hideGroups').checked;
+  var hideSystem = document.getElementById('hideSystem').checked;
   var messageCount = parseInt(document.getElementById('messageCount').value);
   var timeoutAfter = parseInt(document.getElementById('timeoutAfter').value);
   var dateFormat = parseInt(document.getElementById('dateFormat').value);
@@ -32,7 +33,8 @@ function save_options() {
     disableShowNotifications: disableShowNotifications,
     disableReadNotifications: disableReadNotifications,
     confirmDelete: confirmDelete,
-    hideGroups: hideGroups
+    hideGroups: hideGroups,
+    hideSystem: hideSystem
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -59,7 +61,8 @@ function restore_options() {
     disableShowNotifications: false,
     disableReadNotifications: false,
     confirmDelete: true,
-    hideGroups: true
+    hideGroups: true,
+    hideSystem: false
   }, function(items) {
     document.getElementById('uuid').value = items.uuid;
     document.getElementById('api').value = items.api;
@@ -72,6 +75,7 @@ function restore_options() {
     document.getElementById('disableReadNotifications').checked = items.disableReadNotifications;
     document.getElementById('confirmDelete').checked = items.confirmDelete;
     document.getElementById('hideGroups').checked = items.hideGroups;
+    document.getElementById('hideSystem').checked = items.hideSystem;
     document.getElementById('messageCount').value = (items.messageCount ? items.messageCount : 200);
     document.getElementById('timeoutAfter').value = (items.timeoutAfter ? items.timeoutAfter : 60);
   });
@@ -115,6 +119,7 @@ document.getElementById('disableShowNotifications').addEventListener('click', sa
 document.getElementById('disableReadNotifications').addEventListener('click', save_options);
 document.getElementById('confirmDelete').addEventListener('click', save_options);
 document.getElementById('hideGroups').addEventListener('click', save_options);
+document.getElementById('hideSystem').addEventListener('click', save_options);
 document.getElementById('uuid').addEventListener('paste', save_options);
 document.getElementById('uuid').addEventListener('keyup', save_options);
 document.getElementById('api').addEventListener('paste', save_options);
