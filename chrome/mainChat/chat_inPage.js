@@ -345,9 +345,22 @@ lookForApiKeys(0);
           }
           var avatarData = chatData[key]['userStyles'];
           var date = new Date(chatData[key]['timestamp']);
-          if (config.timeformat != '24') var timePeriod = (date.getHours() > 12 ? 'p.m.' : 'a.m.');
-          var hours = (config.timeformat == "24" ? date.getHours() : (date.getHours() > 12 ? date.getHours() - 12 : date.getHours()));
+          if (config.timeformat != '24') var timePeriod = (date.getHours() >= 12 ? 'p.m.' : 'a.m.');
+          var hours = date.getHours();
           var minutes = "0" + date.getMinutes();
+          if (config.timeformat != "24") {
+            if (hours == 12 && minutes == 0) {
+              hours = "noon";
+              minutes = "";
+              timePeriod = "";
+            } else if (hours == 0 && minutes == 0) { // Say it's 12:01 AM at midnight to avoid confusion
+              hours = "12";
+              minutes = "01";
+            } else {
+              hours = hours % 12;
+              hours = hours ? hours : 12; // hour '0' is '12' for 12 hour clock
+            }
+          }
           var day = date.getDate();
           var month = date.getMonth()+1;
           var year = date.getFullYear();
