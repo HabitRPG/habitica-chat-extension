@@ -497,3 +497,8 @@
 .markdown-img {
   max-width:100%;
 }
+
+#chatWrapper .bubble ul, #chatWrapper .bubble ol {
+  margin-left: 0;
+  padding-left: 20px;
+}
