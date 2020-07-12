@@ -25,6 +25,13 @@ To allow for ease of deployment the code is kept in separate folders, chrome, an
 + Increased the Refresh Rate as required by staff
 # Version history
 
+### 2.2.8
++ Fix avatars not displaying bug
++ Fix click username to replay
++ Fix bug when copied messages included mentions as markdown urls
++ Add `Ctrl + Enter` short-cut to send message
++ Shrink padding for lists on chat messages
+
 ### 2.2.6
 + Modify Sanitization to not remove required functions
 + Added the option to hide system messages
