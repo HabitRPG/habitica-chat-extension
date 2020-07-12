@@ -19,11 +19,12 @@
     {
       "js": ["mainChat/chat.js"],
       "css": ["mainChat/chat.css", "resources/spinner.css"],
-      "matches": ["*://*.habitica.com/*", "*://*.habitica.com/static/*"]
+      "matches": ["*://*.habitica.com/*"],
+      "exclude_matches": ["*://*.habitica.com/static/*"]
     }
   ],
   "externally_connectable": {
-    "matches": ["*://*.habitica.com/*", "*://*.habitica.com/static/*"]
+    "matches": ["*://*.habitica.com/*"]
   },
   "web_accessible_resources": [
     "mainChat/chat.css",

@@ -23,7 +23,8 @@
     {
       "js": ["mainChat/chat.js"],
       "css": ["mainChat/chat.css", "resources/spinner.css"],
-      "matches": ["*://*.habitica.com/*", "*://*.habitica.com/static/*"]
+      "matches": ["*://*.habitica.com/*"],
+      "exclude_matches": ["*://*.habitica.com/static/*"]
     }
   ],
   "web_accessible_resources": [
