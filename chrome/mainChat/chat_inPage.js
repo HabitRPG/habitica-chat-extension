@@ -204,6 +204,13 @@ lookForApiKeys(0);
             removeChatBox(chatBoxId);
           });
 
+          // Add event listener for 'Ctrl + Enter' shortcut
+          $("#"+chatBoxId+" .chatBox_input textarea").keyup(function(e){
+            if (!e) e = window.event;
+            var keyCode = e.keyCode || e.which;
+            if (keyCode == '13' && e.ctrlKey){ sendChatMessage($(this).parent().parent().attr('id')) }
+          });
+
           // Mention navigation
           $("#"+chatBoxId+" .chatBoxMentionNav .mentionNav_up ").click(function() {
             var totalMentions = parseInt($("#"+chatBoxId+" .chatBox_content div").attr('totalMentions'));
