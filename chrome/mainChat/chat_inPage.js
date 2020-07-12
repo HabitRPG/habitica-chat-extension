@@ -70,11 +70,20 @@ function copyMessageText (messageID) {
   document.body.appendChild(dummy);
   var messageElement = document.getElementById(messageID);
   var chatMarkdown = messageElement.getAttribute('data-markdown');
-  dummy.innerHTML = chatMarkdown;
+  dummy.innerHTML = removeMentions(chatMarkdown);
   dummy.select();
   document.execCommand('copy');
   document.body.removeChild(dummy);
   alert('Message contents copied to clipboard.');
+}
+
+function removeMentions (text) {
+  // Match mentions
+  // [@user](url)
+  var regex = /\[(@[^\]]+)\]\([^\)]+\)/g;
+
+  // Replace matches with first capture group
+  return text.replace(regex, "$1");
 }
 
 function lookForApiKeys (retryCount) {
