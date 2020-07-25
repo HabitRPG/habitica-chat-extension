@@ -1,4 +1,4 @@
-// Saves options to chrome.storage
+// Saves options to storage
 function save_options() {
   var uuid = document.getElementById('uuid').value;
   var api = document.getElementById('api').value;
@@ -20,7 +20,7 @@ function save_options() {
   if (timeoutAfter < 15) {
     timeoutAfter = 15;
   }
-  chrome.storage.sync.set({
+  chrome.storage.local.set({
     uuid: uuid,
     api: api,
     enableSound: enableSound,
@@ -46,9 +46,9 @@ function save_options() {
 }
 
 // Restores select box and checkbox state using the preferences
-// stored in chrome.storage.
+// stored in storage.
 function restore_options() {
-  chrome.storage.sync.get({
+  chrome.storage.local.get({
     uuid: '',
     api: '',
     enableSound: true,
