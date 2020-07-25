@@ -12,18 +12,16 @@ Hi, and thanks for contributing to this humble project!
 
 This is an official Habitica (HabitRPG) Chrome and Firefox Extension that it is maintained only by volunteer contributors to Habitica. This code is not maintained by staff.
 
-Please note that the Chrome and Firefox port are almost identical. Coding requirements for porting chrome extensions to firefox can be found in [this article](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Porting_a_Google_Chrome_extension).  
-
-To allow for ease of deployment the code is kept in separate folders, chrome, and firefox. If changing the code, 
-+ please ensure you replicate the code changes in the other port and test both. 
+When making changes please keep these things in mind
++ Ensure the code works for both, Chrome and Firefox. 
 + It is important when completing changes to firefox to zip the files (not the folder but the files themselves) as described in this [article](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Package_your_extension_). 
-+ To make it easier on staff please ensure you update this ReadMe file with the latest version changes. This will be used for the release notes.
-+ Update manifest.json in both chrome and firefox with the latest version number.
-
-
-
++ Update this ReadMe file with the latest version changes. This will be used for the release notes.
++ Update manifest.json with the latest version number.
 + Increased the Refresh Rate as required by staff
 # Version history
+
+### 2.2.9
++ Merge the code for Chrome and Firefox
 
 ### 2.2.8
 + Fix avatars not displaying bug
