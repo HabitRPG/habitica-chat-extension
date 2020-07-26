@@ -30,7 +30,13 @@ body {
 #setupButton {
  text-align: center; 
 }
+
+#textInputs, #warning, #manualSetupTriggerHolder {
+  text-align: center;
+}
+
 #checkBoxes {
+  text-align: center;
  	margin-top: 20px;
 }
 
@@ -69,12 +75,17 @@ body {
  display: none;
 }
 
+#userForm .row, #userForm .field, #userForm .legend {
+  text-align: center;
+}
+
 #userForm {
   margin-top: 30px;
- display: none; 
+  display: none; 
 }
 
 #gitHubButton, #reportBugButton, #wikiButton {
+  text-align: center;
   margin-top: 10px;
   width: 100%;
 }

@@ -1,4 +1,4 @@
-// Saves options to chrome.storage
+// Saves options to browser.storage
 function save_options() {
   var uuid = document.getElementById('uuid').value;
   var api = document.getElementById('api').value;
@@ -20,7 +20,7 @@ function save_options() {
   if (timeoutAfter < 15) {
     timeoutAfter = 15;
   }
-  chrome.storage.sync.set({
+  browser.storage.local.set({
     uuid: uuid,
     api: api,
     enableSound: enableSound,
@@ -46,9 +46,9 @@ function save_options() {
 }
 
 // Restores select box and checkbox state using the preferences
-// stored in chrome.storage.
+// stored in browser.storage.
 function restore_options() {
-  chrome.storage.sync.get({
+  browser.storage.local.get({
     uuid: '',
     api: '',
     enableSound: true,
@@ -82,19 +82,19 @@ function restore_options() {
 }
 
 function openSettings() {
-	chrome.tabs.create({ url: "https://habitica.com/user/settings/api" });
+	browser.tabs.create({ url: "https://habitica.com/user/settings/api" });
 }
 
 function openGitHub() {
-	chrome.tabs.create({ url: "https://github.com/HabitRPG/habitica-chat-extension" });
+	browser.tabs.create({ url: "https://github.com/HabitRPG/habitica-chat-extension" });
 }
 
 function openWiki() {
-	chrome.tabs.create({ url: "https://habitica.fandom.com/wiki/Chat_Extension" });
+	browser.tabs.create({ url: "https://habitica.fandom.com/wiki/Chat_Extension" });
 }
 
 function reportBug() {
-	chrome.tabs.create({ url: "https://habitica.com/groups/guild/a29da26b-37de-4a71-b0c6-48e72a900dac" });
+	browser.tabs.create({ url: "https://habitica.com/groups/guild/a29da26b-37de-4a71-b0c6-48e72a900dac" });
 }
 
 function displayManualOptions() {
