@@ -7,7 +7,7 @@ if (
   var config = document.createElement("config");
   config.setAttribute("id", "habitRPGChatConfig");
   config.setAttribute("style", "display: none;");
-  browser.storage.local.get(
+  chrome.storage.local.get(
     {
       uuid: "",
       api: "",
@@ -51,7 +51,7 @@ if (
 
   // Call markdown to html script
   var s = document.createElement("script");
-  s.src = browser.extension.getURL("resources/habitica-markdown.js");
+  s.src = chrome.extension.getURL("resources/habitica-markdown.js");
   s.onload = function() {
     this.parentNode.removeChild(this);
   };
@@ -67,7 +67,7 @@ if (
 
   // Call other functions
   var s = document.createElement("script");
-  s.src = browser.extension.getURL("resources/miscFunctions.js");
+  s.src = chrome.extension.getURL("resources/miscFunctions.js");
   s.onload = function() {
     this.parentNode.removeChild(this);
   };
@@ -75,7 +75,7 @@ if (
 
   // Load Purify.js to sanitize inputs
   var s = document.createElement("script");
-  s.src = browser.extension.getURL("resources/purify.js");
+  s.src = chrome.extension.getURL("resources/purify.js");
   s.onload = function() {
     this.parentNode.removeChild(this);
   };
@@ -85,7 +85,7 @@ if (
   //pause 2 seconds to allow everything to catch up
   setTimeout(function() {
     var s = document.createElement("script");
-    s.src = browser.extension.getURL("mainChat/chat_inPage.js");
+    s.src = chrome.extension.getURL("mainChat/chat_inPage.js");
     s.onload = function() {
       this.parentNode.removeChild(this);
     };
@@ -109,7 +109,7 @@ if (
       return;
     }
 
-    browser.storage.local.set(
+    chrome.storage.local.set(
       {
         uuid: message.uuid,
         api: message.apik
