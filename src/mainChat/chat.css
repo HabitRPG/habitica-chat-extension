@@ -292,7 +292,7 @@
 		vertical-align: top;
 		}
 
-		.msg_footer .flagMessage2,.msg_footer .flagMessage,.msg_footer .copyMessage,.msg_footer .deleteMessage,.msg_footer .flagMessage,.msg_footer .likeMessage,.msg_footer .showInfo,.msg_footer .Translate,.msg_footer {
+		.msg_footer .flagMessage2,.msg_footer .flagMessage,.msg_footer .copyMessage,.msg_footer .deleteMessage,.msg_footer .flagMessage,.msg_footer .likeMessage,.msg_footer .showInfo,.msg_footer .translateMessage,.msg_footer {
 			margin-right: 5px;
 			cursor: pointer;
 			color: #aaa;
