@@ -6,7 +6,7 @@
   * Bad: #E60000 (red)
   * Bubble 1: rgba(15, 53, 119,0.1) (alternative pale blue)
   * Bubble 2: #D9EAD3 (pale green)
-  * 
+  *
   **/
 
 /* General Styling */
@@ -50,13 +50,13 @@
 			width: 16px;
 			padding: 0px;
 			line-height: 0px;
-			border-radius: 10px;	
+			border-radius: 10px;
 			padding-bottom: 3px;
 			margin-top: 3px;
       margin-right: 5px;
       cursor: pointer
 		}
-		
+
 			button.chatBox_closer:hover, button.chatBox_minimizer:hover {
 				padding-top: 1px;
 			}
@@ -98,7 +98,7 @@
     font-size: 0.8em
   }
 
-/* ChatBox Shower */ 
+/* ChatBox Shower */
 
 .chatBox_shower, #groupsBox .groupsBox_shower  {
     height: 20px;
@@ -112,7 +112,7 @@
     cursor: pointer;
     text-overflow: ellipsis;
 	white-space: nowrap;
-	overflow: hidden;	
+	overflow: hidden;
 }
 
 /* Groups Box */
@@ -153,7 +153,7 @@
 			border: 1px solid rgba(15, 53, 119,0.1);
 			background-color: rgba(15, 53, 119,0.05);
 		}
-			
+
 		.group-item.openChatBox {
 			border: 1px solid rgba(15, 53, 119,0.3);
 			background-color: rgba(15, 53, 119,0.1);
@@ -211,7 +211,7 @@
 		-moz-border-radius: 5px;
 		border-radius: 5px;
   }
-  
+
   .large_bubble, .large_bubble ~ .msg_user {
     width: 290px!important;
     margin-left: 10px!important
@@ -223,7 +223,7 @@
 	.chatMessage.otherPoster .bubble {
 		margin-left: 65px;
   }
-	
+
 		.chatMessage .bubble p:not(:first-child) {
 			margin-top: 8px;
 		}
@@ -267,11 +267,11 @@
 			z-index: 1;
 			border-width: 9px 0px 9px 12px;
 		}
-		
+
 		.bubble ul,.bubble ol {
 			margin-left: 2em;
 		}
-		
+
 	.chatMessage .msg_footer {
 	font-size: 0.7em;
 	width: 100%;
@@ -281,7 +281,7 @@
 	margin-right: 5px;
 	vertical-align: top;
 	}
-	
+
 		.chatMessage.userPoster .msg_footer {
 			margin-right: 55px;
 		}
@@ -292,7 +292,7 @@
 		vertical-align: top;
 		}
 
-		.msg_footer .flagMessage,.msg_footer .copyMessage,.msg_footer .deleteMessage,.msg_footer .flagMessage,.msg_footer .likeMessage, .msg_footer .showInfo {
+		.msg_footer .flagMessage2,.msg_footer .flagMessage,.msg_footer .copyMessage,.msg_footer .deleteMessage,.msg_footer .flagMessage,.msg_footer .likeMessage,.msg_footer .showInfo,.msg_footer .Translate,.msg_footer {
 			margin-right: 5px;
 			cursor: pointer;
 			color: #aaa;
@@ -340,7 +340,7 @@
 /* Large Text */
 
 #chatWrapper_boxes.largeText { font-size: 1.2em; }
-#chatWrapper_boxes.largeText .chatBox_input textarea {	font-size: 0.9em; }	
+#chatWrapper_boxes.largeText .chatBox_input textarea {	font-size: 0.9em; }
 #chatWrapper_boxes.largeText .chatBox_input button { font-size: 0.9em; }
 
 /* Mentions */
@@ -352,7 +352,7 @@
 	.mentionedInChat .bubble {
 		box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
 	}
-	
+
 	.chatMention {
 		font-weight: bold;
 		text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
