@@ -20,6 +20,11 @@ When making changes please keep these things in mind
 + Increased the Refresh Rate as required by staff
 # Version history
 
+### 2.2.10
++ Style fixes on icon layouts
++ Add translate function to other's messages
++ Remove duplication of icon assets
+
 ### 2.2.9
 + Merge the code for Chrome and Firefox
 
