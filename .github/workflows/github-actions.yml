@@ -1,7 +1,7 @@
-name: Lint
+name: Habitica Chat CI
 on: [push]
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -9,9 +9,6 @@ jobs:
       run: npm install eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise
     - name: Run ESLint
       run: npx eslint . --ext .js,.jsx,.ts,.tsx
-name: Build
-on: [push]
-jobs:
   build:
     runs-on: ubuntu-latest
     steps:
