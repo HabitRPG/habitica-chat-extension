@@ -16,4 +16,4 @@ jobs:
     - name: Install modules
       run: npm install web-ext
     - name: web-ext build
-      run: npx web-ext build
+      run: cd src && npx web-ext build
