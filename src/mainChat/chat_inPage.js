@@ -220,8 +220,8 @@ function createChatBox (chatBoxId) { // eslint-disable-line no-unused-vars
         $('#' + chatBoxId + ' .chatBox_title .chatBoxTitle_title a').click(function (e) {
           e.stopPropagation()
         })
-        const sanitizedId = DOMPurify.sanitize(chatBoxId, { SAFE_FOR_JQUERY: true });
-        ('#' + chatBoxId + ' .chatBox_input').html('<textarea id="TA_' + sanitizedId + '" placeholder="Type here..." maxlength="3000" oninput="countCharacters(\'' + sanitizedId + '\')"></textarea><button onClick="sendChatMessage(\'' + sanitizedId + '\')">Send<br><span class="characterCount">(<span id="charactersLeftInMessage_' + sanitizedId + '">0</span>/3k)</span></button>')
+        const sanitizedId = DOMPurify.sanitize(chatBoxId, { SAFE_FOR_JQUERY: true })
+        $('#' + chatBoxId + ' .chatBox_input').html('<textarea id="TA_' + sanitizedId + '" placeholder="Type here..." maxlength="3000" oninput="countCharacters(\'' + sanitizedId + '\')"></textarea><button onClick="sendChatMessage(\'' + sanitizedId + '\')">Send<br><span class="characterCount">(<span id="charactersLeftInMessage_' + sanitizedId + '">0</span>/3k)</span></button>')
         $('#' + chatBoxId + ' .chatBox_shower').html("<div class='shower_title'>" + DOMPurify.sanitize(data.name, { SAFE_FOR_JQUERY: true }) + "</div><button class='chatBox_closer'>×</button><button class='chatBox_minimizer'>—</button>")
         $('#' + chatBoxId + ' div .chatBox_closer').click(function () {
           removeChatBox(chatBoxId)
