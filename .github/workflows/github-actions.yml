@@ -1,0 +1,23 @@
+name: Habitica Chat CI
+on: [push]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install modules
+      run: npm install eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise
+    - name: Run ESLint
+      run: npx eslint . --ext .js,.jsx,.ts,.tsx
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install modules
+      run: npm install web-ext
+    - name: web-ext build
+      run: cd src && npx web-ext build
+    - uses: actions/upload-artifact@v2
+      with:
+        name: habitica_chat_client.zip
+        path: src/web-ext-artifacts/
