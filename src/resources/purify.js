@@ -1,4 +1,3 @@
-/* eslint-disable */ 
 // DOMPurify
 // Copyright 2015 Mario Heiderich
 // https://github.com/cure53/DOMPurify/
