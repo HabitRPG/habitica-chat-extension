@@ -2,6 +2,13 @@ env:
   browser: true
   es2021: true
   webextensions: true
+  jquery: true
 extends:
   - standard
-rules: {}
+globals:
+  exports: false
+  module: false
+  require: false
+rules: {
+  no-var: off
+}

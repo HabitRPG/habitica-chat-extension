@@ -1,5 +1,5 @@
 // Saves options to storage
-function save_options () {
+function saveOptions () {
   const uuid = document.getElementById('uuid').value
   const api = document.getElementById('api').value
   const enableSound = document.getElementById('enableSound').checked
@@ -47,7 +47,7 @@ function save_options () {
 
 // Restores select box and checkbox state using the preferences
 // stored in storage.
-function restore_options () {
+function restoreOptions () {
   chrome.storage.local.get({
     uuid: '',
     api: '',
@@ -103,7 +103,7 @@ function displayManualOptions () {
 }
 
 // Load options
-document.addEventListener('DOMContentLoaded', restore_options)
+document.addEventListener('DOMContentLoaded', restoreOptions)
 // Display manual settings
 document.getElementById('manualSetupTrigger').addEventListener('click', displayManualOptions)
 // Link
@@ -112,19 +112,19 @@ document.getElementById('gitHub').addEventListener('click', openGitHub)
 document.getElementById('wiki').addEventListener('click', openWiki)
 document.getElementById('reportBug').addEventListener('click', reportBug)
 // Saving
-document.getElementById('largeText').addEventListener('click', save_options)
-document.getElementById('disableAvatars').addEventListener('click', save_options)
-document.getElementById('enableSound').addEventListener('click', save_options)
-document.getElementById('disableShowNotifications').addEventListener('click', save_options)
-document.getElementById('disableReadNotifications').addEventListener('click', save_options)
-document.getElementById('confirmDelete').addEventListener('click', save_options)
-document.getElementById('hideGroups').addEventListener('click', save_options)
-document.getElementById('hideSystem').addEventListener('click', save_options)
-document.getElementById('uuid').addEventListener('paste', save_options)
-document.getElementById('uuid').addEventListener('keyup', save_options)
-document.getElementById('api').addEventListener('paste', save_options)
-document.getElementById('api').addEventListener('keyup', save_options)
-document.getElementById('messageCount').addEventListener('input', save_options)
-document.getElementById('timeoutAfter').addEventListener('input', save_options)
-document.getElementById('dateFormat').addEventListener('input', save_options)
-document.getElementById('timeFormat').addEventListener('input', save_options)
+document.getElementById('largeText').addEventListener('click', saveOptions)
+document.getElementById('disableAvatars').addEventListener('click', saveOptions)
+document.getElementById('enableSound').addEventListener('click', saveOptions)
+document.getElementById('disableShowNotifications').addEventListener('click', saveOptions)
+document.getElementById('disableReadNotifications').addEventListener('click', saveOptions)
+document.getElementById('confirmDelete').addEventListener('click', saveOptions)
+document.getElementById('hideGroups').addEventListener('click', saveOptions)
+document.getElementById('hideSystem').addEventListener('click', saveOptions)
+document.getElementById('uuid').addEventListener('paste', saveOptions)
+document.getElementById('uuid').addEventListener('keyup', saveOptions)
+document.getElementById('api').addEventListener('paste', saveOptions)
+document.getElementById('api').addEventListener('keyup', saveOptions)
+document.getElementById('messageCount').addEventListener('input', saveOptions)
+document.getElementById('timeoutAfter').addEventListener('input', saveOptions)
+document.getElementById('dateFormat').addEventListener('input', saveOptions)
+document.getElementById('timeFormat').addEventListener('input', saveOptions)

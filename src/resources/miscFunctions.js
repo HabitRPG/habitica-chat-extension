@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 // From http://web.archive.org/web/20110102112946/http://www.scottklarr.com/topic/425/how-to-insert-text-into-a-textarea-where-the-cursor-is/
 function insertAtCaret (areaId, text) {
   const txtarea = document.getElementById(areaId)
