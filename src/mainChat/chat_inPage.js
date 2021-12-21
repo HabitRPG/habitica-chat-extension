@@ -6,6 +6,37 @@ jQuery.fn.scrollTo = function (elem) {
   }, speed = 300) // eslint-disable-line 
   return this
 }
+var apiRemaining = 30
+var apiReset = 0
+
+var ajaxQ = {
+  requests: [],
+  addReq: function (opt) {
+    this.requests.push(opt)
+    if (this.requests.length === 1) {
+      this.run()
+    }
+  },
+  run: function () {
+    var original = this.requests[0].complete
+    var ajx = this
+    ajx.requests[0].complete = function () {
+      if (typeof original === 'function') { original() }
+      ajx.requests.shift()
+      if (ajx.requests.length > 0 && apiRemaining < 5) {
+        var reset = new Date(apiReset)
+        var now = new Date()
+        var delay = reset.getTime() - now.getTime()
+        setTimeout(ajaxQ.run(), delay)
+      } else if (ajx.requests.length > 0 && apiRemaining < 15) {
+        setTimeout(ajaxQ.run(), 10000)
+      } else if (ajx.requests.length > 0) {
+        ajaxQ.run()
+      }
+    }
+    $.ajax(this.requests[0])
+  }
+}
 
 const HABITICA_URL = 'https://habitica.com'
 const membersCache = {}
@@ -58,13 +89,15 @@ function markNotificationAsRead (groupID) {
     if (notifications[key].data.group && (groupID === 'party' ? notifications[key].data.group.id === partyId : notifications[key].data.group.id === groupID)) {
       const notificationId = notifications[key].id
       const action = 'notifications/' + notificationId + '/read'
-      $.ajax({
+      ajaxQ.addReq({
         dataType: 'json',
         url: baseAPIUrl + action,
         headers: apiHeaders,
         method: 'post',
-        success: function (response) {
+        success: function (response, status, jqXHR) {
           processNotifications(response.data)
+          apiRemaining = jqXHR.getResponseHeader('X-RateLimit-Remaining')
+          apiReset = jqXHR.getResponseHeader('X-RateLimit-Reset')
         }
       })
     }
@@ -143,11 +176,13 @@ function createChatWrapper () {
 
 function createGroupsBox () {
   const action = 'groups/?type=guilds'
-  $.ajax({
+  ajaxQ.addReq({
     dataType: 'json',
     url: baseAPIUrl + action,
     headers: apiHeaders,
-    success: function (response) {
+    success: function (response, status, jqXHR) {
+      apiRemaining = jqXHR.getResponseHeader('X-RateLimit-Remaining')
+      apiReset = jqXHR.getResponseHeader('X-RateLimit-Reset')
       const groups = response.data
       const notifications = response.notifications
 
@@ -203,11 +238,13 @@ function createChatBox (chatBoxId) { // eslint-disable-line no-unused-vars
 
     // Populate, position and add triggers
     const action = chatBoxId.replace('groups_', 'groups/')
-    $.ajax({
+    ajaxQ.addReq({
       dataType: 'json',
       url: baseAPIUrl + action,
       headers: apiHeaders,
-      success: function (response) {
+      success: function (response, status, jqXHR) {
+        apiRemaining = jqXHR.getResponseHeader('X-RateLimit-Remaining')
+        apiReset = jqXHR.getResponseHeader('X-RateLimit-Reset')
         const data = response.data
         const notifications = response.notifications
         if (notifications && notifications !== globalNotifications) processNotifications(notifications)
@@ -302,12 +339,14 @@ function updateChat (chatBoxId) {
   const action = chatBoxId.replace('groups_', 'groups/') + '/chat'
   const data = ''
   if (chatIsActive) {
-    $.ajax({
+    ajaxQ.addReq({
       dataType: 'json',
       url: baseAPIUrl + action,
       data: data,
       headers: apiHeaders,
-      success: function (response) {
+      success: function (response, status, jqXHR) {
+        apiRemaining = jqXHR.getResponseHeader('X-RateLimit-Remaining')
+        apiReset = jqXHR.getResponseHeader('X-RateLimit-Reset')
         let data = response.data
         const notifications = response.notifications
         if (notifications && notifications !== globalNotifications) processNotifications(notifications)
@@ -632,11 +671,13 @@ function createAvatarHead (avatarData, uuid) {
 }
 
 function lookUpMember (uuid, messageID, chatClient) { // eslint-disable-line no-unused-vars
-  $.ajax({
+  ajaxQ.addReq({
     dataType: 'json',
     url: baseAPIUrl + 'members/' + uuid,
     headers: apiHeaders,
-    success: function (response) {
+    success: function (response, status, jqXHR) {
+      apiRemaining = jqXHR.getResponseHeader('X-RateLimit-Remaining')
+      apiReset = jqXHR.getResponseHeader('X-RateLimit-Reset')
       const data = response.data
       if (messageID && document.getElementById(messageID)) {
         const chatMessages = document.getElementsByClassName(uuid) // eslint-disable-line no-unused-vars
@@ -705,13 +746,15 @@ function flagMessage (chatBoxId, gid, mid, userComment) { // eslint-disable-line
   if ($('#mid_' + mid + ' .msg_footer .flagMessage').hasClass('flagged') || confirm('Reporting a message indicates that you believe it to be in violation of the community guidelines. Are you sure you wish to report this message?')) {
     const action = 'groups/' + gid + '/chat/' + mid + '/flag'
 
-    $.ajax({
+    ajaxQ.addReq({
       dataType: 'json',
       url: baseAPIUrl + action,
       type: 'POST',
       headers: apiHeaders,
       data: { comment: userComment },
-      success: function (response) {
+      success: function (response, status, jqXHR) {
+        apiRemaining = jqXHR.getResponseHeader('X-RateLimit-Remaining')
+        apiReset = jqXHR.getResponseHeader('X-RateLimit-Reset')
         const data = response.data // eslint-disable-line no-unused-vars
         updateChat(chatBoxId)
         $('#mid_' + mid + ' .msg_footer .flagMessage').toggleClass('flagged')
@@ -724,12 +767,14 @@ function deleteMessage (chatBoxId, gid, mid) { // eslint-disable-line no-unused-
   if (config.confirmdelete === 'false' || confirm('Are you sure you want to delete this post? You cannot undo this action.')) {
     const action = 'groups/' + gid + '/chat/' + mid
 
-    $.ajax({
+    ajaxQ.addReq({
       dataType: 'json',
       url: baseAPIUrl + action,
       type: 'DELETE',
       headers: apiHeaders,
-      success: function () {
+      success: function (response, status, jqXHR) {
+        apiRemaining = jqXHR.getResponseHeader('X-RateLimit-Remaining')
+        apiReset = jqXHR.getResponseHeader('X-RateLimit-Reset')
         updateChat(chatBoxId)
       }
     })
@@ -739,12 +784,14 @@ function deleteMessage (chatBoxId, gid, mid) { // eslint-disable-line no-unused-
 function likeMessage (chatBoxId, gid, mid) { // eslint-disable-line no-unused-vars
   const action = 'groups/' + gid + '/chat/' + mid + '/like'
 
-  $.ajax({
+  ajaxQ.addReq({
     dataType: 'json',
     url: baseAPIUrl + action,
     type: 'POST',
     headers: apiHeaders,
-    success: function () {
+    success: function (response, status, jqXHR) {
+      apiRemaining = jqXHR.getResponseHeader('X-RateLimit-Remaining')
+      apiReset = jqXHR.getResponseHeader('X-RateLimit-Reset')
       updateChat(chatBoxId)
       const $numLikes = '#mid_' + mid + ' .msg_footer .likeNumberCont' // shortcut target
       $('#mid_' + mid + ' .msg_footer .likeMessage, ' + $numLikes).toggleClass('liked')
@@ -784,13 +831,15 @@ function sendChatMessage (chatBoxId) {
     const id = chatBoxId.replace('groups_', '')
     const action = 'groups/' + id + '/chat'
 
-    $.ajax({
+    ajaxQ.addReq({
       dataType: 'json',
       url: baseAPIUrl + action,
       type: 'POST',
       data: sentMessage,
       headers: apiHeaders,
-      success: function (response) {
+      success: function (response, textStatus, jqXHR) {
+        apiRemaining = jqXHR.getResponseHeader('X-RateLimit-Remaining')
+        apiReset = jqXHR.getResponseHeader('X-RateLimit-Reset')
         updateChat(chatBoxId)
         $('#' + chatBoxId + ' .chatBox_input textarea').focus()
         countCharacters(chatBoxId)
@@ -899,11 +948,13 @@ ping.volume = 0.7
 let userIdKeyCorrect = false
 if ((userId.length === 36) && (userKey.length === 36)) {
   const action = 'user'
-  $.ajax({
+  ajaxQ.addReq({
     dataType: 'json',
     url: baseAPIUrl + action,
     headers: apiHeaders,
-    success: function (response) {
+    success: function (response, status, jqXHR) {
+      apiRemaining = jqXHR.getResponseHeader('X-RateLimit-Remaining')
+      apiReset = jqXHR.getResponseHeader('X-RateLimit-Reset')
       const data = response.data
       setPartyId(data.party._id ? data.party._id : '')
       setContributorTier(data.contributor.level)
@@ -920,11 +971,13 @@ if ((userId.length === 36) && (userKey.length === 36)) {
 setInterval(function () {
   if ((userIdKeyCorrect) && (globalNotifications) && (chatIsActive) && ($('.chatBox').length === 0)) {
     const action = 'user?userFields=achievements'
-    $.ajax({
+    ajaxQ.addReq({
       dataType: 'json',
       url: baseAPIUrl + action,
       headers: apiHeaders,
-      success: function (response) {
+      success: function (response, status, jqXHR) {
+        apiRemaining = jqXHR.getResponseHeader('X-RateLimit-Remaining')
+        apiReset = jqXHR.getResponseHeader('X-RateLimit-Reset')
         const notifications = response.notifications
         if (notifications && notifications !== globalNotifications) processNotifications(notifications)
       }
