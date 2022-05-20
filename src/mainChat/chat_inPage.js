@@ -135,7 +135,7 @@ lookForApiKeys(0);
       success: function(response) {
         var groups = response.data;
 		var notifications = response.notifications;
-		
+
         $("#chatWrapper_boxes").append("<div id='groupsBox'></div>");
         $("#groupsBox").append("<div class='hidders groupsBox_title'><div class='groupsBoxTitle_title'>Groups</div><button class='chatBox_minimizer'>—</button></div></div>");
         $("#groupsBox").append("<div class='hidders groupsBox_content'></div>");
@@ -552,7 +552,7 @@ lookForApiKeys(0);
         break;
       }
     }
-    
+
     if (!avatarData || !avatarData["items"] || !avatarData["preferences"]) {
       uuid = DOMPurify.sanitize(uuid)
       return '<a href="/profile/' + uuid + '" target="_blank"><div class="herobox user-not-found">' +
@@ -649,7 +649,9 @@ lookForApiKeys(0);
           } else {
             contributorTitle = "No Contributor Tier";
           }
-          document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].innerHTML = "<br>" + elementTitle + "<br>" + contributorTitle + "<br><a href=\"" + "/profile/" + uuid +  "\" target=\"" + "_blank" + "\">" + uuid + "</a>";
+          document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].innerHTML = "<br>"
+            + DOMPurify.sanitize(elementTitle) + "<br>" + DOMPurify.sanitize(contributorTitle) + "<br><a href=\"" + "/profile/"
+            + DOMPurify.sanitize(uuid) +  "\" target=\"" + "_blank" + "\">" + DOMPurify.sanitize(uuid) + "</a>";
           document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].style.fontSize = "1.2em";
           document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].style.display = "block";
           document.getElementById(messageID).getElementsByClassName('msg_footer')[0].getElementsByClassName('showInfo')[0].style.cursor = "text";
@@ -834,12 +836,12 @@ lookForApiKeys(0);
 
   // Hardcoded settings
   var baseAPIUrl = HABITICA_URL + "/api/v3/";
-  var refreshRateFast = 30000; //previously 5000 
+  var refreshRateFast = 30000; //previously 5000
   var refreshRateMedium = 45000;
   var refreshRateSlow = 60000;
   var refreshRateNotification = 40000;
 
-  
+
   // Settings are fetched from attributes of an HTML tag
   // called "config" with id "habitRPGChatConfig"
   // and stored in object named config
@@ -859,18 +861,18 @@ lookForApiKeys(0);
     "x-api-key": user_key
   }
 
-  
+
   //Make timeouts longer if longer than hour idle time.
   if (parseInt(config.timeoutafter) > 60) {
-	refreshRateFast =  Math.ceil(refreshRateFast * parseInt(config.timeoutafter)/60);  
-	refreshRateMedium =  Math.ceil(refreshRateMedium * parseInt(config.timeoutafter)/60);  
+	refreshRateFast =  Math.ceil(refreshRateFast * parseInt(config.timeoutafter)/60);
+	refreshRateMedium =  Math.ceil(refreshRateMedium * parseInt(config.timeoutafter)/60);
     refreshRateSlow =  Math.ceil(refreshRateSlow * parseInt(config.timeoutafter)/60);
-	refreshRateNotification =  Math.ceil(refreshRateNotification * parseInt(config.timeoutafter)/60);  
+	refreshRateNotification =  Math.ceil(refreshRateNotification * parseInt(config.timeoutafter)/60);
   }
-  
-  
-  
- 
+
+
+
+
   // Leaving the window changes refresh rate
   window.addEventListener('focus', function() {
     for (var key in intervals) {
@@ -910,12 +912,12 @@ lookForApiKeys(0);
 		  setContributorTier(data['contributor']['level']);
 		  setHeroName(data['auth']['local']['username']);
 		  createChatWrapper(); //Only launch group chat once party key is set.
-		  userIdKeyCorrect = true	
+		  userIdKeyCorrect = true
 		}
 	});
   }
- 
-  //refresh notifications every refreshRateNotification seconds 
+
+  //refresh notifications every refreshRateNotification seconds
   //if no chat windows and if chat is active
   //if UserId and API Token are set.
   setInterval(function () {
