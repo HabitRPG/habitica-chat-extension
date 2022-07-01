@@ -38,5 +38,5 @@
     "resources/jquery.js",
     "resources/purify.js"
   ],
-  "permissions": ["storage", "activeTab"]
+  "permissions": ["storage"]
 }
